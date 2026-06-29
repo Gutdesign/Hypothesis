@@ -1,0 +1,58 @@
+# Environment & secrets
+.env
+.env.local
+*.env.local
+
+# Audio recordings (interview raw files)
+*.mp3
+*.wav
+*.m4a
+*.ogg
+*.flac
+*.aac
+
+# Video recordings
+*.mp4
+*.mov
+*.webm
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache directories
+.cache/
+.parallel-cache/
+.apify-cache/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Large raw exports (keep raw text/markdown, ignore binary dumps)
+*.bin
+*.pickle
