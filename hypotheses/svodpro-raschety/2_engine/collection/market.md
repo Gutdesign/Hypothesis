@@ -8,63 +8,45 @@
 
 ## Sources used
 
-- 
-- 
+- Parallel.ai (pro), marketing/VoC запрос: `collection/raw/audience_and_voc.md` — раздел «Оценка численности проектных кадров в России» и «Статус обновления ключевых норм».
+- Косвенные источники внутри отчёта: hh.ru/dreamjob.ru зарплатные сводки, НОПРИЗ реестр, Росстат (недоступен напрямую в открытой выгрузке на момент запроса).
 
 ---
 
 ## Top-down sizing
 
-<!-- Industry reports, analyst summaries, public market data. Always cite sources;
-     never present a number without where it came from. -->
+**Total Addressable Market (TAM):** Экспертная оценка Parallel: **80 000–120 000** практикующих архитекторов и инженеров-проектировщиков в РФ (2024-2026).
+**Source:** `collection/raw/audience_and_voc.md`, раздел «Оценка численности проектных кадров» — явно помечено отчётом как **экспертная оценка, не подтверждённая прямыми данными Росстата** (открытая выгрузка Росстата на момент запроса недоступна).
+**Assumptions:** Косвенные индикаторы — объём вакансий «инженер-проектировщик» на hh.ru/dreamjob.ru, реестр НОПРИЗ. Не прямой подсчёт.
 
-**Total Addressable Market (TAM):** 
-**Source:** 
-**Assumptions:** 
+**Serviceable Addressable Market (SAM):** 20-30% от TAM = **16 000–36 000** человек — доля, регулярно выполняющая расчёты по этим 4 нишам (по той же экспертной оценке).
+**Source:** тот же отчёт, тот же раздел.
+**Assumptions:** Отчёт обосновывает это тем, что «основная масса проектировщиков работает в жилье и промке и с бассейнами/общепитом/высотками с эскалаторами сталкивается редко» — качественное, не количественное обоснование.
 
-**Serviceable Addressable Market (SAM):** 
-**Source:** 
-**Assumptions:** 
-
-**Serviceable Obtainable Market (SOM):** 
-**Source:** 
-**Assumptions:** 
+**Serviceable Obtainable Market (SOM):** Не пересчитан здесь заново — см. Bottom-up ниже (приор фаундера давал 5-10% от SAM ≈ 660-3 600 при использовании нижней границы 66к/20-30%; при новой оценке 16-36к диапазон SOM смещается на **800-3 600** человек при том же 5-10%).
+**Source:** производный расчёт от приора фаундера (03_priors) + новой SAM-оценки.
+**Assumptions:** Ставка «реалистично достижимо 5-10%» не перепроверена этим исследованием — осталась предположением фаундера, не протестированным допущением.
 
 ---
 
 ## Bottom-up sizing
 
-<!-- Count of target users × estimated revenue per user. Spell out the math, not just
-     the result. Bottom-up is usually more honest than top-down — be skeptical when
-     they agree perfectly. -->
+**Estimated number of target users:** Founder-прайор (03_priors): 66 000 архитекторов/технологов (1/8 от всех ИТР) × 20-30% реально считающих = 13 200–19 800.
+**How estimated:** Founder использовал долю от общего числа ИТР; Parallel independently вышел на диапазон 80-120к специалистов (шире, чем founder-оценка 66к) той же долей 20-30%.
 
-**Estimated number of target users:** 
-**How estimated:** 
-<!-- E.g., "X companies with Y headcount in country Z, multiplied by W% of those
-     companies having the target role" -->
+**Estimated revenue per user:** Не оценено ни в одном источнике этого прогона — стоимость подписки svodpro не была предметом запроса (см. `research_plan.md` → Out of scope).
+**How estimated:** —
 
-**Estimated revenue per user:** 
-**How estimated:** 
-
-**Bottom-up market size:** 
-**Math:** 
+**Bottom-up market size:** В деньгах не подсчитан (нет ARPU). В людях: 13 200–36 000 в зависимости от того, чья оценка TAM берётся за основу (founder 66к vs Parallel 80-120к).
+**Math:** TAM × 20-30% = SAM; ARPU не определён → нет $ SOM в этом прогоне.
 
 ---
 
 ## Gap between top-down and bottom-up
 
-<!-- These almost never match. The gap itself is data:
-
-     - Top-down significantly larger → probably reflects market potential including
-       segments outside the realistic target audience.
-     - Bottom-up significantly larger → either top-down underestimates or bottom-up
-       is over-counting addressable users.
-     - Suspiciously close → check both sets of assumptions; one may be derived from
-       the other. -->
-
-Gap: 
-Direction: 
-Likely explanation: 
+Gap: Оценка Parallel (80-120к специалистов) **шире**, чем founder-прайор (66к) — разница примерно в 1.2-1.8 раза.
+Direction: Parallel-оценка больше founder-оценки.
+Likely explanation: **Обе оценки — это экспертные прикидки, а не проверенная статистика** (Parallel сам явно помечает свою цифру как неподтверждённую Росстатом). Совпадение доли «20-30% реально считают» между founder-приором и независимой Parallel-оценкой **не является независимым подтверждением** — скорее всего, оба источника рассуждают схожей эвристикой («большинство работает в жилье/промке, не сталкивается с нишевыми расчётами»), а не считают по разным первичным данным. Это ровно тот случай из `docs/methodology.md`/CLAUDE.md, когда «подозрительно хорошее совпадение» требует не радости, а настороженности — см. `symmetry_check.md`.
 
 ---
 
@@ -72,42 +54,42 @@ Likely explanation:
 
 **Is this market expanding, consolidating, or mature?**
 
-Status: expanding | consolidating | mature
+Status: **mature, но регуляторно нестабильный** (не подходит ни под "expanding", ни чисто под "mature" — рынок специалистов стабилен по размеру, но нормативная база под ним активно меняется).
 
-Evidence: 
+Evidence: СП 1.13130.2020 получил Изменение №1 (2023, ред. 16.06.2025), СП 267.1325800.2016 — Изменение №2, СанПиН для общепита — поправки с 1 марта 2025. Три из четырёх нормативных баз уже "задышали" за последние 1-2 года. Это **прямо опровергает допущение M2** из `1_frame/02_assumptions.md` («нормативная база стабильна на горизонте теста») — по факту нестабильна.
 
-**Growth rate (if available):** 
-**Source:** 
+**Growth rate (if available):** Не определено (нет данных о росте числа проектировщиков или объёма строительства за период).
+**Source:** —
 
 ---
 
 ## Buyer landscape
 
-**Who holds budget:** 
-**Who influences the decision:** 
-**Are these the same person? If not, what does that mean for go-to-market?**
+**Who holds budget:** По ВТ и условным блюдам — вероятно сам проектировщик/технолог или ГИП (эти расчёты чаще остаются внутри института). По эвакуации и водоподготовке — бюджет уже уходит на аутсорс третьим компаниям, то есть решение о «платить или нет» принимает не тот, кто искал бы бесплатный калькулятор.
+**Who influences the decision:** ГИП утверждает расчёт перед экспертизой (везде), но не обязательно сам его выполняет.
+**Are these the same person? If not, what does that mean for go-to-market?** Не всегда. Для эвакуации/водоподготовки целевой пользователь калькулятора (если он вообще есть внутри института) может не быть тем, кто принимает решение об аутсорсе — то есть калькулятор конкурирует не столько за деньги, сколько за то, будет ли задача вообще решаться внутри, а не отдана наружу. Это меняет рамку: калькулятор мог бы стать аргументом «не отдавать на аутсорс», а не просто более удобной заменой Excel.
 
 ---
 
 ## Comparison to priors
 
-<!-- Pull from 1_frame/03_priors.md → "Market size — expected". How does reality compare? -->
+Из `1_frame/03_priors.md` → "Market size — expected":
 
-- 
-- 
+- **Top-down:** founder дал 66 000 — Parallel независимо оценивает 80 000-120 000. Разошлись, но в ожидаемом направлении (founder был консервативнее) — не совпадение, а расхождение, что снижает тревогу насчёт confirmation bias.
+- **20-30% реально считают:** совпало почти точно с founder-приором — **но см. предупреждение выше**: это не независимое подтверждение, обе оценки — качественные прикидки без первичных данных Росстата.
+- **5-10% реально достижимо:** этот кусок приора вообще не был протестирован этим исследованием (не было прямого источника про реальную достижимость/охват svodpro) — остаётся открытым допущением.
 
 ---
 
 ## Confidence in these numbers
 
-<!-- Be honest. How much would you stake on these figures? What would change
-     if a key assumption is off by 2x? -->
-
-Confidence: low | medium | high
-Sensitivity notes: 
+Confidence: **low**
+Sensitivity notes: Ни TAM, ни SAM не опираются на первичную статистику (Росстат недоступен в открытой выгрузке на момент запроса) — обе цифры (founder и Parallel) являются экспертными оценками по схожей логике. Если реальное число практикующих архитекторов/технологов в 2 раза меньше нижней границы — SOM падает до нескольких сотен человек, что уже критично для unit economics (см. `1_frame/04_devils_advocate.md` → "Why the unit economics will fail"). Рекомендация: искать данные НОПРИЗ (реестр специалистов) напрямую — он был упомянут как регулируемый контур, но не выгружен в этом прогоне.
 
 ---
 
 ## Open questions
 
-- 
+- Можно ли получить реальные цифры из реестра НОПРИЗ (`reestr.nopriz.ru`) вместо экспертных оценок — это единственный названный источник, потенциально дающий проверяемое число, а не оценку.
+- ARPU/цена подписки svodpro — не собрано в этом прогоне (см. `research_plan.md` → Out of scope), нужно для перевода людей в деньги.
+- Оценка "5-10% реально достижимо" (founder prior) не имеет независимого источника вообще — кандидат для проверки через интервью, а не десk research.

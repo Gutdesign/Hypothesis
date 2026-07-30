@@ -8,50 +8,52 @@
 
 ## Channel strategy
 
-<!-- Pulled from target_profile.md → "Where they congregate" and prioritization. -->
+### Channel 1: Личная сеть фаундера (коллеги/заказчики по 3 текущим ВТ-проектам)
 
-### Channel 1: [name]
+**Type of reach:** warm (existing relationship)
+**Expected response rate:** высокий (тёплые контакты)
+**Volume to send to get 1 interview:** 2-3
+**Time investment:** низкий — личные сообщения
 
-**Type of reach:** warm (existing relationship) | cold
-**Expected response rate:** 
-**Volume to send to get 1 interview:** 
-**Time investment:** 
+### Channel 2: Профессиональные форумы/Telegram-каналы (АВОК, каналы для архитекторов/ГИПов)
 
-### Channel 2: [name]
+**Type of reach:** cold
+**Expected response rate:** низкий-средний, типично для холодных постов в проф. сообществах
+**Volume to send to get 1 interview:** 10-20 (пост + личные сообщения откликнувшимся)
+**Time investment:** средний — нужно соблюдать нормы сообщества, не выглядеть как реклама
 
-(same fields)
+### Channel 3: Прямой охват secondary-персон (ПБ, технолог питания, ОВ/ВК)
+
+**Type of reach:** cold, точечный (по 1 контакту на группу)
+**Expected response rate:** зависит от наличия хоть каких-то точек входа — требует уточнения у фаундера, есть ли знакомые в этих специальностях
+**Volume to send to get 1 interview:** 3-5 на группу
+**Time investment:** средний
 
 ---
 
 ## Outreach draft — existing audience (if applicable)
 
-<!-- If the founder has prior relationships (past customers, course buyers, newsletter
-     subscribers), this is the highest-value pool. Draft a message that doesn't
-     mention the hypothesis — frame it as "I'm trying to understand how people in
-     [role/situation] handle [problem area]". -->
-
-Subject: 
+Subject: Можно 20 минут вашего опыта по расчётам ВТ?
 
 Body:
+«Привет! Работаю сейчас над тем, как устроен расчёт вертикального транспорта в реальных проектах — не для презентации, а чтобы разобраться, где реально теряется время при пересчётах под правки заказчика. Можно списаться на 20 минут в удобное время — расспрошу про ваш последний опыт, без питчей и продаж.»
 
 ---
 
 ## Outreach draft — cold (LinkedIn / email)
 
-Subject: 
+Subject: Вопрос про практику расчёта [ВТ / эвакуации / условных блюд / водоподготовки]
 
 Body:
+«Здравствуйте! Изучаю, как на практике устроен расчёт [нужная тема] в проектах — кто этим занимается, как часто пересчитывают под изменившиеся исходные данные. Ищу 20 минут разговора с человеком, который реально сталкивался с этой задачей в работе. Это не продажа и не опрос для маркетинга — интересует именно ваш реальный опыт. Было бы интересно поговорить на этой неделе?»
 
 ---
 
 ## Outreach draft — community posts
 
-<!-- For Reddit, Discord, niche forums. These need to follow community norms.
-     Often a post explaining what you're studying and offering something in return
-     (a copy of findings, etc.) works better than a DM. -->
-
-Channel: 
+Channel: Форумы АВОК / профильные Telegram-каналы для архитекторов и ГИПов
 Post body:
+«Собираю реальные истории о том, как в проектах считают вертикальный транспорт (лифты/эскалаторы) — конкретно про моменты, когда приходится пересчитывать из-за правок заказчика или уточнения исходных данных. Если сталкивались — готов созвониться на 20 минут, интересен именно ваш опыт, а не мнение "в целом". В благодарность поделюсь итоговыми выводами (обезличенно), если будет интересно.»
 
 ---
 

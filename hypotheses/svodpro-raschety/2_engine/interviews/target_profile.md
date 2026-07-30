@@ -8,70 +8,54 @@
 
 ## Primary persona
 
-**Role / position:** 
-**Seniority:** 
-**Company type:** 
-**Industry / vertical:** 
-**Geography:** 
-**Years of experience:** 
+**Role / position:** Архитектор или ГИП, лично ведущий раздел вертикального транспорта (лифты/эскалаторы) в проекте
+**Seniority:** Ведущий специалист или ГИП (достаточный опыт, чтобы отвечать за раздел перед заказчиком/экспертизой)
+**Company type:** Проектный институт или частное архитектурное/проектное бюро
+**Industry / vertical:** Проектирование многоквартирных и общественных зданий (РФ)
+**Geography:** Россия
+**Years of experience:** 3+ лет в проектировании (достаточно, чтобы столкнуться с правками заказчика и повторным пересчётом хотя бы раз)
 
 ### Why this persona
 
-<!-- Why is this the person most likely to feel the pain in the hypothesis acutely?
-     Tied back to evidence from collection/signals.md and collection/market.md. -->
+Прямое пересечение с личным опытом фаундера (00_intake): он сам ведёт 3 проекта по ВТ и построил интерактивный расчёт из-за боли повторного пересчёта под правки заказчика. Это ближайшая по ролям аудитория, у которой стоит проверить, совпадает ли боль фаундера с болью «типового» архитектора/ГИПа — или фаундер спроецировал свою специфическую роль на более широкую аудиторию (см. 04_devils_advocate, «возможное несоответствие»). Primary persona выбрана намеренно узко (ВТ, а не все 4 калькулятора) — если даже здесь, где есть личное свидетельство фаундера, боль не подтвердится независимо, остальные 3 калькулятора нужно ставить под ещё больший вопрос.
 
 ---
 
 ## Secondary persona (if applicable)
 
-<!-- Some hypotheses involve more than one persona — e.g., the daily user vs the budget holder.
-     If so, define each separately. They will likely need different interview frameworks. -->
-
-**Role / position:** 
-**Why secondary, not primary:** 
+**Role / position:** Специалисты по 3 остальным предметным направлениям — инженер пожарной безопасности (пропускная способность эвакуации), технолог общественного питания (условные блюда), инженер ОВ/ВК или специалист по бассейновому оборудованию (водоподготовка)
+**Why secondary, not primary:** По 01_sharpened эти три группы, вероятно, представляют разные профессиональные миры, не одну аудиторию с ВТ-персоной. Интервью с ними — отдельная, более лёгкая волна (по 1-2 на группу), чтобы проверить допущение S2 (аудитория калькуляторов релевантна для подписки), а не основной массив.
 
 ---
 
 ## Where they congregate
 
-<!-- Specific places to reach this audience. Communities, events, channels.
-     "LinkedIn" is too broad. "LinkedIn groups for in-house BIM coordinators in
-     the EU" is specific. -->
-
-- 
-- 
-- 
+- Профессиональные форумы проектировщиков (форумы АВОК — инженерные системы; специализированные ветки по ВТ/лифтам на форумах проектных институтов)
+- Профильные Telegram-каналы для архитекторов и ГИПов (каналы про проектирование МКД, каналы АВОК)
+- Профессиональные группы ВКонтакте/сообщества для архитекторов и технологов общепита
 
 ---
 
 ## Existing audience access
 
-<!-- If the founder has prior relationships with members of this persona —
-     past customers, course buyers, newsletter subscribers, colleagues — list here.
-     This is often the highest-value channel and should be used first. -->
-
-- 
+- Собственная сеть фаундера: коллеги и заказчики по 3 текущим проектам вертикального транспорта — самый тёплый и быстрый канал для primary persona.
+- Ранние пользователи/подписчики svodpro.ru (сайт только запустился — пул пока маленький, но стоит проверить у фаундера, есть ли уже контакты первых пользователей).
 
 ---
 
 ## Disqualifying criteria
 
-<!-- Who should NOT be interviewed, even if they're in the persona range?
-     E.g., people who haven't worked in the field in the last 12 months,
-     people whose role no longer involves the relevant tasks. -->
-
-- 
-- 
+- Не работал с проектной документацией последние 12 месяцев.
+- Роль не предполагает ответственности за расчётный раздел (например, чисто визуализатор/рендерщик без отношения к нормативным расчётам).
+- Студенты/учащиеся без реального проектного опыта — важно отличать «интересующихся» от практикующих (см. риск в 04_devils_advocate про case «архитектор, но не считает сам»).
 
 ---
 
 ## Recruitment prioritization
 
-<!-- Order in which to approach pools, with reasoning. -->
-
-1. 
-2. 
-3. 
+1. Личная сеть фаундера по ВТ-проектам (самый быстрый доступ, уже тёплые контакты) — primary persona.
+2. Форумы/Telegram-каналы для architects/ГИПов — primary persona, холодный охват для проверки, что личная сеть фаундера не единственный источник сигнала (иначе выборка смещена).
+3. По одному контакту на каждую из 3 secondary-персон (ПБ, технолог питания, ОВ/ВК) — минимально достаточно, чтобы протестировать допущение S2.
 
 ---
 
@@ -80,5 +64,5 @@
 **For L2 confidence:** 3–7 interviews from primary persona
 **For L3 confidence:** 10+ interviews including subsegments
 
-Target for this hypothesis: 
-Realistic timeline: 
+Target for this hypothesis: 5 интервью с primary persona (ВТ) + по 1 с каждой из 3 secondary-персон = 8 интервью → L2, с частичным покрытием L3 по субсегментам.
+Realistic timeline: <!-- FOUNDER TO CONFIRM: зависит от доступности личной сети фаундера -->

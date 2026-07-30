@@ -8,38 +8,26 @@
 
 ## Volume comparison
 
-**Supporting evidence — number of distinct points:** 
-**Disconfirming evidence — number of distinct points:** 
-**Ratio (supporting : disconfirming):** 
+**Supporting evidence — number of distinct points:** 10 (3 competitors + 3 market + 4 signals)
+**Disconfirming evidence — number of distinct points:** 10 (3 competitors + 3 market + 3 signals + 1 anecdote caveat)
+**Ratio (supporting : disconfirming):** примерно 1:1 по объёму
 
 ---
 
 ## Strength comparison
 
-**Supporting strength rating:** weak | moderate | strong | very strong
-**Disconfirming strength rating:** weak | moderate | strong | very strong
+**Supporting strength rating:** moderate
+**Disconfirming strength rating:** moderate-to-strong
 
 ---
 
 ## Asymmetry assessment
 
-<!-- Three possibilities:
+Объём симметричен (по указанию CLAUDE.md — если бы одна сторона была заметно тоньше, это надо было бы явно флагать; здесь это не так). Но **качественно disconfirming сторона немного сильнее**: её ключевые пункты (KONE TrafCal, vaco-eng.ru, 3 конкурента по условным блюдам, опровержение M2) — это конкретные, проверяемые факты, обнаруженные независимо от фаундера и прямо опровергающие его приоры. Сильнейший supporting-пункт (форумное подтверждение боли) тоже независим от фаундера, но это единственный такой факт (n=1), тогда как дисконфирмирующих независимых фактов — несколько.
 
-     1. REAL asymmetry — the evidence genuinely is one-sided. Either the hypothesis
-        is strongly supported by reality, or it's strongly refuted. This is informative
-        and should drive the decision in 3_decision/.
+Most likely explanation for the observed asymmetry: **REAL asymmetry, но локальная, не глобальная** — не "гипотеза в целом сильна/слаба", а "гипотеза сильна ровно там, где конкуренции нет (эвакуация), и слаба там, где фаундер ошибочно предполагал пустую нишу (условные блюда, водоподготовка, и отчасти ВТ из-за KONE TrafCal)". Это не framing error (01_sharpened была достаточно специфична, чтобы дать конкретные проверяемые ответы) и не collection bias (оба Parallel-запроса были нейтрально сформулированы, не подталкивали к одному выводу — прямые доказательства этому есть в самих файлах: оба отчёта одинаково прямо называют и совпадения, и расхождения с приорами).
 
-     2. COLLECTION BIAS — the engine collected data that skews one way. Maybe the
-        sources or queries were tilted. Maybe the framing in research_plan.md
-        guided the engine toward confirmation.
-
-     3. FRAMING ERROR — the hypothesis as stated in 01_sharpened.md is ambiguous
-        enough that one side has more to work with. This means the hypothesis needs
-        sharpening before another research run is worthwhile. -->
-
-Most likely explanation for the observed asymmetry: 
-
-Evidence for this explanation: 
+Evidence for this explanation: Само разделение по 4 калькуляторам внутри одной гипотезы даёт естественный контроль — эвакуация выглядит сильно (real asymmetry в сторону "za"), а условные блюда/водоподготовка выглядят слабо (real asymmetry в сторону "против") **внутри одного и того же прогона исследования**, что исключает объяснение через смещение выборки источников.
 
 ---
 
@@ -47,39 +35,27 @@ Evidence for this explanation:
 
 ### Areas where supporting evidence is strong AND disconfirming is weak
 
-<!-- Genuinely promising signals. -->
-
-- 
+- **Эвакуация (пропускная способность)**: доказанное отсутствие бесплатного онлайн-конкурента + доказанный платный рынок услуг (готовность платить за решение задачи) = самый чистый сигнал "за" из всего исследования.
 
 ### Areas where disconfirming evidence is strong AND supporting is weak
 
-<!-- Red flags that need to be addressed in interviews or in the decision. -->
-
-- 
+- **Условные блюда**: 3 независимых бесплатных конкурента, ниша насыщена — самый чистый сигнал "против" из четырёх тем. Стоит рассмотреть исключение этого калькулятора из первой волны публикации, а не запуск всех 4 одновременно (это прямо противоречит решению фаундера "сразу несколько калькуляторов" из 1_frame/01_sharpened.md — конфликт зафиксирован, не сглажен).
+- **Водоподготовка бассейнов**: приор фаундера "ничего не видел" опровергнут (vaco-eng.ru, 100+ расчётов) — вторая по слабости тема.
 
 ### Areas where both sides are weak
 
-<!-- Open questions. The desk research didn't conclusively answer this either way.
-     Candidates for interview probes. -->
-
-- 
+- Реальный объём поискового спроса (Q1) — ни подтверждён, ни опровергнут количественно (Wordstat недоступен в этом прогоне). Кандидат не столько для интервью, сколько для отдельного ручного SEO-исследования фаундера.
+- Насколько типичен forum-кейс пересчёта (1 на 2 лифта) — распространённая практика или редкий эксцесс? Прямой кандидат для интервью (см. `interviews/questions.md`).
+- Готовность целевой аудитории (архитекторы/технологи) реально дойти от калькулятора до платной подписки ИИ-ассистента — ни один источник этого прогона не отвечает напрямую. Кандидат для интервью (solution-area вопросы).
 
 ### Areas where both sides are strong (genuine ambiguity)
 
-<!-- Hard tradeoffs. The synthesis will need to weigh these explicitly. -->
-
-- 
+- **ВТ (вертикальный транспорт)**: одновременно (а) есть чёткое, проверяемое УТП по актуальности норматива против КРУПТ, и (б) есть реальный, уже используемый вендорский конкурент KONE TrafCal, о котором заранее не было известно. Это не "слабое место", а настоящий трейд-офф: УТП по норме может не перевесить инерцию использования KONE TrafCal там, где проектировщик и так закладывает лифты KONE. Синтезу придётся explicitly взвесить это, а не усреднить.
 
 ---
 
 ## Recommendation for the next step
 
-<!-- One of:
+Recommendation: **PROCEED to interview prep, но с сужением фокуса перед публикацией.**
 
-     - PROCEED to interview prep — desk research is sufficient context.
-     - RE-RUN COLLECTION with adjusted queries — collection bias suspected.
-     - RE-FRAME — go back to 1_frame/01_sharpened.md, hypothesis needs tightening.
-     - STOP — disconfirming case is so strong that interviews would only confirm a kill. -->
-
-Recommendation: 
-Justification: 
+Justification: Десk research дал достаточно, чтобы явно расставить приоритеты между 4 калькуляторами — это не "нужно больше desk research", а "нужны интервью, чтобы решить, публиковать ли все 4 сразу или начать с эвакуации (самый чистый сигнал) + ВТ (личная экспертиза фаундера), отложив условные блюда/водоподготовку". Полный STOP не оправдан — сигнал не разгромный против гипотезы в целом, он неровный по 4 подтемам, и это ровно то разрешение неоднозначности, для которого нужны интервью, а не ещё один прогон Parallel. RE-FRAME тоже не нужен — гипотеза была достаточно специфична, чтобы дать этот результат; проблема не в формулировке, а в изначальном решении фаундера включить все 4 темы без приоритезации (см. риск, явно принятый в 1_frame/01_sharpened.md).
