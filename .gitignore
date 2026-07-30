@@ -45,6 +45,7 @@ yarn-error.log*
 
 # Cache directories
 .cache/
+.parallel/
 .parallel-cache/
 .apify-cache/
 
