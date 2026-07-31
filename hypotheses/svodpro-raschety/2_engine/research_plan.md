@@ -66,6 +66,38 @@ Hard ceiling: $50
 
 ---
 
+## External tool tasks — for approval before running
+
+**Ретроактивная запись.** Этот раздел появился в шаблоне после того, как оба запроса ниже уже были выполнены — фаундер не видел их точный текст до запуска. Это процессный пробел этого прогона, зафиксирован честно, не задним числом отредактирован под вид согласования. Начиная со следующего запроса в этой гипотезе — согласование обязательно до статуса «выполнено».
+
+| # | Инструмент | Точный текст задания | Статус |
+|---|-----------|----------------------|--------|
+| 1 | Parallel.ai (pro) | Конкурентный анализ по 4 калькуляторам + производители лифтов + позиционирование SvodPro (полный текст ниже) | выполнено (без предварительного согласования) |
+| 2 | Parallel.ai (pro) | Роли/практика расчётов, численность проектных кадров, статус пересмотра норм (полный текст ниже) | выполнено (без предварительного согласования) |
+| 3 | Wordstat | 5 фраз: «расчет лифтов», «расчет эвакуации», «расчет санузлов», «расчет условных блюд», «расчет водоподготовки» — все регионы | выполнено (фаундер запустил сам вручную, согласование не требовалось) |
+
+**Задание #1, полный текст (на английском — так был сформулирован промпт для Parallel):**
+
+> Conduct a comprehensive competitive analysis for: free and paid online calculators used by Russian architects and engineers for four specific building-code calculations under Russian norms (ГОСТ/СП): (1) vertical transportation sizing — number and capacity of elevators/escalators per ГОСТ Р 55964 and СП 267.1325800, including any tool from "Крупт" (Krupt), and whether elevator manufacturers (Otis, KONE, and domestic manufacturers such as Щербинский завод, Карачаровский механический завод, Могилевлифтмаш) offer free online elevator selection/sizing calculators tied to their product catalogs for the Russian market; (2) evacuation route throughput capacity calculations for fire safety compliance (расчет пропускной способности путей эвакуации); (3) "условные блюда" (standardized dish count) calculations for catering facility design per SanPiN/SP norms; (4) swimming pool water treatment (водоподготовка бассейна) calculations per Russian norms.
+>
+> Cover: key players/tools per calculation type, whether each is free or paid, what functionality each offers (does it just compute values, or also help select specific equipment/models), positioning approach (calculator-only tool vs full engineering platform vs manufacturer sales tool vs professional forum-shared spreadsheet), and any gaps where no good calculator currently exists online in Russian for a given topic. Also identify the company "svodpro" (svodpro.ru) — an AI assistant for navigating Russian СП/ГОСТ construction norms — and note whether it or comparable AI-assistant-for-norms products already offer any of these calculators.
+>
+> Include a summary comparison table by calculation type (columns: topic, known tools/competitors, free/paid, does it select equipment or just calculate, apparent gap). Output as a structured markdown report with inline citations. Write the report in Russian.
+
+**Задание #2, полный текст:**
+
+> Research the professional practice of Russian building design engineers (архитекторы, технологи, инженеры-проектировщики) regarding four specific calculation tasks under Russian construction norms (СП/ГОСТ): vertical transportation (lift/escalator) sizing per СП 267.1325800 and ГОСТ Р 55964, evacuation route throughput capacity for fire safety, standardized dish count (условные блюда) for catering facility design, and swimming pool water treatment (водоподготовка) sizing.
+>
+> Cover:
+> (a) Which professional role typically performs each calculation inside a Russian design institute or bureau — is it done by general architects/technologists themselves, or handed off to specialized consultants, subcontractors, or equipment suppliers? Look for evidence in professional forums, job descriptions, or industry articles.
+> (b) Any evidence in Russian professional forums, Telegram channels, or industry communities (e.g. АВОК, форумы проектировщиков, форумы архитекторов) of discussion, complaints, or requests related to: repeated recalculation when client requirements change, manual Excel-based calculation workflows for these tasks, or demand for online calculator tools for any of these specific topics.
+> (c) A rough estimate, from official Russian statistics (Росстат) or industry sources, of how many practicing architects and technologists work in Russia today, and any data or informed estimates on what share of them personally perform this kind of technical/regulatory calculation versus outsourcing or not encountering it at all.
+> (d) Whether any of the underlying norms (СП 267.1325800, evacuation capacity norms in СП 1.13130 or similar, SanPiN catering norms, pool water treatment norms in СП 31-113 or similar) are scheduled for revision or update in the near term (this year or next).
+>
+> Output as a structured markdown report with inline citations, in Russian.
+
+---
+
 ## Out of scope
 
 - ~~Точные цифры поисковой частотности (Wordstat/Keys.so/Ahrefs)~~ — **закрыто**: фаундер прогнал Wordstat вручную по всем 4 исходным темам + 1 новому кандидату («расчёт санузлов»), см. `collection/raw/wordstat_search_volume.md` и обновлённый `collection/market.md`. Keys.so/Ahrefs (позиции в выдаче, а не только показы) по-прежнему не собраны — остаётся мелким остаточным gap.
