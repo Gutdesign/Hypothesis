@@ -79,6 +79,21 @@ Hard ceiling: $
 
 ---
 
+## External tool tasks — for approval before running
+
+<!-- List the exact prompt/query text for every planned Parallel/Apify/Wordstat call,
+     BEFORE running it. Show this section to the founder and wait for a go-ahead —
+     don't flip status to "выполнено" until they've said yes. Free/local tools
+     (web_fetch, web_search) don't need this. -->
+
+| # | Инструмент | Точный текст задания | Статус |
+|---|-----------|----------------------|--------|
+| 1 |           |                       | на согласовании |
+
+<!-- Статусы: "на согласовании" → "одобрено" → "выполнено". -->
+
+---
+
 ## Out of scope
 
 <!-- Explicitly list things that COULD be researched but are intentionally not in this run.
