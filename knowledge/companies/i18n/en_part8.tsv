@@ -1,0 +1,79 @@
+cegid-menfis	round	product of the Cegid group (foreign group)
+cegid-menfis	note	per market overviews, one of the main Spanish estimating programs alongside Presto, Arquímedes and TCQ; popular in some autonomous communities; headquarters of the product team, founding year and headcount not found
+sigrid	round	product of the Cegid group (foreign group)
+sigrid	founded	1987 (Professional Software, per Tracxn aggregator)
+sigrid	note	an implementing contractor is named: Construcciones San Martín (one example, not representative statistics)
+brickcontrol	note	no data on owners, finances, headcount or adoption
+istram	size	37 (Tracxn aggregator)
+bimetica	note	no data on owners, finances or download counts
+construsoft	note	exclusive Tekla distribution: per the company itself (one source)
+saalg	size	5 (Tracxn aggregator)
+saalg	round	Series B, July 2023 (Tracxn aggregator)
+saalg	raised	about $5.46M (Tracxn aggregator)
+saalg	note	number of projects and customers in Spain not found
+011h	size	292 (Tracxn aggregator)
+011h	round	Series B, October 2025 (Tracxn aggregator)
+011h	raised	about $60.95M (Tracxn aggregator)
+011h	note	the offer is wider than site scanning: digital building delivery; number of projects not found; the website 011h.com comes from the report's table
+aridditive	size	14 (Tracxn aggregator)
+aridditive	round	seed round, Nov 2024 (Tracxn aggregator)
+aridditive	raised	about $0.545M (Tracxn aggregator)
+hoprin	note	the company record mentions a grant, but the amount and investor are not confirmed; no data on commercial robot installations
+arcus-global	note	products are listed in the government procurement catalogue; headquarters, headcount and customers not confirmed
+nec-software	size	about 1,740 (external data, for the whole company)
+nec-software	note	no current planning or building-control contract confirmed; legacy Acolaid installations belong to Idox, not NEC
+civica	markets	United Kingdom and worldwide; 900 public-authority partners: company claim
+civica	note	the claim of 900 partners is for the whole company, not the number of planning customers; a current planning win is not confirmed
+barnbrook	note	does not replace the regulator for higher-risk buildings (Building Safety Regulator); no company data found
+planning-portal	markets	United Kingdom (mainly England)
+planning-portal	round	TerraQuest was sold to Apse Capital for £72M in 2020 (secondary source)
+planning-portal	note	the current owner should be checked; the applicant's filing fee changes every year
+uk-planning-gateway	note	no data on the company, finances or volumes
+planx	markets	United Kingdom (England)
+planx	round	government-funded project
+planx	note	as of March 2026: 16 authorities use it, 56 services created, another 23 authorities funded for a year; not a commercial company
+searchland	size	about 60 (external profile)
+searchland	round	investor Fuel Ventures (external profile)
+searchland	raised	about $3.0M (external profile)
+searchland	note	database of 23M+ planning applications and 2,000+ property-professional customers: company claims; this is site sourcing, not a filing and approval system
+landtech	size	about 144 (external profile)
+landtech	raised	about $69.2M over its history (external profile)
+landtech	note	revenue and customer count not verified; not a council decision system
+urban-intelligence	size	about 9 (external profile)
+urban-intelligence	note	finances and customer count not found
+centric-leefomgeving	markets	Netherlands: municipalities, environmental agencies, ministries
+centric-leefomgeving	founded	1992 (whole company)
+centric-leefomgeving	size	about 2,346 (whole Centric company)
+centric-leefomgeving	note	headcount and year are for the whole of Centric, not the unit; finances and product customer count not found
+genetics	note	no data on the company, finances or customer count
+cype	size	246 (Tracxn aggregator; other estimates 51–100 and 201–500)
+struck	size	about 22 (external profile)
+struck	raised	about $2.3M (external profile), latest round 6 Nov 2025
+struck	note	the address struck.eu comes from the Parallel report (instead of the unconfirmed struckcompliance.com); claims about shorter checking time are customer testimonials on the website, not a controlled assessment; related to the hypothesis svodpro-raschety
+roxit	note	external profile in the Parallel report: founded 2011, about 184 employees (differs from "about 250" in the Visma acquisition announcement); per tenders, a six-year VTH software contract for Midden-Drenthe (secondary source, not checked); per the press, one of four companies sharing the planning-software market (Roxit, GISkit, xxllnc, Cadac)
+eqa	note	Madrid's register of collaborating bodies lists EQA Licencias Urbanísticas S.L.; the city describes the MADRIDdbp platform (BIM-based digital permits) as a future one; tender 300/2025/00064 of 30 Jun 2025 for €9,326,691.30 excluding VAT: the supplier is not established by the sources and live use is not proven; the EU project CHEK is a consortium, not a single supplier; the company claims it cuts licence time from 18 to 3 months
+idox	note	Blackburn tender: 29 suppliers invited, 3 responded, Idox scored 83.8, contract 5 years plus up to 5, capital costs £102K (council decision of 18 Oct 2024); Epsom and Ewell: £276,340 excluding VAT for software and support from 22 Nov 2025 to 29 Oct 2028, justified as single supplier (Find a Tender); over 100 people at the Pune centre (17% of the workforce) per the report; per the company, the leading provider of building control software in the UK
+*	verified	частично: отчёт Parallel (источники в списке), данные не сверены с первоисточником	partial: Parallel report (sources listed), data not checked against primary sources
+*	verified	да: первоисточник — публикация правительства Великобритании в выдаче отчёта; страница не открывалась мной	yes: primary source, a UK government publication cited in the report; I did not open the page
+*	sub	сметы, обмеры и сертификации	estimating, measurement and certifications
+*	sub	ERP для подрядчиков: затраты, отклонения по объектам, управление отделами	contractor ERP: costs, job variances, department management
+*	sub	облачное планирование, бюджеты и управление строительными проектами	cloud scheduling, budgets and construction project management
+*	sub	проектирование и обмеры для гражданского и дорожного строительства	design and quantity measurement for civil and road engineering
+*	sub	библиотека BIM-объектов для проектировщиков и производителей	BIM object library for designers and manufacturers
+*	sub	дистрибьютор Tekla (Trimble) в Испании и Латинской Америке: BIM для конструкций	Tekla (Trimble) distributor in Spain and Latin America: BIM for structures
+*	sub	контроль проекта с ИИ: геотехника и ход работ	AI project monitoring: geotechnics and progress
+*	sub	цифровое строительство и поставка зданий	digital construction and building delivery
+*	sub	3D-печать бетоном и прослеживаемость	3D concrete printing and traceability
+*	sub	роботы для строительной площадки	robots for the construction site
+*	sub	ПО на Salesforce для планирования, строительного контроля и разрешений	Salesforce-based software for planning, building control and permits
+*	sub	программы для органов власти (по обзору — в том числе планирование)	software for public authorities (including planning, per an overview)
+*	sub	программы для местных органов власти (планирование — не подтверждено)	software for local authorities (planning not confirmed)
+*	sub	рабочий процесс для частных органов строительного контроля (Approved Inspector Professional)	workflow for private building control bodies (Approved Inspector Professional)
+*	sub	национальный путь подготовки и подачи заявок на планирование (сторона заявителя)	national route for preparing and submitting planning applications (applicant side)
+*	sub	подготовка и подача заявок на планирование для архитекторов и технологов	preparing and submitting planning applications for architects and technologists
+*	sub	государственный конструктор цифровых услуг планирования для советов (низкий код)	government low-code builder of digital planning services for councils
+*	sub	поиск участков, история разрешений и оповещения	site sourcing, planning history and alerts
+*	sub	поиск и первичная оценка участков для застройщиков	site sourcing and first-pass appraisal for developers
+*	sub	анализ планирования и земли	planning and land analysis
+*	sub	программа выдачи разрешений, надзора и контроля (VTH) для публичных органов	permitting, inspection and enforcement (VTH) software for public bodies
+*	sub	ведение дел VTH, ГИС и административная система	VTH case management, GIS and administration system

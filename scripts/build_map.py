@@ -34,7 +34,7 @@ STAGE_CODES = {c for c, _ in STAGES}
 EU_OTHER = {"Германия", "Франция", "Португалия", "Швеция", "Австрия", "Швейцария", "Ирландия", "Люксембург", "Лихтенштейн",
             "Словения", "Италия", "Бельгия", "Дания", "Финляндия", "Норвегия"}
 OUT = {"Индия", "Канада", "Япония", "Израиль", "ОАЭ"}
-NAME_EN = [("бывш.", "formerly"), ("строительное направление", "construction unit")]
+NAME_EN = [("бывш.", "formerly"), ("строительное направление", "construction unit"), ("дистрибьютор Tekla", "Tekla distributor")]
 
 
 def region(country):
@@ -172,6 +172,28 @@ def en_block(r, per_id, star):
     return e
 
 
+def load_pains():
+    """Rows of knowledge/pains.md (table with P-numbers) + English texts from i18n/pains_en.tsv."""
+    en = {}
+    f = I18N / "pains_en.tsv"
+    if f.exists():
+        for line in f.read_text(encoding="utf-8").splitlines():
+            p = line.split("\t")
+            if len(p) >= 6:
+                en[p[0]] = {"pain": p[1], "who": p[2], "why": p[3], "stype": p[4], "src": p[5]}
+    out = []
+    for line in (ROOT / "knowledge" / "pains.md").read_text(encoding="utf-8").splitlines():
+        if not re.match(r"^\| P\d+ ", line):
+            continue
+        c = [x.strip() for x in line.strip().strip("|").split("|")]
+        if len(c) < 9:
+            continue
+        links = [{"t": m.group(1), "u": m.group(2)} for m in re.finditer(r"\[([^\]]+)\]\((https?://[^)]+)\)", c[7])]
+        out.append({"id": c[0], "pain": c[1], "stage": c[2], "who": c[3], "why": c[4], "grade": c[5], "stype": c[6],
+                    "src": re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", c[7]), "links": links, "en": en.get(c[0], {})})
+    return out
+
+
 def build_data(rows):
     per_id, star = load_en()
     out = []
@@ -211,6 +233,7 @@ def main():
     html = (tpl.replace("__DATA__", payload)
             .replace("__COLS__", json.dumps(COLS, ensure_ascii=False))
             .replace("__EN__", json.dumps(en_dicts, ensure_ascii=False))
+            .replace("__PAINS__", json.dumps(load_pains(), ensure_ascii=False).replace("</", "<\\/"))
             .replace("__DATE__", date.today().strftime("%d.%m.%Y"))
             .replace("__COUNT__", str(len(data))))
     (SITE / "index.html").write_text(html, encoding="utf-8")

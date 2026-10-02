@@ -43,6 +43,7 @@ ROLE_EN = {
     "генподрядчик (капитальные проекты)": "general contractor (capital projects)",
     "производитель материалов": "materials manufacturer",
     "сметчик": "quantity surveyor", "подрядчик по гражданскому строительству": "civil engineering contractor",
+    "орган строительного контроля": "building control body", "производитель сборных элементов": "precast producer",
 }
 LAYER_EN = {
     "данные": "data", "финансы и страхование": "finance and insurance", "комплаенс": "compliance",
@@ -69,6 +70,7 @@ PHRASES = [
     (r"более ", "over "), (r"около ", "about "), (r"сотрудников", "employees"), (r"штатный сотрудник", "employees"),
     (r"в июле", "in July"), (r"слабая оценка", "weak estimate"),
     (r"млрд", "B"), (r"млн", "M"), (r"тыс\.", "K"),
+    (r"Великобритания", "United Kingdom"), (r"Нидерланды", "Netherlands"), (r"Испания", "Spain"), (r"США", "USA"),
     (r"н/д", "n/a"), (r"\bдата не подтверждена\b", "date not confirmed"),
     (r"\bиз них\b", "of which"), (r"\bи\b", "and"), (r"\bпо\b", "per"), (r"\bдо\b", "up to"),
     (r"янв\.", "Jan"), (r"фев\.", "Feb"), (r"мар\.", "Mar"), (r"апр\.", "Apr"), (r"июнь", "June"),

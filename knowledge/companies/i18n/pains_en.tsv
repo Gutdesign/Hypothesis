@@ -1,0 +1,13 @@
+P01	Manual quantity takeoff from drawings takes days; errors and omissions in the estimate	subcontractors, general contractors	drawings are PDFs, no common format	vendor	Bild AI, Fresco, Rudus, Bobyard (company claims)
+P02	Errors in drawings and scope gaps are found on site, causing rework	designers, general contractors	manual checking, many disciplines	vendor	InspectMind AI, Structured AI, Scoreboard.ai, Helonic
+P03	Permits take a long time	applicants, municipalities	shortage of reviewers, manual review	vendor	PermitFlow, GreenLite, Permitify; EQA (licence time from 18 to 3 months: claim)
+P04	Labour shortage on construction sites	general contractors	demographics (claim)	vendor	Xpanner, Bedrock Robotics, TerraFirma
+P05	Damage from striking underground utilities ($30B a year, USA)	utility contractors	no map of underground assets	vendor	SubVysion
+P06	Settlements with contractors and job costing are done by hand	general contractors	generic accounting software	vendor	Adaptive (750+ customers: claim)
+P07	Checking the admission of contractors and workers	general contractors, property managers	many documents, supplier turnover	vendor	NetVendor, GoContractor
+P08	The UK Building Safety Act requires a continuous chain of building data	contractors, owners	the law requires the data chain	vendor	ZuTec (blog)
+P09	An annual Presto subscription is unaffordable for a self-employed professional; the substitutes are Excel and manual measuring	solo estimators, Spain	subscription pricing, few modular options	buyer: a single forum opinion, 2021	Sólo Arquitectura, 24 Nov 2021
+P10	Usability and training decide the choice between Presto and Arquímedes	designers and estimators, Spain	different interface and price-database integration	buyer: forum, 2011 (together with the 2021 thread, two independent opinions on choice but with different complaints)	Sólo Arquitectura, 27 Sep 2011
+P11	Generic site-control checklists are impractical; the control book is filled in by hand on the last day	inspectors and site managers, Spain	the prescribed sequence does not match the real one	buyer: forum, 2009 (old data)	Sólo Arquitectura, 19 Jan 2009
+P12	The market for planning and permit software is thin: of 29 suppliers invited to Blackburn's tender, 3 responded; in the Netherlands a few suppliers share a shrinking market	municipalities, United Kingdom and Netherlands	complex requirements, costly migration	buyer that is a public authority: council decision of 18 Oct 2024; trade press	Blackburn council decision; Binnenlands Bestuur
+P13	Municipal licence procedures in Madrid are the subject of a COAM survey of architects; there are no survey results	architects, Madrid	unknown	professional body: a survey invitation without results	COAM, 22 Sep 2026
