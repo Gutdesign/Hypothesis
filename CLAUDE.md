@@ -89,7 +89,7 @@ Your role: **draft preparer.** Draft `map.md`, `gaps_and_pains.md`, `hypothesis_
 
 `knowledge/` holds facts that outlive a single study:
 
-- `value_chain.md` — stage taxonomy (S0–S9 + cross-cutting) with mapping to RIBA / AIA / ACE / local plans of work.
+- `value_chain.md` — stage taxonomy (S0–S9; data / finance / compliance / education are theme labels in the `слой` column, not stages) with mapping to RIBA / AIA / ACE / local plans of work.
 - `companies/registry.csv` (source of truth, `;`-delimited, UTF-8 with BOM so Russian Excel opens it) and `companies/registry.md` (generated view; do not hand-edit — run `python scripts/registry.py build`).
 - `markets/` — market-level data (growth, size) with sources and comparability notes.
 - `pains.md` — pains with evidence grade; grows as landscapes and hypotheses report.
