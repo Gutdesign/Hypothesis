@@ -95,7 +95,7 @@ def build_data(rows):
             "region": region(r["штаб_страна"]), "size": r["размер_сотрудников"], "round": r["последний_раунд"],
             "raised": r["привлечено"], "founded": r["год_основания"], "revenue": r["выручка"],
             "sources": [u for u in r["источники_данных"].split() if u.startswith("http")],
-            "verified": r["данные_проверены"], "note": r["примечание"], "profile": r["профиль_по_списку"],
+            "layer": r.get("слой", ""), "verified": r["данные_проверены"], "note": r["примечание"], "profile": r["профиль_по_списку"],
         })
     return out
 
@@ -110,7 +110,6 @@ def main():
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     html = (TEMPLATE.replace("__DATA__", payload)
             .replace("__COLS__", json.dumps(COLS, ensure_ascii=False))
-            .replace("__LAYERS__", json.dumps(LAYERS, ensure_ascii=False))
             .replace("__DATE__", date.today().strftime("%d.%m.%Y"))
             .replace("__COUNT__", str(len(data))))
     (SITE / "index.html").write_text(html, encoding="utf-8")
