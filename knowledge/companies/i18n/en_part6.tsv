@@ -1,0 +1,40 @@
+procore	size	4,421 full-time employees at the end of 2025 (+5%); 17,850 customers
+procore	revenue	$1,323M for 2025 (+15% year on year)
+idox	revenue	£89.8M for the year to 31 Oct 2025 (+3%, £87.6M a year earlier), of which recurring £59.7M (66%); adjusted EBITDA £27.0M (30% margin); order intake £108M
+idox	note	per the report: over 100 people at the company's centre in Pune (17% of the workforce); total headcount not stated. Per the company, the leading provider of building control software in the UK; covers the municipality side of permits (S4), which the registry lacked
+hilti	size	34,420 at the end of 2025 (+67)
+hilti	revenue	CHF 6.3B for 2025 (−2.1% in Swiss francs; +1.9% in local currencies); software annual recurring revenue +28%, over 25,000 software customers
+autodesk	revenue	$7,206M for fiscal 2026 (+18%)
+autodesk	note	the founder's list had a regional office; the registry covers the whole company; the headcount of 14,300 is not confirmed by the release (it gives no headcount); global: presence in the Americas, Europe and Asia-Pacific (per a market overview)
+trimble	revenue	$3,587.3M for 2025 (−3% vs 2024; +6% organic); annual recurring revenue $2.39B (+6%)
+siemens	size	about 318,000 as of 30 Sep 2025
+siemens	revenue	€78.9B for fiscal 2025 (whole group, construction is a small part); net income €10.4B
+bentley-systems	revenue	$1,501.8M for 2025 (+11.0%; +10.1% in constant currency)
+greenlite	round	Series B, $49.5M, 15 Sep 2025 (led by Insight Partners); earlier Series A $28.5M, Sep 2024
+greenlite	markets	USA: nearly 100 Fortune 500 customers claimed (Walgreens, O'Reilly Auto Parts, TD Bank and others); permit time shorter by 75% (company claim)
+foresight	round	Series A, $25M, 18 Mar 2026 (led by Macquarie Capital Venture Capital)
+higharc	note	per the press release: Series B $53M, Feb 2024 (led by Spark Capital and Pillar VC), $78.7M raised in total at that time; the Series C of $95M (2026) is not confirmed by a primary source; per press, replaces AutoCAD and automates design, estimates and sales for homebuilders
+bedrock-robotics	round	Series B, $270M, 5 Feb 2026 (co-led by CapitalG and Valor Atreides AI Fund); the $1.8B valuation is from a search summary and is not confirmed in the article
+bedrock-robotics	note	retrofits excavators, bulldozers and loaders; works with general contractors; per the article it came out of stealth in July 2025 with $80M (seed and Series A); the founding year differs (2024 per aggregators, 2025 per the article)
+monumental	round	Series B, $32M, 15 Jul 2026 (led by Khosla Ventures; Plural and Hummingbird participated)
+monumental	note	per the article: a fleet of over 150 robots in the Netherlands and the United Kingdom; founding year and total raised not stated; it does part of the work itself as a contractor
+*	verified	да: первоисточник открыт 02.10.2026 (пресс-релиз об итогах 2025 на сайте для инвесторов)	yes: primary source opened 02.10.2026 (press release on 2025 results on the investor site)
+*	verified	да: первоисточник открыт 02.10.2026 (сообщение о результатах года на бирже)	yes: primary source opened 02.10.2026 (exchange announcement of the year's results)
+*	verified	да: первоисточник открыт 02.10.2026 (сообщение компании о результатах 2025)	yes: primary source opened 02.10.2026 (company announcement of 2025 results)
+*	verified	да: первоисточник открыт 02.10.2026 (сообщение об итогах финансового 2026 года в форме 8-K)	yes: primary source opened 02.10.2026 (8-K press release on fiscal 2026 results)
+*	verified	да: первоисточник открыт 02.10.2026 (сообщение об итогах 2025 года на сайте компании)	yes: primary source opened 02.10.2026 (company announcement of 2025 results on its website)
+*	verified	да: первоисточник открыт 02.10.2026 (сообщение компании об итогах финансового 2025 года)	yes: primary source opened 02.10.2026 (company announcement of fiscal 2025 results)
+*	verified	частично: текст сообщения компании об итогах 2025 в выдаче поиска (страница не открылась по таймауту)	partial: text of the company announcement of 2025 results in search results (the page timed out)
+*	verified	да: первоисточник открыт 02.10.2026 (пресс-релиз о Series B)	yes: primary source opened 02.10.2026 (press release on the Series B)
+*	verified	да: первоисточник открыт 02.10.2026 (пресс-релиз о Series A)	yes: primary source opened 02.10.2026 (press release on the Series A)
+*	verified	да: первоисточник открыт 02.10.2026 (пресс-релиз о Series B (2024); Series C — пока только агрегатор)	yes: primary source opened 02.10.2026 (press release on the 2024 Series B; the Series C is so far from an aggregator only)
+*	verified	частично: статья в профильной прессе (первичное сообщение компании не открылось)	partial: trade press article (the company's own announcement did not open)
+*	verified	да: первоисточник открыт 02.10.2026 (статья tech.eu о Series B; первичного сообщения компании нет)	yes: primary source opened 02.10.2026 (tech.eu article on the Series B; no primary company announcement)
+*	sub	сметы и планирование (TCQ) и банк цен и экологических данных (BEDEC)	estimating and planning (TCQ) and a price and environmental data bank (BEDEC)
+*	sub	уполномоченная организация по проверке и оформлению градостроительных лицензий и платформа Gestiona Licencias	accredited body that checks and processes urban planning licences, plus the Gestiona Licencias platform
+*	sub	ПО для планов и документов по закону об окружающей среде (Rx.Base) и публикации в DSO	software for plans and documents under the Environment and Planning Act (Rx.Base) and DSO publishing
+*	sub	ПО для документов окружающей среды, правил и разрешений (DSO)	software for environmental documents, rules and permits (DSO)
+*	sub	ПО для планов по закону об окружающей среде	software for plans under the Environment and Planning Act
+*	sub	цифровой обмер объёмов и сметы для сметчиков	digital takeoff and estimating for quantity surveyors
+*	sub	обмер площадей, длин и количеств по двумерным чертежам	measuring areas, lengths and counts from 2D drawings
+*	sub	сметы и обмеры для гражданского строительства (по стандарту CESMM4)	estimating and measurement for civil engineering (CESMM4 standard)

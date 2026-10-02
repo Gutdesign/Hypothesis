@@ -18,7 +18,7 @@ STAGES_EN = {
 COUNTRY_EN = {
     "Австрия": "Austria", "Великобритания": "United Kingdom", "Германия": "Germany", "Дания": "Denmark",
     "Израиль": "Israel", "Индия": "India", "Ирландия": "Ireland", "Испания": "Spain", "Канада": "Canada",
-    "Люксембург": "Luxembourg", "Нидерланды": "Netherlands", "ОАЭ": "UAE", "Португалия": "Portugal",
+    "Люксембург": "Luxembourg", "Лихтенштейн": "Liechtenstein", "Нидерланды": "Netherlands", "ОАЭ": "UAE", "Португалия": "Portugal",
     "США": "USA", "Словения": "Slovenia", "Франция": "France", "Швейцария": "Switzerland", "Швеция": "Sweden",
     "Япония": "Japan", "н/д": "n/a",
 }
@@ -42,6 +42,7 @@ ROLE_EN = {
     "подрядчик по инженерным системам": "MEP contractor",
     "генподрядчик (капитальные проекты)": "general contractor (capital projects)",
     "производитель материалов": "materials manufacturer",
+    "сметчик": "quantity surveyor", "подрядчик по гражданскому строительству": "civil engineering contractor",
 }
 LAYER_EN = {
     "данные": "data", "финансы и страхование": "finance and insurance", "комплаенс": "compliance",

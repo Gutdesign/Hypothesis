@@ -31,7 +31,7 @@ STAGES = [
 ]
 COLS = [[c, ru, T.STAGES_EN[c]] for c, ru in STAGES]
 STAGE_CODES = {c for c, _ in STAGES}
-EU_OTHER = {"Германия", "Франция", "Португалия", "Швеция", "Австрия", "Швейцария", "Ирландия", "Люксембург",
+EU_OTHER = {"Германия", "Франция", "Португалия", "Швеция", "Австрия", "Швейцария", "Ирландия", "Люксембург", "Лихтенштейн",
             "Словения", "Италия", "Бельгия", "Дания", "Финляндия", "Норвегия"}
 OUT = {"Индия", "Канада", "Япония", "Израиль", "ОАЭ"}
 NAME_EN = [("бывш.", "formerly"), ("строительное направление", "construction unit")]
@@ -75,6 +75,60 @@ def site_url(s):
     if not s or s == "н/д":
         return ""
     return s if s.startswith("http") else "https://" + s
+
+
+RATES = {"$": 1.0, "€": 1.1, "£": 1.3, "CHF": 1.2}  # rough, for ordering only
+_NUM = r"(?:\d[\d \xa0]*\d|\d)"
+
+
+def _n(s):
+    return float(s.replace(" ", "").replace(" ", "").replace(",", "."))
+
+
+def parse_emp(s):
+    """First headcount number in the string (range -> midpoint); None if absent."""
+    s = (s or "").strip()
+    if not s or s == "н/д":
+        return None
+    m = re.match(r"\D*(" + _NUM + r")(?:\s*[–-]\s*(" + _NUM + r"))?", s)
+    if not m:
+        return None
+    a = _n(m.group(1))
+    b = _n(m.group(2)) if m.group(2) else a
+    return int(round((a + b) / 2))
+
+
+def parse_rev(s):
+    """First revenue amount in USD millions (rough rates); None if undisclosed."""
+    s = (s or "").strip()
+    if not s or s == "н/д" or (s.startswith("не раскрыта") and "оценка" not in s):
+        return None
+    m = re.search(r"(\$|€|£|CHF)\s?(" + _NUM + r"(?:,\d+)?)(?:\s*[–-]\s*(" + _NUM + r"(?:,\d+)?))?\s*(млн|млрд|тыс\.)", s)
+    if not m:
+        return None
+    cur, a, b, unit = m.groups()
+    a = _n(a)
+    b = _n(b) if b else a
+    mult = {"млн": 1.0, "млрд": 1000.0, "тыс.": 0.001}[unit]
+    return round((a + b) / 2 * mult * RATES[cur], 1)
+
+
+WEAK = re.compile(r"недостоверно|расчёт|слабая оценка|слабые оценки|предположение|не подтвержд|шум|возможно")
+SOFT = re.compile(r"агрегатор|latka|оценк|заявлен|заявле|по сообщению|по описанию|по прессе|по данным|по сайту|по обзору|пресс[еы]\b")
+
+
+def quality(field, text, verified):
+    """A: company reporting / primary document; B: press release or news; C: aggregator estimate or company claim; D: calculation or doubtful."""
+    if not text or text == "н/д" or text.startswith("не раскрыта") and ";" not in text:
+        return ""
+    t = text.lower()
+    if WEAK.search(t):
+        return "D"
+    if SOFT.search(t):
+        return "C"
+    if verified.startswith("да") and field in ("revenue", "size"):
+        return "A"
+    return "B"
 
 
 def load_en():
@@ -138,6 +192,10 @@ def build_data(rows):
             "sources": [u for u in r["источники_данных"].split() if u.startswith("http")],
             "layer": r.get("слой", ""), "global": r.get("глобальная", ""), "verified": r["данные_проверены"],
             "note": r["примечание"], "profile": r["профиль_по_списку"], "en": en_block(r, per_id, star),
+            "emp": parse_emp(r["размер_сотрудников"]), "rev": parse_rev(r["выручка"]),
+            "q": {k: quality(k, r[f], r["данные_проверены"]) for k, f in
+                  [("round", "последний_раунд"), ("raised", "привлечено"), ("size", "размер_сотрудников"),
+                   ("revenue", "выручка"), ("founded", "год_основания"), ("markets", "рынки_цель")]},
         })
     return out
 
@@ -147,7 +205,7 @@ def main():
     data = build_data(rows)
     SITE.mkdir(exist_ok=True)
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
-    en_dicts = {"region": T.REGION_EN, "role": T.ROLE_EN}
+    en_dicts = {"region": T.REGION_EN, "role": T.ROLE_EN, "layer": T.LAYER_EN}
     tpl = (Path(__file__).resolve().parent / "map_template.html").read_text(encoding="utf-8")
     html = (tpl.replace("__DATA__", payload)
             .replace("__COLS__", json.dumps(COLS, ensure_ascii=False))
