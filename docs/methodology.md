@@ -96,6 +96,18 @@ The triggers field is the most important. It is the founder's defense against su
 
 The system does not interpret confidence levels — the user does. The system only enforces that the level is explicit and that the consequences (e.g., the premature flag at L1+build) are applied.
 
+## Landscape track
+
+A hypothesis tests one idea. A landscape study answers a prior question — *where are the ideas worth testing?* — by mapping a domain: who plays at which stage, how much money and maturity sit in each cell, which pains are documented and by whom.
+
+Same philosophy, different mechanics:
+
+- **Scope first, founder-approved.** The stage taxonomy and boundaries determine what the map can show. The scope file includes an adversarial pre-pass against the study itself (seed-list bias, survivorship, loud voices vs. buyers).
+- **Registry, not prose.** Companies live in one shared table with sources and verification status per row, so the same facts serve every later hypothesis.
+- **Gaps are not opportunities.** An empty cell has at least four readings: unmet need, no money, regulation/fragmented buyers, or an artifact of the seed list. The map keeps them side by side.
+- **Evidence grading.** Pains are graded A–D by independence and source type; vendor claims cap at C.
+- **Exit through the front door.** Candidates re-enter the pipeline as `00_intake` and get the full frame/engine/decision treatment. The landscape never validates anything by itself.
+
 ## The retrospective loop
 
 After each zone, the user writes a short retrospective in `retrospectives/{slug}/{zone}.md`. The format is intentionally minimal (3–4 questions). The point is not to produce a report; it is to capture what the user noticed about the pipeline while running it.

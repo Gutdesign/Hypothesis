@@ -36,6 +36,25 @@ hypotheses/{slug}/
 
 Between zones: write a short retrospective in `retrospectives/{slug}/{zone}.md`. These feed the cross-hypothesis self-improvement loop.
 
+## Landscape track and knowledge base
+
+Not every question is a hypothesis. To understand a whole domain (who builds what, which lifecycle stages are covered, where the pains are), use a **landscape study**:
+
+```
+landscapes/{slug}/
+├── 1_scope/        ← FOUNDER: questions, boundaries, stage taxonomy, seed-list bias, adversarial pre-pass
+├── 2_collection/   ← MACHINE: fills the shared company registry, market data
+└── 3_map/          ← FOUNDER: coverage map, gaps and pains (evidence-graded), hypothesis candidates
+```
+
+Output is a map plus candidates, not a build/kill decision. A candidate enters the hypothesis pipeline via `00_intake.md`.
+
+Both tracks read and write `knowledge/` — the shared company registry (`knowledge/companies/registry.csv`), the value-chain stage taxonomy, market data and pains. `python scripts/registry.py build` regenerates the readable registry view.
+
+```bash
+cp -r templates/landscape landscapes/{your-slug}
+```
+
 ## Confidence levels
 
 Decisions are tagged with confidence level. Levels above L1 require interviews.

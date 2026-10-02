@@ -6,6 +6,12 @@ This file is read by Claude Code at the start of each session. It defines how Cl
 
 Structured product hypothesis validation. Each hypothesis is a folder under `hypotheses/` with a fixed three-zone lifecycle. The output of every hypothesis is a decision artifact backed by an evidence trail.
 
+The repo has two tracks that share one knowledge base:
+
+- **Hypothesis track** (`hypotheses/`) — validate one idea, end in a decision. Described below.
+- **Landscape track** (`landscapes/`) — map a whole domain (who plays where, where the pains are), end in a map and a list of hypothesis candidates. See "Landscape track".
+- **Knowledge base** (`knowledge/`) — reusable facts both tracks read and write: company registry, value-chain stages, market data, pains. See "Knowledge base".
+
 ## The three zones — your behavior changes per zone
 
 ### Zone 1: `1_frame/` — FOUNDER zone
@@ -47,6 +53,49 @@ Your role: **draft preparer.** Final calls belong to the user.
 - You MAY suggest confidence level (L1/L2/L3) based on whether interviews were conducted, but the user confirms.
 - Write `_summary.md` once the founder records their decision in `decision_log.md`.
 
+## Landscape track
+
+A landscape study lives in `landscapes/{slug}/` with three zones. Templates: `templates/landscape/`. Start with `cp -r templates/landscape landscapes/{slug}`.
+
+### `1_scope/` — FOUNDER zone
+
+Your role: **drafter and pressure-tester.** Draft `scope.md` (questions, boundaries, stage taxonomy, seed-list bias, evidence grading) and mark it `черновик`. The founder approves it; do not start collection before that, and do not edit it afterward without asking.
+
+- Run a **discovery-type adversarial pre-pass inside `scope.md` before any collection**: which segments/stages the seed list cannot see, loud-online vs. real buyer demand, "empty cell" read as "no money / regulation" instead of "opportunity", vendor claims posing as buyer evidence.
+- Name what the seed list over- and under-represents (typically: VC-funded startups over incumbents, English over local-language, products over services firms). If incumbents are missing, propose a small clearly tagged set (`список_источника = добавлено`); the founder may remove it.
+- Write `1_scope/_summary.md` after approval.
+
+### `2_collection/` — MACHINE zone
+
+Your role: **autonomous executor**, under the same external-tool rules as the engine zone (show exact tasks, get a go-ahead, record status in `research_plan.md`).
+
+- The company registry is `knowledge/companies/registry.csv`, not a per-landscape copy. Deduplicate before adding; merge offices of one vendor into one row.
+- **No data from memory without a source.** A filled size/round/year/revenue cell needs a URL in `источники_данных`; otherwise write `н/д` (revenue is often `не раскрыта` — that is a valid result). Label stage/role classification derived from the founder's one-line description as `оценка по описанию`.
+- Verify the founder's labels and domains; flag mismatches instead of silently correcting or silently trusting.
+- Market data: use one comparable metric (real output growth, y/y) and flag non-comparable series (e.g. nominal vs. real). If you produce a market size, give top-down and bottom-up and flag the gap.
+- Write `2_collection/_summary.md` at the end.
+
+### `3_map/` — FOUNDER zone
+
+Your role: **draft preparer.** Draft `map.md`, `gaps_and_pains.md`, `hypothesis_candidates.md`; the founder owns the conclusions.
+
+- Every gap gets competing explanations (unmet need / no money / regulation or fragmented buyers / artifact of the seed list). Never present an empty cell as an opportunity on its own.
+- Every pain carries an evidence grade (A–D, defined in `scope.md`) and a source type (vendor / buyer / statistics). Vendor claims are grade C at best. Single-source = weak.
+- Supporting and disconfirming views stay in separate sections; flag asymmetry.
+- Candidates are proposals. A candidate becomes a hypothesis only when the founder copies it into `hypotheses/{slug}/1_frame/00_intake.md`.
+- Write `3_map/_summary.md` once the founder accepts the conclusions.
+
+## Knowledge base
+
+`knowledge/` holds facts that outlive a single study:
+
+- `value_chain.md` — stage taxonomy (S0–S9 + cross-cutting) with mapping to RIBA / AIA / ACE / local plans of work.
+- `companies/registry.csv` (source of truth, `;`-delimited, UTF-8 with BOM so Russian Excel opens it) and `companies/registry.md` (generated view; do not hand-edit — run `python scripts/registry.py build`).
+- `markets/` — market-level data (growth, size) with sources and comparability notes.
+- `pains.md` — pains with evidence grade; grows as landscapes and hypotheses report.
+
+Rules: hypotheses link to `knowledge/` instead of re-collecting competitors from scratch; when a hypothesis or landscape finds a new fact, write it back there with a source. Every row/claim keeps its source and verification status. Per-company cards are created only for deep dives.
+
 ## Hard rules
 
 ### Adversarial requirements
@@ -86,7 +135,7 @@ Each hypothesis is either **product-type** ("X will work for audience Y") or **d
 ## Workflow conventions
 
 - One commit per zone completion at minimum, ideally per major artifact.
-- Commit messages: `{slug}: {zone} - {short description}`.
+- Commit messages: `{slug}: {zone} - {short description}`. For landscapes use the landscape slug and zone (`construction-tech: 1_scope - ...`); for `knowledge/` use `knowledge: {short description}`.
 - Before starting a new hypothesis, read the last 3–5 retrospectives in `retrospectives/` and propose pipeline improvements based on patterns.
 - Update this file or templates when retrospectives surface durable improvements.
 
@@ -117,6 +166,9 @@ Default mode is **lean**: 2–3 large Parallel queries, cheap Apify actors, heav
 - Never modify files in `1_frame/` or `3_decision/` without explicit user approval.
 - Never run a paid or third-party external-tool task (Parallel, Apify, Wordstat, etc.) without first showing the founder the exact task and getting a go-ahead.
 - Never let the riskiest named assumption go untested in the adversarial dual-read without saying so explicitly — a quiet gap there is worse than a loud one.
+- Never fill registry facts (size, round, year, revenue) from memory without a source URL; write `н/д`.
+- Never call a landscape gap an "opportunity" without listing competing explanations; never start landscape collection before the founder approves `scope.md`.
+- Never edit `1_scope/` or `3_map/` files after the founder has approved them without explicit approval.
 
 ## See also
 
