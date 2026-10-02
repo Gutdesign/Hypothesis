@@ -74,8 +74,14 @@ def merge(path):
             continue
         if rid in by_id:
             for c, v in u.items():
-                if c != "id" and c in COLUMNS and v.strip():
-                    by_id[rid][c] = v.strip()
+                v = (v or "").strip()
+                if c == "id" or c not in COLUMNS or not v:
+                    continue
+                cur = by_id[rid].get(c, "")
+                if c in ("примечание", "источники_данных") and cur and v not in cur:
+                    by_id[rid][c] = cur + (" | " if c == "примечание" else " ") + v
+                else:
+                    by_id[rid][c] = v
             changed += 1
         else:
             by_id[rid] = {c: u.get(c, "").strip() for c in COLUMNS}
