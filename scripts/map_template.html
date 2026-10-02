@@ -3,33 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Карта строительных технологий</title>
-<meta name="description" content="Матрица: что даёт каждая компания на каждом этапе жизненного цикла объекта.">
+<title>Карта строительных технологий / Construction Tech Map</title>
+<meta name="description" content="Матрица: что даёт каждая компания на каждом этапе жизненного цикла объекта. / Matrix: what each company offers at each stage of the building lifecycle.">
 <style>
 :root{
   --bg:#f6f5f1; --panel:#ffffff; --ink:#1d2327; --muted:#6a737b; --line:#e1ded5; --accent:#1f5f8b;
-  --prod:#2f7fb3; --prod-l:#cfe3f1; --vend:#3b4752; --vend-l:#cdd3d8; --build:#c68a17; --build-l:#f3e1b6; --svc:#7d8388; --svc-l:#dcdee0;
-  --warn-bg:#fff4d6; --warn-ink:#5a4300; --focus:#c25b00; --dash:#c9c5ba;
+  --prod:#2f7fb3; --vend:#3b4752; --build:#c68a17; --svc:#7d8388;
+  --warn-bg:#fff4d6; --warn-ink:#5a4300; --focus:#c25b00; --dash:#c9c5ba; --glob:#1f7a4d;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#101315; --panel:#171b1e; --ink:#e8ebed; --muted:#929ca5; --line:#2a3238; --accent:#6bb0dd;
-  --prod:#3f8fc4; --prod-l:#25485f; --vend:#7f8d99; --vend-l:#3b454e; --build:#d79b2a; --build-l:#5a4515; --svc:#8f969c; --svc-l:#383f45;
-  --warn-bg:#3a3113; --warn-ink:#f1dfa5; --focus:#ffb066; --dash:#3a444b;}}
+  --prod:#3f8fc4; --vend:#7f8d99; --build:#d79b2a; --svc:#8f969c;
+  --warn-bg:#3a3113; --warn-ink:#f1dfa5; --focus:#ffb066; --dash:#3a444b; --glob:#5cc28d;}}
 :root[data-theme="dark"]{
   --bg:#101315; --panel:#171b1e; --ink:#e8ebed; --muted:#929ca5; --line:#2a3238; --accent:#6bb0dd;
-  --prod:#3f8fc4; --prod-l:#25485f; --vend:#7f8d99; --vend-l:#3b454e; --build:#d79b2a; --build-l:#5a4515; --svc:#8f969c; --svc-l:#383f45;
-  --warn-bg:#3a3113; --warn-ink:#f1dfa5; --focus:#ffb066; --dash:#3a444b;}
+  --prod:#3f8fc4; --vend:#7f8d99; --build:#d79b2a; --svc:#8f969c;
+  --warn-bg:#3a3113; --warn-ink:#f1dfa5; --focus:#ffb066; --dash:#3a444b; --glob:#5cc28d;}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 a{color:var(--accent)}
 .wrap{max-width:1500px;margin:0 auto;padding:20px 16px 48px}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:start;flex-wrap:wrap}
 h1{font-size:26px;line-height:1.2;margin:0 0 6px}
 .sub{color:var(--muted);margin:0 0 14px;max-width:72ch}
 .note{background:var(--warn-bg);color:var(--warn-ink);border-radius:8px;padding:10px 14px;margin:0 0 16px;max-width:92ch;font-size:14px}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.lang button{font:inherit;border:0;background:var(--panel);color:var(--muted);padding:6px 12px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:#fff}
 .bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:end;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}
 .bar label{display:flex;flex-direction:column;font-size:12px;color:var(--muted);gap:3px}
+.bar label.chk{flex-direction:row;align-items:center;gap:7px;font-size:14px;color:var(--ink);padding-bottom:6px}
 .bar select,.bar input[type=search]{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 8px;min-width:150px}
-.bar button{font:inherit;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer}
+.bar button.act{font:inherit;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer}
 .count{margin-left:auto;font-size:13px;color:var(--muted)}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin-bottom:12px;align-items:center}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -47,10 +52,10 @@ h1{font-size:26px;line-height:1.2;margin:0 0 6px}
 .nm button:hover{text-decoration:underline}
 .nm small{font-size:12px;color:var(--muted);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nm em{font-style:normal;font-size:11px;color:var(--muted)}
+.gl{display:inline-block;font-style:normal;font-size:10.5px;font-weight:600;color:var(--glob);border:1px solid var(--glob);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:1px}
 .dsh{grid-row:1;margin:11px 4px;border:1px dashed var(--dash);border-radius:8px;color:var(--dash);text-align:center;font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center;min-height:22px}
 .seg{grid-row:1;margin:9px 4px;min-height:26px;border-radius:8px;border:1px solid var(--c);--l:color-mix(in srgb,var(--c) 12%,var(--panel));--m:color-mix(in srgb,var(--c) 42%,var(--panel));background:linear-gradient(to right,var(--l) 0 var(--a,0%),var(--m) var(--a,0%) var(--b,100%),var(--l) var(--b,100%) 100%);cursor:pointer;padding:0 8px;z-index:1;color:var(--ink);font:inherit;font-size:12px;line-height:1.2;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.seg.product{--c:var(--prod)}.seg.vendor{--c:var(--vend)}
-.seg.builder{--c:var(--build)}.seg.services{--c:var(--svc)}
+.seg.product{--c:var(--prod)}.seg.vendor{--c:var(--vend)}.seg.builder{--c:var(--build)}.seg.services{--c:var(--svc)}
 .sep{grid-column:1/-1;padding:8px 12px;font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--ink);background:color-mix(in srgb,var(--panel) 88%,var(--accent) 12%);position:sticky;left:0;text-transform:uppercase}
 .empty{padding:24px;color:var(--muted)}
 dialog{border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);padding:0;width:min(640px,calc(100vw - 24px));max-height:calc(100vh - 32px)}
@@ -73,39 +78,39 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
 </head>
 <body>
 <div class="wrap">
-  <h1>Карта строительных технологий</h1>
-  <p class="sub">Матрица: одна строка — одна компания. Сплошная полоса показывает, на каких этапах жизненного цикла объекта она работает (тёмная часть — основной этап); пунктир с прочерком — на этом этапе компании нет. Под названием — что именно она даёт. Нажмите на название или полосу, чтобы увидеть данные и источники.</p>
-  <p class="note"><b>Как читать.</b> Данные собраны из агрегаторов, пресс-релизов и сайтов компаний; почти все строки проверены лишь частично. Суммы привлечённых денег и численность в разных источниках расходятся. Выручка стартапов в основном не раскрыта; где указана, это оценка агрегатора. Этапы присвоены по описанию продукта. Присутствие компании показывает наличие продукта, а не спрос и не долю рынка. Список неполон: в нём больше стартапов с внешними деньгами, чем местных игроков.</p>
+  <div class="top">
+    <div>
+      <h1 id="h1"></h1>
+      <p class="sub" id="sub"></p>
+    </div>
+    <div class="lang" role="group" aria-label="Language / Язык">
+      <button type="button" id="lru" aria-pressed="true">Ru</button>
+      <button type="button" id="len" aria-pressed="false">Eng</button>
+    </div>
+  </div>
+  <p class="note" id="note"></p>
 
   <div class="bar" role="search">
-    <label>Поиск<input type="search" id="q" placeholder="название, роль, примечание"></label>
-    <label>Тип<select id="fk"><option value="">Все</option><option value="product">Продукты</option><option value="vendor">Крупные вендоры</option><option value="builder">Строители и застройщики</option><option value="services">Услуги, консалтинг, образование</option></select></label>
-    <label>Страна штаба<select id="fr"><option value="">Все</option></select></label>
-    <label>Роль клиента<select id="fo"><option value="">Все</option></select></label>
-    <label>Закрывает этап<select id="fe"><option value="">Любой</option></select></label>
-    <label>Охват<select id="fw"><option value="">Любой</option><option value="1">Один этап</option><option value="2">Два и более этапов</option><option value="4">Четыре и более этапов</option></select></label>
-    <button type="button" id="reset">Сбросить</button>
-    <button type="button" id="theme" aria-label="Переключить тему">Тема</button>
+    <label><span data-i="search"></span><input type="search" id="q"></label>
+    <label><span data-i="type"></span><select id="fk"></select></label>
+    <label><span data-i="country"></span><select id="fr"></select></label>
+    <label><span data-i="role"></span><select id="fo"></select></label>
+    <label><span data-i="stage"></span><select id="fe"></select></label>
+    <label><span data-i="scope"></span><select id="fw"></select></label>
+    <label class="chk"><input type="checkbox" id="fg"> <span data-i="global"></span></label>
+    <button type="button" class="act" id="reset"></button>
+    <button type="button" class="act" id="theme"></button>
     <span class="count" id="count" aria-live="polite"></span>
   </div>
-  <div class="legend" aria-hidden="true">
-    <span><i class="sw" style="background:var(--prod)"></i>продукт</span>
-    <span><i class="sw" style="background:var(--vend)"></i>крупный вендор</span>
-    <span><i class="sw" style="background:var(--build)"></i>строитель или застройщик</span>
-    <span><i class="sw" style="background:var(--svc)"></i>услуги, консалтинг, образование</span>
-    <span><i class="sw" style="background:linear-gradient(to right,var(--prod-l) 50%,var(--prod) 50%)"></i>светлее — дополнительные этапы, темнее — основной</span>
-    <span><i class="sw" style="border:1px dashed var(--dash)"></i>— компании на этапе нет</span>
-  </div>
+  <div class="legend" aria-hidden="true" id="legend"></div>
 
   <div class="map" id="map"></div>
 
-  <footer>
-    <p>Снимок на __DATE__. Реестр: __COUNT__ строк. <a href="registry.csv">Скачать таблицу (CSV, разделитель «;», кодировка UTF-8 с BOM)</a>. Темы «данные», «финансы и страхование», «комплаенс», «образование» — не отдельные этапы: они разнесены по этапам, на которых компания их закрывает, и указаны в карточке. Компании без этапа (услуги и разработка вне строительства) стоят отдельным блоком с пунктиром. Таксономия этапов — рабочий инструмент классификации, а не стандарт.</p>
-  </footer>
+  <footer><p id="foot"></p></footer>
 </div>
 
 <dialog id="dlg" aria-labelledby="dtitle">
-  <div class="dh"><h2 id="dtitle"></h2><button type="button" id="close" aria-label="Закрыть">Закрыть</button></div>
+  <div class="dh"><h2 id="dtitle"></h2><button type="button" id="close"></button></div>
   <div class="db" id="dbody"></div>
 </dialog>
 
@@ -113,58 +118,128 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
 <script>
 (function(){
   var D = JSON.parse(document.getElementById('data').textContent);
-  var COLS = __COLS__;
-  var KIND = {product:'продукт',vendor:'крупный вендор',builder:'строитель или застройщик',services:'услуги, консалтинг, образование'};
-  var GROUPS = [['vendor','Крупные вендоры'],['product','Продукты'],['builder','Строители и застройщики'],['services','Услуги, консалтинг, образование']];
-  var IDX = {}; COLS.forEach(function(c,i){IDX[c[0]]=i});
-  var $ = function(id){return document.getElementById(id)};
-  var map=$('map'), q=$('q'), fk=$('fk'), fr=$('fr'), fo=$('fo'), fe=$('fe'), fw=$('fw');
+  var COLS = __COLS__;            /* [код, ru, en] */
+  var EN = __EN__;                /* словари перевода: kind, region, role */
+  var META = {date:'__DATE__', count:__COUNT__};
+  var UI = {
+    ru:{
+      title:'Карта строительных технологий',
+      sub:'Матрица: одна строка — одна компания. Сплошная полоса показывает, на каких этапах жизненного цикла объекта она работает (тёмная часть — основной этап); пунктир с прочерком — на этом этапе компании нет. Под названием — что именно она даёт. Нажмите на название или полосу, чтобы увидеть данные и источники.',
+      note:'<b>Как читать.</b> Данные собраны из агрегаторов, пресс-релизов, отчётов для инвесторов и сайтов компаний; почти все строки проверены лишь частично. Суммы привлечённых денег и численность в разных источниках расходятся. Выручка стартапов в основном не раскрыта; где указана, это оценка агрегатора. Этапы присвоены по описанию продукта. Присутствие компании показывает наличие продукта, а не спрос и не долю рынка. Список неполон: в нём больше стартапов с внешними деньгами, чем местных игроков.',
+      search:'Поиск', searchPh:'название, роль, примечание', type:'Тип', country:'Страна штаба', role:'Роль клиента', stage:'Закрывает этап', scope:'Охват',
+      global:'Глобальные компании', all:'Все', any:'Любой', reset:'Сбросить', theme:'Тема', close:'Закрыть',
+      one:'Один этап', two:'Два и более этапов', four:'Четыре и более этапов',
+      shown:function(a,b){return 'Показано '+a+' из '+b}, comp:' комп.',
+      head:'Компания и что она даёт', noRes:'Нет компаний при этих фильтрах.', outside:'Вне этапов жизненного цикла',
+      legProd:'продукт', legVend:'крупный вендор', legBuild:'строитель или застройщик', legSvc:'услуги, консалтинг, образование',
+      legShade:'светлее — дополнительные этапы, темнее — основной', legGap:'— компании на этапе нет', legGlobal:'глобальная компания',
+      globalTag:'глобальная',
+      foot:function(d,n){return 'Снимок на '+d+'. Реестр: '+n+' строк. <a href="registry.csv">Скачать таблицу (CSV, разделитель «;», кодировка UTF-8 с BOM)</a>. Темы «данные», «финансы и страхование», «комплаенс», «образование» — не отдельные этапы: они разнесены по этапам, на которых компания их закрывает, и указаны в карточке. Компании без этапа (услуги и разработка вне строительства) стоят отдельным блоком. «Глобальная» — компания с подтверждённым присутствием на нескольких континентах или в десятках стран; основание записано в примечании. Таксономия этапов — рабочий инструмент классификации, а не стандарт.'},
+      stagesL:'Этапы', themes:'Темы', roleL:'Роль клиента', hq:'Штаб', markets:'Рынки', founded:'Год основания', size:'Размер', round:'Последний раунд', raised:'Привлечено', revenue:'Выручка', site:'Сайт', verified:'Проверка данных', noteL:'Примечание', sources:'Источники', globalL:'Глобальная', main:' (основной)', none:'вне этапов', yes:'да',
+      kinds:{product:'продукт',vendor:'крупный вендор',builder:'строитель или застройщик',services:'услуги, консалтинг, образование'},
+      groups:{vendor:'Крупные вендоры',product:'Продукты',builder:'Строители и застройщики',services:'Услуги, консалтинг, образование'},
+      kindFilter:{product:'Продукты',vendor:'Крупные вендоры',builder:'Строители и застройщики',services:'Услуги, консалтинг, образование'}
+    },
+    en:{
+      title:'Construction Tech Map',
+      sub:'A matrix: one row per company. A solid bar shows the stages of the building lifecycle where the company works (the darker part is its main stage); a dashed cell with a dash means the company is absent at that stage. The line under the name says what it offers. Click a name or a bar for the data and sources.',
+      note:'<b>How to read.</b> Data comes from aggregators, press releases, investor reports and company websites; almost all rows are only partially verified. Funding totals and headcounts differ between sources. Startup revenue is mostly undisclosed; where shown, it is an aggregator estimate. Stages are assigned from the product description. A company on the map shows that a product exists, not demand or market share. The list is incomplete: it has more venture-funded startups than local players.',
+      search:'Search', searchPh:'name, role, note', type:'Type', country:'Headquarters country', role:'Customer role', stage:'Covers stage', scope:'Coverage',
+      global:'Global companies', all:'All', any:'Any', reset:'Reset', theme:'Theme', close:'Close',
+      one:'One stage', two:'Two or more stages', four:'Four or more stages',
+      shown:function(a,b){return 'Showing '+a+' of '+b}, comp:' cos.',
+      head:'Company and what it offers', noRes:'No companies match these filters.', outside:'Outside the lifecycle stages',
+      legProd:'product', legVend:'major vendor', legBuild:'builder or developer', legSvc:'services, consulting, education',
+      legShade:'lighter: additional stages, darker: main stage', legGap:'— the company is absent at this stage', legGlobal:'global company',
+      globalTag:'global',
+      foot:function(d,n){return 'Snapshot of '+d+'. Registry: '+n+' rows. <a href="registry.csv">Download the table (CSV, ";" delimiter, UTF-8 with BOM; the data columns are in Russian)</a>. The themes data, finance and insurance, compliance and education are not separate stages: they are spread across the stages where the company covers them and shown on the card. Companies without a stage (services and development outside construction) are in a separate block. "Global" means confirmed presence on several continents or in dozens of countries; the basis is in the note. The stage taxonomy is a working classification tool, not a standard.'},
+      stagesL:'Stages', themes:'Themes', roleL:'Customer role', hq:'Headquarters', markets:'Markets', founded:'Founded', size:'Size', round:'Latest round', raised:'Raised', revenue:'Revenue', site:'Website', verified:'Data check', noteL:'Note', sources:'Sources', globalL:'Global', main:' (main)', none:'outside the stages', yes:'yes',
+      kinds:{product:'product',vendor:'major vendor',builder:'builder or developer',services:'services, consulting, education'},
+      groups:{vendor:'Major vendors',product:'Products',builder:'Builders and developers',services:'Services, consulting, education'},
+      kindFilter:{product:'Products',vendor:'Major vendors',builder:'Builders and developers',services:'Services, consulting, education'}
+    }
+  };
+  var LANG='ru';
+  try{var sl=localStorage.getItem('lang'); if(sl==='ru'||sl==='en')LANG=sl}catch(e){}
+  var U=function(){return UI[LANG]};
+  var IDX={}; COLS.forEach(function(c,i){IDX[c[0]]=i});
+  var $=function(id){return document.getElementById(id)};
+  var map=$('map'), q=$('q'), fk=$('fk'), fr=$('fr'), fo=$('fo'), fe=$('fe'), fw=$('fw'), fg=$('fg');
   function uniq(a){return a.filter(function(v,i){return v&&a.indexOf(v)===i})}
-  uniq(D.map(function(c){return c.region})).sort().forEach(function(v){var o=document.createElement('option');o.value=o.textContent=v;fr.appendChild(o)});
-  var roles=[]; D.forEach(function(c){c.role.split(';').forEach(function(r){r=r.trim(); if(r&&r!=='н/д')roles.push(r)})});
-  uniq(roles).sort().forEach(function(v){var o=document.createElement('option');o.value=o.textContent=v;fo.appendChild(o)});
-  COLS.forEach(function(c){var o=document.createElement('option');o.value=c[0];o.textContent=c[0]+' '+c[1];fe.appendChild(o)});
+  function G(c,k){return (LANG==='en'&&c.en&&c.en[k]!==undefined&&c.en[k]!=='')?c.en[k]:c[k]}
+  function stName(i){return LANG==='en'?COLS[i][2]:COLS[i][1]}
+  function roleName(r){return LANG==='en'?(EN.role[r]||r):r}
+  function regName(r){return LANG==='en'?(EN.region[r]||r):r}
 
   D.forEach(function(c){
     var all=[c.primary].concat(c.secondary).filter(function(s){return IDX[s]!==undefined});
     c.cols=uniq(all).map(function(s){return IDX[s]}).sort(function(a,b){return a-b});
     c.pcol=IDX[c.primary];
     c.first=c.cols.length?c.cols[0]:99;
+    c.glob=c.global==='да';
   });
+
+  function fill(sel, items, keep){
+    var cur=keep===false?'':sel.value; sel.textContent='';
+    items.forEach(function(it){var o=document.createElement('option');o.value=it[0];o.textContent=it[1];sel.appendChild(o)});
+    sel.value=cur; if(sel.value!==cur) sel.value='';
+  }
+  function buildFilters(){
+    var u=U();
+    fill(fk,[['',u.all]].concat(['product','vendor','builder','services'].map(function(k){return [k,u.kindFilter[k]]})));
+    fill(fr,[['',u.all]].concat(uniq(D.map(function(c){return c.region})).sort().map(function(r){return [r,regName(r)]})));
+    var roles=[]; D.forEach(function(c){c.role.split(';').forEach(function(r){r=r.trim(); if(r&&r!=='н/д')roles.push(r)})});
+    fill(fo,[['',u.all]].concat(uniq(roles).sort().map(function(r){return [r,roleName(r)]})));
+    fill(fe,[['',u.any]].concat(COLS.map(function(c,i){return [c[0],c[0]+' '+stName(i)]})));
+    fill(fw,[['',u.any],['1',u.one],['2',u.two],['4',u.four]]);
+  }
+  function setStatic(){
+    var u=U();
+    document.documentElement.lang=LANG;
+    document.title=u.title;
+    $('h1').textContent=u.title; $('sub').textContent=u.sub; $('note').innerHTML=u.note;
+    document.querySelectorAll('[data-i]').forEach(function(el){el.textContent=u[el.getAttribute('data-i')]});
+    q.placeholder=u.searchPh; $('reset').textContent=u.reset; $('theme').textContent=u.theme; $('close').textContent=u.close;
+    $('lru').setAttribute('aria-pressed',LANG==='ru'); $('len').setAttribute('aria-pressed',LANG==='en');
+    $('legend').innerHTML='<span><i class="sw" style="background:var(--prod)"></i>'+u.legProd+'</span><span><i class="sw" style="background:var(--vend)"></i>'+u.legVend+'</span><span><i class="sw" style="background:var(--build)"></i>'+u.legBuild+'</span><span><i class="sw" style="background:var(--svc)"></i>'+u.legSvc+'</span><span><i class="sw" style="background:linear-gradient(to right,color-mix(in srgb,var(--prod) 12%,var(--panel)) 50%,color-mix(in srgb,var(--prod) 42%,var(--panel)) 50%);border:1px solid var(--prod)"></i>'+u.legShade+'</span><span><i class="sw" style="border:1px dashed var(--dash)"></i>'+u.legGap+'</span><span><i class="gl" style="margin:0">'+u.globalTag+'</i>'+u.legGlobal+'</span>';
+    $('foot').innerHTML=u.foot(META.date,META.count);
+  }
   function match(c){
     if(fk.value && c.kind!==fk.value) return false;
     if(fr.value && c.region!==fr.value) return false;
     if(fo.value && c.role.split(';').map(function(s){return s.trim()}).indexOf(fo.value)<0) return false;
     if(fe.value && c.cols.indexOf(IDX[fe.value])<0) return false;
     if(fw.value && c.cols.length<Number(fw.value)) return false;
+    if(fg.checked && !c.glob) return false;
     var t=q.value.trim().toLowerCase();
-    if(t){var h=(c.name+' '+c.role+' '+c.sub+' '+c.note+' '+c.markets+' '+c.city+' '+c.country+' '+c.layer).toLowerCase(); if(h.indexOf(t)<0) return false}
+    if(t){var h=[c.name,c.role,c.sub,c.note,c.markets,c.city,c.country,c.layer,c.en&&c.en.sub,c.en&&c.en.note,c.en&&c.en.markets,c.en&&c.en.role].join(' ').toLowerCase(); if(h.indexOf(t)<0) return false}
     return true;
   }
-  function order(a,b){return (a.first-b.first)||(b.cols.length-a.cols.length)||a.name.localeCompare(b.name,'ru')}
+  function order(a,b){return (a.first-b.first)||(b.cols.length-a.cols.length)||a.name.localeCompare(b.name,LANG)}
   function runs(cols){var r=[],s=null,p=null;cols.forEach(function(i){if(s===null){s=p=i}else if(i===p+1){p=i}else{r.push([s,p]);s=p=i}});if(s!==null)r.push([s,p]);return r}
 
   function headRow(list){
     var h=document.createElement('div'); h.className='row head';
-    var n=document.createElement('div'); n.className='nm'; n.textContent='Компания и что она даёт'; h.appendChild(n);
+    var n=document.createElement('div'); n.className='nm'; n.textContent=U().head; h.appendChild(n);
     COLS.forEach(function(c,i){
       var cnt=list.filter(function(x){return x.cols.indexOf(i)>=0}).length;
       var d=document.createElement('div'); d.className='hs'; d.innerHTML='<b></b><span></span><i></i>';
-      d.children[0].textContent=c[0]; d.children[1].textContent=c[1]; d.children[2].textContent=cnt+' комп.'; h.appendChild(d);
+      d.children[0].textContent=c[0]; d.children[1].textContent=stName(i); d.children[2].textContent=cnt+U().comp; h.appendChild(d);
     });
     return h;
   }
   function line(c){
     var r=document.createElement('div'); r.className='row';
     var nm=document.createElement('div'); nm.className='nm';
-    var b=document.createElement('button'); b.type='button'; b.textContent=c.name; b.title=c.name;
+    var b=document.createElement('button'); b.type='button'; b.textContent=G(c,'name'); b.title=G(c,'name');
     b.addEventListener('click',function(){open(c)}); nm.appendChild(b);
-    var sm=document.createElement('small'); sm.textContent=c.sub||c.profile||''; sm.title=c.sub||''; nm.appendChild(sm);
-    var em=document.createElement('em'); em.textContent=[c.country&&c.country!=='н/д'?c.country:'',c.layer].filter(Boolean).join(' · '); if(em.textContent) nm.appendChild(em);
+    if(c.glob){var gl=document.createElement('i');gl.className='gl';gl.textContent=U().globalTag;b.appendChild(gl)}
+    var sm=document.createElement('small'); var st=G(c,'sub')||''; sm.textContent=st; sm.title=st; nm.appendChild(sm);
+    var em=document.createElement('em'); em.textContent=[G(c,'country')&&G(c,'country')!=='н/д'&&G(c,'country')!=='n/a'?G(c,'country'):'',G(c,'layer')].filter(Boolean).join(' · '); if(em.textContent) nm.appendChild(em);
     r.appendChild(nm);
     var covered={}; c.cols.forEach(function(i){covered[i]=1});
-    for(var i=0;i<COLS.length;i++){ if(!covered[i]){var d=document.createElement('div');d.className='dsh';d.style.gridColumn=String(i+2);d.textContent='—';d.setAttribute('aria-label',COLS[i][1]+': компании нет');r.appendChild(d)} }
-    var label=c.name+', '+KIND[c.kind];
+    for(var i=0;i<COLS.length;i++){ if(!covered[i]){var d=document.createElement('div');d.className='dsh';d.style.gridColumn=String(i+2);d.textContent='—';r.appendChild(d)} }
+    var label=G(c,'name')+', '+U().kinds[c.kind];
     var rs=runs(c.cols), widest=null;
     rs.forEach(function(x){ var w=x[1]-x[0]; if(!widest||w>widest[1]-widest[0]||(w===widest[1]-widest[0]&&c.pcol>=x[0]&&c.pcol<=x[1])) widest=x });
     rs.forEach(function(rn){
@@ -173,64 +248,75 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       var n=rn[1]-rn[0]+1;
       if(c.pcol>=rn[0]&&c.pcol<=rn[1]){s.style.setProperty('--a',((c.pcol-rn[0])/n*100)+'%');s.style.setProperty('--b',((c.pcol-rn[0]+1)/n*100)+'%')}
       else{s.style.setProperty('--a','100%');s.style.setProperty('--b','100%')}
-      var names=[];for(var k=rn[0];k<=rn[1];k++)names.push(COLS[k][0]+' '+COLS[k][1]);
-      s.setAttribute('aria-label',label+', этапы: '+names.join(', ')); s.title=c.name+': '+names.join(', ');
-      if(rn===widest){s.textContent=[c.sub,c.layer].filter(Boolean).join(' · ')}
+      var names=[];for(var k=rn[0];k<=rn[1];k++)names.push(COLS[k][0]+' '+stName(k));
+      s.setAttribute('aria-label',label+': '+names.join(', ')); s.title=G(c,'name')+': '+names.join(', ');
+      if(rn===widest){s.textContent=[G(c,'sub'),G(c,'layer')].filter(Boolean).join(' · ')}
       s.addEventListener('click',function(){open(c)}); r.appendChild(s);
     });
     return r;
   }
   function render(){
     map.textContent='';
-    var list=D.filter(match);
+    var list=D.filter(match), u=U();
     map.appendChild(headRow(list));
-    if(!list.length){var e=document.createElement('div');e.className='empty';e.textContent='Нет компаний при этих фильтрах.';map.appendChild(e)}
-    GROUPS.forEach(function(g){
-      var arr=list.filter(function(c){return c.kind===g[0]&&c.cols.length}).sort(order);
+    if(!list.length){var e=document.createElement('div');e.className='empty';e.textContent=u.noRes;map.appendChild(e)}
+    ['vendor','product','builder','services'].forEach(function(k){
+      var arr=list.filter(function(c){return c.kind===k&&c.cols.length}).sort(order);
       if(!arr.length)return;
-      var s=document.createElement('div');s.className='row';var d=document.createElement('div');d.className='sep';d.textContent=g[1]+' · '+arr.length;s.appendChild(d);map.appendChild(s);
+      var s=document.createElement('div');s.className='row';var d=document.createElement('div');d.className='sep';d.textContent=u.groups[k]+' · '+arr.length;s.appendChild(d);map.appendChild(s);
       arr.forEach(function(c){map.appendChild(line(c))});
     });
     var none=list.filter(function(c){return !c.cols.length}).sort(order);
-    if(none.length){var s=document.createElement('div');s.className='row';var d=document.createElement('div');d.className='sep';d.textContent='Вне этапов жизненного цикла · '+none.length;s.appendChild(d);map.appendChild(s);none.forEach(function(c){map.appendChild(line(c))})}
-    $('count').textContent='Показано '+list.length+' из '+D.length;
+    if(none.length){var s=document.createElement('div');s.className='row';var d=document.createElement('div');d.className='sep';d.textContent=u.outside+' · '+none.length;s.appendChild(d);map.appendChild(s);none.forEach(function(c){map.appendChild(line(c))})}
+    $('count').textContent=u.shown(list.length,D.length);
   }
-  function row(dl,k,v){ if(!v||v==='н/д') v=null; var dt=document.createElement('dt');dt.textContent=k;var dd=document.createElement('dd');
-    if(v===null){dd.textContent='н/д';dd.style.color='var(--muted)'} else dd.textContent=v; dl.appendChild(dt);dl.appendChild(dd); return dd}
+  function row(dl,k,v){ if(!v||v==='н/д'||v==='n/a') v=null; var dt=document.createElement('dt');dt.textContent=k;var dd=document.createElement('dd');
+    if(v===null){dd.textContent=LANG==='en'?'n/a':'н/д';dd.style.color='var(--muted)'} else dd.textContent=v; dl.appendChild(dt);dl.appendChild(dd); return dd}
   function open(c){
-    $('dtitle').textContent=c.name;
+    var u=U();
+    $('dtitle').textContent=G(c,'name');
     var b=$('dbody'); b.textContent='';
-    var tg=document.createElement('p'); var t1=document.createElement('span'); t1.className='kt '+c.kind; t1.textContent=KIND[c.kind]; tg.appendChild(t1);
-    if(c.sub){var t2=document.createElement('span');t2.textContent=c.sub;tg.appendChild(t2)} b.appendChild(tg);
+    var tg=document.createElement('p'); var t1=document.createElement('span'); t1.className='kt '+c.kind; t1.textContent=u.kinds[c.kind]; tg.appendChild(t1);
+    if(c.glob){var t3=document.createElement('span');t3.className='gl';t3.style.marginRight='6px';t3.textContent=u.globalTag;tg.appendChild(t3)}
+    if(G(c,'sub')){var t2=document.createElement('span');t2.textContent=G(c,'sub');tg.appendChild(t2)} b.appendChild(tg);
     var dl=document.createElement('dl');
-    var st=[c.primary].concat(c.secondary).filter(function(s){return IDX[s]!==undefined}).map(function(s){return s+' '+COLS[IDX[s]][1]+(s===c.primary?' (основной)':'')});
-    row(dl,'Этапы',st.length?st.join('; '):'вне этапов');
-    row(dl,'Темы',c.layer);
-    row(dl,'Роль клиента',c.role);
-    var loc=[c.city,c.country].filter(function(x){return x&&x!=='н/д'}).join(', '); row(dl,'Штаб',loc);
-    row(dl,'Рынки',c.markets);
-    row(dl,'Год основания',c.founded);
-    row(dl,'Размер',c.size);
-    row(dl,'Последний раунд',c.round);
-    row(dl,'Привлечено',c.raised);
-    row(dl,'Выручка',c.revenue);
-    var sd=row(dl,'Сайт',c.site?' ':null); if(c.site){var a=document.createElement('a');a.href=c.site;a.target='_blank';a.rel='noopener noreferrer';a.textContent=c.site.replace(/^https?:\/\//,'');sd.textContent='';sd.appendChild(a)}
-    row(dl,'Проверка данных',c.verified);
-    if(c.note) row(dl,'Примечание',c.note);
+    var st=[c.primary].concat(c.secondary).filter(function(s){return IDX[s]!==undefined}).map(function(s){return s+' '+stName(IDX[s])+(s===c.primary?u.main:'')});
+    row(dl,u.stagesL,st.length?st.join('; '):u.none);
+    row(dl,u.themes,G(c,'layer'));
+    row(dl,u.roleL,G(c,'role'));
+    var loc=[c.city,G(c,'country')].filter(function(x){return x&&x!=='н/д'&&x!=='n/a'}).join(', '); row(dl,u.hq,loc);
+    row(dl,u.markets,G(c,'markets'));
+    row(dl,u.founded,G(c,'founded'));
+    row(dl,u.size,G(c,'size'));
+    row(dl,u.round,G(c,'round'));
+    row(dl,u.raised,G(c,'raised'));
+    row(dl,u.revenue,G(c,'revenue'));
+    var sd=row(dl,u.site,c.site?' ':null); if(c.site){var a=document.createElement('a');a.href=c.site;a.target='_blank';a.rel='noopener noreferrer';a.textContent=c.site.replace(/^https?:\/\//,'');sd.textContent='';sd.appendChild(a)}
+    row(dl,u.verified,G(c,'verified'));
+    if(G(c,'note')) row(dl,u.noteL,G(c,'note'));
     b.appendChild(dl);
-    if(c.sources.length){var h=document.createElement('p');h.textContent='Источники';h.style.cssText='margin:12px 0 4px;color:var(--muted);font-size:13px';b.appendChild(h);
-      var s=document.createElement('div');s.className='src';c.sources.forEach(function(u){var a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener noreferrer';a.textContent=u.replace(/^https?:\/\//,'');s.appendChild(a)});b.appendChild(s)}
+    if(c.sources.length){var h=document.createElement('p');h.textContent=u.sources;h.style.cssText='margin:12px 0 4px;color:var(--muted);font-size:13px';b.appendChild(h);
+      var s=document.createElement('div');s.className='src';c.sources.forEach(function(x){var a=document.createElement('a');a.href=x;a.target='_blank';a.rel='noopener noreferrer';a.textContent=x.replace(/^https?:\/\//,'');s.appendChild(a)});b.appendChild(s)}
     $('dlg').showModal();
   }
+  function setLang(l){
+    LANG=l; try{localStorage.setItem('lang',l)}catch(e){}
+    var keep={k:fk.value,r:fr.value,o:fo.value,e:fe.value,w:fw.value};
+    setStatic(); buildFilters();
+    fk.value=keep.k; fr.value=keep.r; fo.value=keep.o; fe.value=keep.e; fw.value=keep.w;
+    render();
+  }
+  $('lru').addEventListener('click',function(){setLang('ru')});
+  $('len').addEventListener('click',function(){setLang('en')});
   $('close').addEventListener('click',function(){$('dlg').close()});
   $('dlg').addEventListener('click',function(e){if(e.target===$('dlg'))$('dlg').close()});
-  [q,fk,fr,fo,fe,fw].forEach(function(el){el.addEventListener('input',render)});
-  $('reset').addEventListener('click',function(){q.value='';fk.value='';fr.value='';fo.value='';fe.value='';fw.value='';render()});
+  [q,fk,fr,fo,fe,fw,fg].forEach(function(el){el.addEventListener('input',render)});
+  $('reset').addEventListener('click',function(){q.value='';fk.value='';fr.value='';fo.value='';fe.value='';fw.value='';fg.checked=false;render()});
   $('theme').addEventListener('click',function(){var r=document.documentElement;var cur=r.getAttribute('data-theme');
     var dark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches; r.setAttribute('data-theme',dark?'light':'dark');
     try{localStorage.setItem('theme',dark?'light':'dark')}catch(e){}});
   try{var th=localStorage.getItem('theme'); if(th)document.documentElement.setAttribute('data-theme',th)}catch(e){}
-  render();
+  setStatic(); buildFilters(); render();
 })();
 </script>
 </body>

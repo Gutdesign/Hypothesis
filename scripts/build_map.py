@@ -2,8 +2,10 @@
 
   python scripts/build_map.py            writes site/index.html and site/registry.csv
 
-The page is self-contained (data embedded as JSON), so it works from GitHub Pages or a local file.
-The public CSV drops the internal `список_источника` column.
+The page is self-contained (data embedded as JSON), has a Ru/Eng switch, and works from GitHub Pages or a local
+file. English data comes from knowledge/companies/i18n/en_part*.tsv (per-id overrides) with
+scripts/i18n_en.py as a fallback for short numeric strings. The public CSV drops the internal
+`список_источника` column.
 """
 import csv
 import json
@@ -14,24 +16,25 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import registry  # noqa: E402
+import i18n_en as T  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
+I18N = ROOT / "knowledge" / "companies" / "i18n"
+LABEL = "этапы — оценка по описанию"
 
 STAGES = [
     ("S0", "Стратегия, участки, ТЭО"), ("S1", "Сделка и кредит"), ("S2", "Изыскания"),
     ("S3", "Проектирование"), ("S4", "Разрешения"), ("S5", "Тендеры и закупки"),
     ("S6", "Строительство"), ("S7", "Сдача объекта"), ("S8a", "Эксплуатация"),
     ("S8b", "Аренда и продажа"), ("S9", "Реновация и ретрофит"),
-    ("X-DATA", "Данные и среда данных"), ("X-FIN", "Финансы и страхование"),
-    ("X-COMP", "Комплаенс и нормы"), ("X-EDU", "Образование"), ("none", "Этап не определён"),
 ]
+COLS = [[c, ru, T.STAGES_EN[c]] for c, ru in STAGES]
 STAGE_CODES = {c for c, _ in STAGES}
-COLS = [s for s in STAGES if s[0].startswith("S")]
-LAYERS = {c: n for c, n in STAGES if c.startswith("X-")}
 EU_OTHER = {"Германия", "Франция", "Португалия", "Швеция", "Австрия", "Швейцария", "Ирландия", "Люксембург",
             "Словения", "Италия", "Бельгия", "Дания", "Финляндия", "Норвегия"}
 OUT = {"Индия", "Канада", "Япония", "Израиль", "ОАЭ"}
+NAME_EN = [("бывш.", "formerly"), ("строительное направление", "construction unit")]
 
 
 def region(country):
@@ -63,9 +66,7 @@ def norm_stage(s):
     m = re.match(r"^(S\d)([abcd]?)$", s)
     if m:
         base, sub = m.groups()
-        if base == "S8":
-            return "S8" + (sub or "a")
-        return base
+        return "S8" + (sub or "a") if base == "S8" else base
     return s if s in STAGE_CODES else "none"
 
 
@@ -76,7 +77,49 @@ def site_url(s):
     return s if s.startswith("http") else "https://" + s
 
 
+def load_en():
+    per_id, star = {}, {}
+    for f in sorted(I18N.glob("en_part*.tsv")):
+        for line in f.read_text(encoding="utf-8").splitlines():
+            parts = line.split("\t")
+            if len(parts) == 3:
+                per_id[(parts[0], parts[1])] = parts[2]
+            elif len(parts) == 4:
+                star[(parts[1], parts[2])] = parts[3]
+    return per_id, star
+
+
+def en_block(r, per_id, star):
+    cid = r["id"]
+    e = {}
+    for ru_key, key in [("последний_раунд", "round"), ("привлечено", "raised"), ("размер_сотрудников", "size"),
+                        ("выручка", "revenue"), ("год_основания", "founded"), ("рынки_цель", "markets")]:
+        v = r[ru_key]
+        if not v or v == "н/д":
+            e[key] = "n/a" if key != "markets" else ""
+        elif (cid, key) in per_id:
+            e[key] = per_id[(cid, key)]
+        else:
+            t = T.phrase(v)
+            e[key] = t if not T.has_cyr(t) else v
+    note = per_id.get((cid, "note"), "")
+    if LABEL in r["примечание"]:
+        note = (note + " " if note else "") + "Stage coding is an estimate from the description."
+    e["note"] = note
+    e["sub"] = star.get(("sub", r["подкатегория"]), r["подкатегория"] if not T.has_cyr(r["подкатегория"]) else "")
+    e["verified"] = star.get(("verified", r["данные_проверены"]), r["данные_проверены"])
+    e["role"] = "; ".join(T.ROLE_EN.get(x.strip(), x.strip()) for x in r["роль_клиента"].split(";") if x.strip())
+    e["country"] = T.COUNTRY_EN.get(r["штаб_страна"], r["штаб_страна"])
+    e["layer"] = "; ".join(T.LAYER_EN.get(x.strip(), x.strip()) for x in r["слой"].split(";") if x.strip())
+    name = r["компания"]
+    for a, b in NAME_EN:
+        name = name.replace(a, b)
+    e["name"] = name
+    return e
+
+
 def build_data(rows):
+    per_id, star = load_en()
     out = []
     for r in rows:
         primary = norm_stage(r["этапы_основные"].replace(",", ";").split(";")[0])
@@ -85,22 +128,18 @@ def build_data(rows):
             n = norm_stage(s)
             if n != "none" and n != primary and n not in secondary:
                 secondary.append(n)
-        kd = kind(r["тип_организации"])
-        if kd in ("services", "builder") and primary == "none":
-            primary = "none"
         out.append({
-            "id": r["id"], "name": r["компания"], "site": site_url(r["сайт"]), "type": r["тип_организации"], "kind": kd,
-            "primary": primary, "secondary": secondary, "role": r["роль_клиента"], "sub": r["подкатегория"],
-            "markets": r["рынки_цель"], "city": r["штаб_город"], "country": r["штаб_страна"],
-            "region": region(r["штаб_страна"]), "size": r["размер_сотрудников"], "round": r["последний_раунд"],
-            "raised": r["привлечено"], "founded": r["год_основания"], "revenue": r["выручка"],
+            "id": r["id"], "name": r["компания"], "site": site_url(r["сайт"]), "type": r["тип_организации"],
+            "kind": kind(r["тип_организации"]), "primary": primary, "secondary": secondary,
+            "role": r["роль_клиента"], "sub": r["подкатегория"], "markets": r["рынки_цель"],
+            "city": r["штаб_город"], "country": r["штаб_страна"], "region": region(r["штаб_страна"]),
+            "size": r["размер_сотрудников"], "round": r["последний_раунд"], "raised": r["привлечено"],
+            "founded": r["год_основания"], "revenue": r["выручка"],
             "sources": [u for u in r["источники_данных"].split() if u.startswith("http")],
-            "layer": r.get("слой", ""), "verified": r["данные_проверены"], "note": r["примечание"], "profile": r["профиль_по_списку"],
+            "layer": r.get("слой", ""), "global": r.get("глобальная", ""), "verified": r["данные_проверены"],
+            "note": r["примечание"], "profile": r["профиль_по_списку"], "en": en_block(r, per_id, star),
         })
     return out
-
-
-TEMPLATE = (Path(__file__).resolve().parent / "map_template.html").read_text(encoding="utf-8")
 
 
 def main():
@@ -108,8 +147,11 @@ def main():
     data = build_data(rows)
     SITE.mkdir(exist_ok=True)
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
-    html = (TEMPLATE.replace("__DATA__", payload)
+    en_dicts = {"region": T.REGION_EN, "role": T.ROLE_EN}
+    tpl = (Path(__file__).resolve().parent / "map_template.html").read_text(encoding="utf-8")
+    html = (tpl.replace("__DATA__", payload)
             .replace("__COLS__", json.dumps(COLS, ensure_ascii=False))
+            .replace("__EN__", json.dumps(en_dicts, ensure_ascii=False))
             .replace("__DATE__", date.today().strftime("%d.%m.%Y"))
             .replace("__COUNT__", str(len(data))))
     (SITE / "index.html").write_text(html, encoding="utf-8")
@@ -120,7 +162,10 @@ def main():
         for r in rows:
             w.writerow({c: r.get(c, "") for c in cols})
     (SITE / ".nojekyll").write_text("", encoding="utf-8")
-    print(f"wrote {SITE / 'index.html'} ({len(data)} companies, {len(html) // 1024} KB)")
+    left = [(d["id"], k) for d in data for k, v in d["en"].items() if T.has_cyr(v)]
+    print(f"wrote {SITE / 'index.html'} ({len(data)} companies, {len(html) // 1024} KB); EN fields still in Russian: {len(left)}")
+    for x in left[:40]:
+        print("  ", x)
 
 
 if __name__ == "__main__":

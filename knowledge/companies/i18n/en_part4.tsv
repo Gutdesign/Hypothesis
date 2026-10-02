@@ -1,0 +1,131 @@
+*	verified	частично: агрегаторы и пресс-релизы, не первоисточник	partial: aggregators and press releases, not primary sources
+*	verified	да: отчётность компании (пресс-релиз и 10-K; цифры взяты из выдачи поиска, сам документ не открывался)	yes: company reporting (press release and 10-K; figures taken from search results, the document itself was not opened)
+*	verified	да: отчётность компании (пресс-релиз и 10-K за 2025; цифры взяты из выдачи поиска, сам документ не открывался)	yes: company reporting (press release and 2025 10-K; figures taken from search results, the document itself was not opened)
+*	verified	частично: Википедия и перечень отчётности; цифры из выдачи поиска	partial: Wikipedia and a list of filings; figures from search results
+*	verified	частично: пресс-релиз компании; метка основателя исправлена	partial: company press release; the founder's label was corrected
+*	verified	нет: компания по названию в поиске не найдена	no: the company was not found by name in search
+*	verified	частично: пресс-релиз компании	partial: company press release
+*	verified	частично: Википедия и агрегатор; цифры из выдачи поиска	partial: Wikipedia and an aggregator; figures from search results
+*	verified	частично: годовой отчёт компании в выдаче поиска; цифры не сверены с документом	partial: company annual report in search results; figures not checked against the document
+*	verified	частично: годовой отчёт в выдаче поиска; цифры не сверены с документом	partial: annual report in search results; figures not checked against the document
+*	verified	частично: блог компании и пресса	partial: company blog and press
+*	verified	частично: агрегаторы, пресс-релизы, сайт компании	partial: aggregators, press releases, company website
+*	verified	частично: сообщение компании инвесторам в выдаче поиска; документ не открывался	partial: company investor announcement in search results; document not opened
+*	verified	частично: сообщения компании и Yahoo Finance в выдаче поиска	partial: company announcements and Yahoo Finance in search results
+*	verified	частично: сообщение компании о результатах 2025 в выдаче поиска	partial: company announcement of 2025 results in search results
+*	verified	да: итоги года компании (сообщение на бирже в выдаче поиска, документ не открывался)	yes: company year-end results (exchange announcement in search results, document not opened)
+*	verified	частично: годовой отчёт группы в выдаче поиска, документ не открывался	partial: group annual report in search results, document not opened
+*	sub	3D-проектирование и платформа 3DEXPERIENCE (сегмент архитектуры, инженерии и стройки)	3D design and the 3DEXPERIENCE platform (architecture, engineering and construction segment)
+*	sub	BIM на площадке: замечания, документы, обслуживание	BIM on site: issues, documents, maintenance
+*	sub	BIM-коллаборация и замечания	BIM collaboration and issue tracking
+*	sub	BIM-консалтинг	BIM consulting
+*	sub	BIM-услуги	BIM services
+*	sub	ERP для строительства на Microsoft Dynamics 365	construction ERP on Microsoft Dynamics 365
+*	sub	ERP и коммерческое управление подрядчика	ERP and commercial management for contractors
+*	sub	ERP и управление площадкой для крупных подрядчиков	ERP and site management for large contractors
+*	sub	ERP и управление проектами для подрядчиков	ERP and project management for contractors
+*	sub	IoT	IoT
+*	sub	ИИ-оптимизация систем отопления и вентиляции в коммерческих зданиях	AI optimization of heating and ventilation in commercial buildings
+*	sub	ПО для проектирования и платформа Xcelerator; автоматизация зданий	design software and the Xcelerator platform; building automation
+*	sub	ПО для управления зданиями и рабочими местами	software for managing buildings and workplaces
+*	sub	ТЭО и осуществимость	feasibility and viability studies
+*	sub	автономная техника	autonomous equipment
+*	sub	автопроектирование MEP	automated MEP design
+*	sub	аренда	leasing
+*	sub	архив исполнительной документации на объекте	on-site archive of as-built documentation
+*	sub	архитектурная визуализация (услуга студии)	architectural visualization (studio service)
+*	sub	библиотека BIM-объектов и ПО для BIM	BIM object library and BIM software
+*	sub	бухгалтерия, расчёт зарплаты и учёт затрат подрядчика	contractor accounting, payroll and job costing
+*	sub	геоинформационные системы (ГИС): анализ территории и инфраструктуры	geographic information systems (GIS): site and infrastructure analysis
+*	sub	график и исполнение по тактовому планированию на площадке	takt-based scheduling and execution on site
+*	sub	график и управление проектом	scheduling and project management
+*	sub	данные о коммерческой недвижимости	commercial real estate data
+*	sub	данные о недвижимости	real estate data
+*	sub	данные о планируемых проектах и заявки (project leads)	data on planned projects and bid leads
+*	sub	дефекты, инспекции и документы на площадке	defects, inspections and documents on site
+*	sub	документы и контракты	documents and contracts
+*	sub	документы сдачи	handover documents
+*	sub	заводское производство	factory production
+*	sub	закупка материалов	materials procurement
+*	sub	знания и документы на площадке	knowledge and documents on site
+*	sub	изыскания и измерения	surveys and measurement
+*	sub	изыскания подземных коммуникаций	underground utility surveys
+*	sub	инвестиционная аналитика	investment analytics
+*	sub	инженерное ПО для инфраструктуры, весь цикл	engineering software for infrastructure, the whole cycle
+*	sub	инжиниринг	engineering
+*	sub	инжиниринг и технологии	engineering and technology
+*	sub	инжиниринг транспортной инфраструктуры	transport infrastructure engineering
+*	sub	инжиниринг, архитектура и ИТ-услуги	engineering, architecture and IT services
+*	sub	инспекции	inspections
+*	sub	инструменты, крепёж и ПО для стройки (Fieldwire, 4PS)	tools, fastening and construction software (Fieldwire, 4PS)
+*	sub	календарное планирование стройки (Powerproject) и ПО для подрядчиков	construction scheduling (Powerproject) and contractor software
+*	sub	клиентский опыт арендаторов	tenant experience
+*	sub	комплаенс подрядчиков	contractor compliance
+*	sub	комплексная платформа: измерения, проектирование, управление стройкой	integrated platform: positioning, design and construction management
+*	sub	контроль качества и коммуникация на площадке	quality control and communication on site
+*	sub	контроль хода и качества	progress and quality monitoring
+*	sub	координация BIM-моделей, замечания	BIM model coordination, issue tracking
+*	sub	координация проектных разделов	coordination between design disciplines
+*	sub	кредитование строительства	construction lending
+*	sub	модульное строительство	modular construction
+*	sub	нормы и комплаенс	codes and compliance
+*	sub	обмер объёмов и сметы	quantity takeoff and estimating
+*	sub	обмеры существующих зданий	measurement of existing buildings
+*	sub	образование	education
+*	sub	операционная аналитика	operational analytics
+*	sub	охрана труда	health and safety
+*	sub	платформа обмена данными моделей и проектов	platform for exchanging model and project data
+*	sub	платформа со средой общих данных (CDE)	platform with a common data environment (CDE)
+*	sub	платформа управления строительством	construction management platform
+*	sub	поиск проектов и заявки	project and bid discovery
+*	sub	предварительная проверка проекта перед подачей и проверка для городов	pre-submittal design review and review for cities
+*	sub	предпроектная подготовка реновации зданий: цифровой двойник, энергомодель, смета	pre-design for building renovation: digital twin, energy model, estimate
+*	sub	предстроительная подготовка: нормы, объёмы, торги	preconstruction: codes, quantities, bidding
+*	sub	проверка персонала	workforce verification
+*	sub	проверка проекта	design review
+*	sub	проверка проекта на соответствие нормам в BIM	code compliance checking inside BIM
+*	sub	продажи жилья	home sales
+*	sub	проектирование дата-центров	data center design
+*	sub	проектирование жилых домов	residential home design
+*	sub	проектирование и работа с чертежами (Allplan, Graphisoft, Bluebeam)	design and drawing software (Allplan, Graphisoft, Bluebeam)
+*	sub	проектирование и управление стройкой (Revit, Construction Cloud)	design and construction management (Revit, Construction Cloud)
+*	sub	проектирование инфраструктуры	infrastructure design
+*	sub	проектирование фасадов	facade design
+*	sub	проектирование энергообъектов	energy facility design
+*	sub	проектно-строительная компания	design-build company
+*	sub	работа с чертежами в PDF: разметка, обмеры, совместная работа	PDF drawings: markup, measurement, collaboration
+*	sub	разбор объёма работ по чертежам и спецификациям для субподрядных договоров	scope review of drawings and specifications for subcontracts
+*	sub	разрешения (сторона заявителя)	permits (applicant side)
+*	sub	расчёты конструкций (мосты)	structural calculations (bridges)
+*	sub	расчёты конструкций и BIM	structural calculations and BIM
+*	sub	ретрофит	retrofit
+*	sub	робот-принтер разметки по BIM на строительной площадке (FieldPrinter)	robot that prints BIM layout on the construction floor (FieldPrinter)
+*	sub	роботы	robots
+*	sub	сделки с коммерческой недвижимостью	commercial real estate deals
+*	sub	системы планирования, строительного контроля и экологического надзора для органов власти	planning, building control and environmental health systems for public authorities
+*	sub	сканирование	scanning
+*	sub	сметы и обмеры в BIM, контроль затрат	estimating and takeoff in BIM, cost control
+*	sub	сметы и управление	estimating and management
+*	sub	спецификации и данные о строительной продукции (NBS Source, Specify)	specifications and construction product data (NBS Source, Specify)
+*	sub	сравнение облака точек площадки с BIM-моделью и отчёт об отклонениях	site point cloud vs BIM model comparison and deviation report
+*	sub	съёмка 360° и контроль хода работ	360° capture and progress tracking
+*	sub	тендеры	tendering
+*	sub	тендеры и сметы	tenders and estimating
+*	sub	торговая площадка подрядчиков	contractor marketplace
+*	sub	управление графиком и проектами (Primavera, Aconex)	scheduling and project management (Primavera, Aconex)
+*	sub	управление документами и качеством на стройке	document and quality management on site
+*	sub	управление затратами, графиком и рисками на капитальных проектах	cost, schedule and risk management on capital projects
+*	sub	управление информацией проекта, замечания, RFI	project information management, issues, RFIs
+*	sub	управление на площадке	site management
+*	sub	управление недвижимостью	property management
+*	sub	управление объектами	facility management
+*	sub	управление проектом	project management
+*	sub	управление проектом застройщика: CRM по продажам, финансовый анализ	developer project management: sales CRM, financial analysis
+*	sub	управление энергопотреблением и климатом зданий через IoT	energy and climate management of buildings via IoT
+*	sub	учёт затрат	job costing
+*	sub	учёт, калькуляция и документы для подрядчика	accounting, estimating and documents for contractors
+*	sub	цифровой двойник города	city digital twin
+*	sub	цифровой паспорт дома: история, материалы, гарантии	digital home passport: history, materials, warranties
+*	sub	частная проверка планов и разрешения (приватизация разрешений)	private plan review and permits (privatized permitting)
+*	sub	энергоэффективная реновация: от анализа объекта до исполнения и контроля качества	energy-efficient renovation: from property analysis to execution and quality control
+*	sub	энергоэффективность действующих зданий: IoT и аналитика	energy performance of operating buildings: IoT and analytics

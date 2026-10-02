@@ -1,0 +1,127 @@
+xpanner	note	sells a subscription for tasks (pile driving, material handling, trenching, grading) on the customer's retrofitted equipment
+attentive-ai	note	easily confused in search with the marketing company Attentive; product Beam AI; website not confirmed
+adaptive	note	duplicate from the two lists merged; stages spread from the former cross-cutting layer (estimate)
+doxel	note	last known round was in 2021; no fresh rounds found
+meltplan	note	products: Melt Code (building code checks), Melt Takeoff (quantities), Melt Bid (bid preparation and leveling); stage refined from press descriptions
+buildots	note	duplicate from the two lists merged; headquarters outside the target geography but active in the USA and Europe: check
+keyway	note	products: KeyDocs (data extraction from documents), KeyComps (rent comparison), KeyBrain (multifamily market data); closer to property management than to construction
+digs	note	corrected: headquarters are in Vancouver, Washington (USA), not Canada; stages recoded from press descriptions ("CarFax for the home", replaces PDF drawings and paper records)
+estie	note	outside the target geography; kept for completeness
+built-robotics	note	last known round was in 2022
+netvendor	note	a mature company founded in 2009, not a startup; clients are property managers
+cosuno	note	no fresh rounds or acquisition news found: check corporate ownership
+zefir	note	a marketplace for selling homes through an agent network; almost unrelated to construction, so outside the core
+greenlite	note	per the press release: private plan review for corporate clients (about 100 Fortune 500 companies claimed), not only sales to municipalities; customer role clarified
+parspec	note	product for sales agents and distributors (product selection, quotes, submittal packages); started with lighting and electrical, expanding to MEP
+dealpath	note	website dealpath.com is an assumption: automated loading returned 403, content not verified
+vts	note	a mature company unrelated to construction: commercial leasing market
+hqo	note	unrelated to construction: tenant experience in commercial real estate
+casafari	note	unrelated to construction: real estate listing data
+entrata	note	a large company, an established player in its segment; unrelated to construction (residential property management); an aggregator shows "IPO Registration" status: not verified
+built	note	this is Built Technologies: construction lending software; headcount reduced since 2023; website getbuilt.com is an assumption (403 on automated loading); stages spread from the former cross-cutting layer (estimate)
+cotality	note	a large established company; renamed from CoreLogic in 2025; revenue and headcount data are outdated
+3d-repo	note	acquired by Asite (also in the registry) in March 2023, so it may no longer be a standalone product
+academa	note	per the website: custom engineering software (calculations of prestressed bridges for Slovenian builders); not a startup
+aec-on	note	services, not a product; per the website, a partner of Bentley (Synchro 4D) and RIB Spain (Presto); software, consulting and training on BIM / CDE / digital twins
+aectual	note	per description: 3D printing of floors, walls and interior elements, i.e. finishing elements rather than load-bearing structures
+ai-bob	note	the domain ai-bob.com from the list is not confirmed, aibob.io was found; per description it checks code compliance inside the BIM model (a Revit plugin) rather than being a general BIM platform; stages recoded
+alloovium	note	a very early company; stages spread from the former cross-cutting layer (estimate)
+amrax-metaroom	note	legal entity Synthetic Dimension GmbH; the domain metaroom.ai from the list is not confirmed, amrax.ai was found; smartphone scan-to-BIM
+arbnco	note	stages recoded: per the company description it optimizes operating commercial buildings (IoT, analytics) rather than only simulating a design
+archilabs	note	a chat interface inside Revit that executes commands in the BIM model; starts with data centers. Not to be confused with Architect Labs (chip design)
+asite	note	acquired 3D Repo in 2023; a mature company, not a startup; stages spread from the former cross-cutting layer (estimate); global: offices in the USA, Saudi Arabia, UAE, Australia, China, India
+atom-modular	note	a construction company, not software; the domain atommodular.com from the list is not confirmed, atom-modular.com was found; factory of modular micro-homes in Arizona; the founder is an architect with 30 years of experience
+augment	note	a micro company; digitizes facilities with laser scanning and drones
+autodesk	note	the founder's list had a regional office; the registry covers the whole company; global: presence in the Americas, Europe and Asia-Pacific (per a market overview)
+bandora	note	bandora.io from the list is a different company (the website CMS Bandora CMS); the one sought is Bandora Systems, Porto; website not found
+bentley-systems	note	global: offices in the USA, United Kingdom, Spain and the EMEA region (per the founder's list)
+bild-ai	note	a narrow Division 8 niche (doors, windows), like Fresco; the company claims 95% model accuracy and time savings
+bimcap	note	services, not a product; headquarters: Amsterdam per some sources, Hong Kong per LinkedIn; sources differ
+boxcore	note	the list gave the domain boxcore.co, boxcore.com was found; 40,000+ worker profiles (company claim)
+braincreators	note	inspection is wider than infrastructure: AI for visual inspection in various industries; the products INSPECH (roads) and SEAGULL were spun out as separate companies
+brick-and-bolt	note	a construction company with a technology layer, not pure software; found via the domain bricknbolt.com, an Indian company (tech-enabled residential construction); outside the target geography and excluded from the market counts; search did not show a London Brick & Bolt
+cascade	note	tracks bond filings, permits, property transactions and meeting minutes to find projects before they go to tender; the company claims $10B of opportunities identified; headquarters differ between sources (New York / London)
+causeway	note	a mature company, not a startup; headquarters city not confirmed; stages spread from the former cross-cutting layer (estimate)
+continuum-industries	note	the product Optioneer compares route options for linear assets; last known round was in 2023
+converge	note	sensors in concrete and an AI forecast of strength gain (ConcreteDNA); focus on reducing emissions from concrete production
+cype	note	a mature Spanish company: directly relevant to the Spanish market
+devscope	note	not AEC-specific; a Microsoft partner for Power Platform, data and AI
+disperse	note	per an aggregator, acquired by OpenSpace in October 2025; it may no longer exist as a standalone product: check
+e-gloo	note	the domain e-gloo.lu from the list is not confirmed, e-gloo.biz was found; per description a hardware "digital brick" that stores as-built records and the user manual in a building's technical rooms; the company claims a 9% lower cost of ownership over 30 years
+elea-ic	note	services, not a product; design of bridges, tunnels, roads, geotechnics, architecture; BIM is one of the lines; part of the iC group
+fenestrapro	note	a Revit plugin for analyzing thermal performance, daylight and solar gains of a facade
+finch-buildings	note	a construction company, not software; timber (CLT) housing modules for multi-storey buildings
+flowmanual	note	a very early company; estimates, bids and procurement for general and MEP contractors
+fresco	note	a narrow niche; 3,000+ takeoffs processed (company claim); a direct competitor of Bild AI
+fyld	note	crews shoot short videos instead of filling forms and AI looks for safety, quality and schedule risks; customers are infrastructure operators (30–40K field workers)
+gocontractor	note	the link to Xpertex from the list was not confirmed by search; per sources it belongs to Safety Plus, so it no longer exists as an independent startup; stages spread from the former cross-cutting layer (estimate)
+growin	note	services, not a product; per description, IT outsourcing for international clients; no AEC link was found
+grupo-alava	note	per aggregators: industrial automation, process monitoring, predictive maintenance, telecom; relevance to AEC to be clarified
+helonic	note	integrations with Procore and Autodesk Construction Cloud (per the website); checks drawings for clashes, code violations and constructability
+idom	note	a large engineering company: a potential customer or partner, not a startup
+inspectmind	note	headquarters city per the YC description: not confirmed
+karmen	note	builds a baseline schedule from project documents and updates it; also automates invoice approvals, RFI requests and change orders
+kodehyve	note	stages recoded per description: management of a development project, CRM and developer finance; closer to sales and project management than to the construction site
+lobo	note	the domain lobo3d.com from the list is not confirmed; the studio Lobo Studio (lobostudio.es; offices in Barcelona, Madrid, Málaga) was found and its match with the founder's company is not proven; 55,000+ images for 3,700+ clients (studio claim); this is a service, not a product
+mx3d	note	per one aggregator, acquired by Amazon in April 2026; not confirmed by a second source: check
+nomoko	note	digital twins from drone imagery: buildings, blocks, cities; real estate focus
+optimuse	note	purpose clarified: help at the pre-design stage of building renovation
+opusense	note	headquarters in Toronto, outside the target geography, but the product's market may be wider
+permitify	note	per description two products: a $297 pre-submittal review for designers and developers and a 24-hour review for homebuilders; also targets city reviewers, so the customer role is wider than "municipality"
+planetverify	note	stages recoded: per description it verifies identity and documents across industries and is not construction-specific; the founder's label "verification for the construction workforce" is not confirmed; stages spread from the former cross-cutting layer (estimate)
+planradar	note	defect tracking, BIM, inspections and reporting; growing in Spain and the United Kingdom (hiring in Madrid and London per the founder's list); global: 170,000+ users in 75+ countries (company claim)
+procore	note	global: platform in several regions, EMEA offices; over 2M users (company claim)
+q-bot	note	a robot sprays insulation under floors; 3,000+ homes insulated (company claim)
+rated-power	note	energy, not buildings; per an aggregator, owned by Enverus since 2022, so not an independent startup
+rudus	note	concrete work only (footings, walls, columns, slabs); target customers are concrete subcontractors; not to be confused with the Finnish Rudus Oy
+scoreboard-ai	note	the founder's label "cost estimating" is not confirmed: per description the service finds scope gaps in drawings and specifications and writes subcontract scope language, it does not calculate cost; the same label was on Speckle, likely a copy error; price is $5 per drawing sheet (general contractors) and $2 (specialty contractors), $0.10 per spec sheet
+smart-bricks	note	investment in existing real estate; almost unrelated to construction
+speckle	note	the founder's label "cost estimating" is not confirmed by the link: per its URL the link is about a $12.5M round for an AEC data hub; corrected; stages spread from the former cross-cutting layer (estimate)
+spotr	note	recognition from satellite, aircraft, drone and car imagery: measurement and condition assessment of real estate
+standard-access	note	a search for the name "Standard Access" did not find a company; data not confirmed, the domain standardaccess.co did not open
+struck	note	the domain struckcompliance.com from the list is not confirmed; per description a guide to applicable rules and (soon) automatic checking of a design against codes and environmental requirements; stages spread from the former cross-cutting layer (estimate); related to the hypothesis svodpro-raschety
+subvysion	note	ground-penetrating radar on autonomous rovers; the company claims $30B of annual damage from striking underground utilities
+trunk-tools	note	AI agents over drawings, specifications, schedules and submittals
+vellum	note	the domain vellumcompany.com from the list is not confirmed, vellum.ink was found; another company called Vellum (vellum.ai, an LLM platform) appears in results, do not confuse; round data is old (2020)
+viboo	note	the company claims average energy savings of 27%
+wallround	note	stages recoded from press descriptions: an end-to-end housing renovation platform; the domain wallround.com did not open
+xbuild	note	main demand is insurance claims for roofing; headquarters not confirmed by sources
+xyz-reality	note	HoloSite: holograms of the BIM model on site with 5 mm accuracy (company claim)
+zerodays	note	outside the subject area; the domain zerodays.io from the list did not open, zerodays.dev was found; custom development, not AEC
+zigurat	note	the venture studio from the founder's description was not confirmed by search; the founder started with training on CYPE software; stages spread from the former cross-cutting layer (estimate)
+zutec	note	four solution families: documents, quality, handover, operational data; headquarters not confirmed
+trimble	note	global: presence in North America, Europe and Asia (per a market overview)
+nemetschek	note	global: the group sells software in 160+ countries via Bluebeam and others (company claim)
+oracle-construction	note	products: Primavera P6, Primavera Cloud, Unifier, Aconex, Textura; unit revenue is not published separately; global: a unit of an international corporation, one of the five market leaders (per an overview)
+rib-schneider	note	ownership by Schneider Electric is confirmed by several sources; headquarters (Stuttgart) not confirmed by search; in Spain the product is RIB Spain's Presto (per AEC-ON's description)
+hexagon	note	construction is a small part of the business (measurement, surveying, industry); global: about 24,500 employees in 50 countries
+fieldwire-hilti	note	1M+ projects in 100 countries (company claim)
+buildertrend	note	added to test the gaps
+togal-ai	note	added: a direct competitor in the takeoff cluster
+bluebeam	note	a general tool for working with drawings on which takeoff startups build; global: 160+ countries, 4M users (company claim)
+dodge	note	headquarters per the BBB profile; the website did not open
+dalux	note	the Hilti link I expected was not confirmed: the company is independent
+revizto	note	the founder and CEO is Arman Gukasyan
+sablono	note	investors include Nemetschek Allplan; no fresh rounds found
+rib-spain-presto	note	a local player in the takeoff and estimating cluster, which the registry lacked for Spain; market share not found
+sage-estimating	note	the product came through the purchase of Maxwell Systems (WinEst); headquarters are those of the parent, Sage Group
+dassault	note	global: 184 offices worldwide (aggregator)
+siemens	note	the share of construction software in revenue was not found; the group's software business grew 14% to €1.6B in the quarter (Q2 2026); global: a multinational group
+hilti	note	owns Fieldwire (2021) and 4PS (2023); global: sales worldwide per the company
+esri	note	construction is one of its customer industries; global: 36 offices (aggregator)
+planon	note	per the company, the leader in building management software in the Netherlands
+cmic	note	headquartered in Canada; the USA is its sales market; the founder and CEO is Gord Rawlins
+openspace	note	acquired Disperse (2025), a direct competitor of Buildots and Doxel; headquarters not confirmed by sources
+dusty-robotics	note	customers include DPR, Swinerton and others (company claim); last round found was in 2022
+idox	note	per the company, the leading provider of building control software in the UK; covers the municipality side of permits (S4), which the registry lacked
+elecosoft	note	Powerproject won an industry award five years in a row (company claim)
+nbs	note	the national specification standard in the UK (per Wikipedia); the revenue figure is an estimate for the whole group
+access-construction	note	the construction unit is part of a large group
+pro4all	note	per the company, the largest Dutch construction software provider: 34 of the country's 50 largest construction companies
+kraan	note	per description, the oldest Dutch software supplier for the construction and housing sector; the address differs between sources (Leusden and Capelle aan den IJssel)
+ed-controls	note	a product of the company Dutchview
+bouwconnect	note	per the company, the largest BIM object library in the Netherlands; the aggregator's headcount and revenue look like noise
+ayesa	note	per a news report, among the ten largest engineering firms in the world by ENR; the revenue figure is for one legal entity, not the whole group
+sener	note	per a news report, among the ten largest engineering firms in the world by ENR; group revenue not found
+ineco	note	per a news report, among the ten largest engineering firms in the world by ENR; revenue not found
+checktobuild	note	a rare Spanish construction-monitoring startup; nearest analogues are Buildots and Doxel
