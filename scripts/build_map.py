@@ -192,6 +192,7 @@ def build_data(rows):
             "sources": [u for u in r["источники_данных"].split() if u.startswith("http")],
             "layer": r.get("слой", ""), "global": r.get("глобальная", ""), "verified": r["данные_проверены"],
             "note": r["примечание"], "profile": r["профиль_по_списку"], "en": en_block(r, per_id, star),
+            "mk": r.get("рынки_коды", ""), "mb": r.get("рынки_основание", ""),
             "emp": parse_emp(r["размер_сотрудников"]), "rev": parse_rev(r["выручка"]),
             "q": {k: quality(k, r[f], r["данные_проверены"]) for k, f in
                   [("round", "последний_раунд"), ("raised", "привлечено"), ("size", "размер_сотрудников"),
