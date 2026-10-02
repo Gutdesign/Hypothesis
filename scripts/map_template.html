@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Карта строительных технологий</title>
+<meta name="description" content="Реестр компаний, продуктов и крупных вендоров для строительной отрасли: какие этапы жизненного цикла объекта закрывает каждая компания.">
+<style>
+:root{
+  --bg:#f6f5f1; --panel:#ffffff; --ink:#1d2327; --muted:#5d6670; --line:#e1ded5; --accent:#1f5f8b;
+  --prod:#2f7fb3; --prod-l:#bcd9ec; --vend:#3b4752; --vend-l:#b9c1c8; --build:#c68a17; --build-l:#f0d9a6; --svc:#8a8f94; --svc-l:#d6d8da;
+  --warn-bg:#fff4d6; --warn-ink:#5a4300; --focus:#c25b00; --label:76,86,94;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14181b; --panel:#1c2125; --ink:#e8ebed; --muted:#9aa4ad; --line:#2d353b; --accent:#6bb0dd;
+  --prod:#3f8fc4; --prod-l:#24475f; --vend:#7f8d99; --vend-l:#3a444d; --build:#d79b2a; --build-l:#5a4515; --svc:#8f969c; --svc-l:#363d43;
+  --warn-bg:#3a3113; --warn-ink:#f1dfa5; --focus:#ffb066;}}
+:root[data-theme="dark"]{
+  --bg:#14181b; --panel:#1c2125; --ink:#e8ebed; --muted:#9aa4ad; --line:#2d353b; --accent:#6bb0dd;
+  --prod:#3f8fc4; --prod-l:#24475f; --vend:#7f8d99; --vend-l:#3a444d; --build:#d79b2a; --build-l:#5a4515; --svc:#8f969c; --svc-l:#363d43;
+  --warn-bg:#3a3113; --warn-ink:#f1dfa5; --focus:#ffb066;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1500px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:26px;line-height:1.2;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 14px;max-width:70ch}
+.note{background:var(--warn-bg);color:var(--warn-ink);border-radius:8px;padding:10px 14px;margin:0 0 16px;max-width:90ch;font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:end;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.bar label{display:flex;flex-direction:column;font-size:12px;color:var(--muted);gap:3px}
+.bar select,.bar input[type=search]{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 8px;min-width:150px}
+.bar button{font:inherit;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer}
+.count{margin-left:auto;font-size:13px;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin-bottom:12px;align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:22px;height:10px;border-radius:5px;display:inline-block}
+.map{overflow:auto;max-height:78vh;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.row{display:grid;grid-template-columns:230px repeat(11,minmax(92px,1fr));min-width:1250px;align-items:center;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.head{position:sticky;top:0;z-index:3;background:var(--panel);border-bottom:2px solid var(--line);align-items:end}
+.head .nm{padding:10px;font-size:12px;color:var(--muted)}
+.head .st{padding:8px 6px 6px;border-left:1px solid var(--line);min-height:62px}
+.head .st b{display:block;font-size:12px;letter-spacing:.04em;color:var(--accent)}
+.head .st span{display:block;font-size:12.5px;font-weight:600;line-height:1.2}
+.head .st i{display:block;font-style:normal;font-size:11px;color:var(--muted);margin-top:2px}
+.nm{position:sticky;left:0;z-index:2;background:var(--panel);padding:4px 8px;display:flex;flex-direction:column;justify-content:center;min-height:36px;border-right:1px solid var(--line);grid-row:1;grid-column:1}
+.nm button{all:unset;cursor:pointer;font-size:13.5px;font-weight:600;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.nm button:hover{text-decoration:underline}
+.nm small{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell{border-left:1px solid var(--line);align-self:stretch;grid-row:1}
+.seg{grid-row:1;height:18px;border-radius:9px;margin:0 3px;z-index:1;border:0;padding:0;cursor:pointer;align-self:center}
+.seg:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.seg.product{--c:var(--prod);--l:var(--prod-l)}.seg.vendor{--c:var(--vend);--l:var(--vend-l)}
+.seg.builder{--c:var(--build);--l:var(--build-l)}.seg.services{--c:var(--svc);--l:var(--svc-l)}
+.seg{background:linear-gradient(to right,var(--l) 0 var(--a,0%),var(--c) var(--a,0%) var(--b,100%),var(--l) var(--b,100%) 100%)}
+.seg.all{background:repeating-linear-gradient(135deg,var(--l) 0 6px,transparent 6px 12px);border:1px dashed var(--c);height:16px}
+.sep{grid-column:1/-1;padding:8px 10px;font-size:12px;font-weight:600;color:var(--muted);background:color-mix(in srgb,var(--panel) 90%,var(--accent) 10%);position:sticky;left:0}
+.tags{display:flex;gap:4px;margin-top:2px}
+.tag{font-size:10.5px;border:1px solid var(--line);border-radius:999px;padding:0 6px;color:var(--muted)}
+.empty{padding:24px;color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);padding:0;width:min(640px,calc(100vw - 24px));max-height:calc(100vh - 32px)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.dh{display:flex;justify-content:space-between;gap:12px;align-items:start;padding:16px 18px 8px}
+.dh h2{margin:0;font-size:20px;line-height:1.25}
+.dh button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:4px 10px;cursor:pointer;font:inherit}
+.db{padding:0 18px 18px;overflow:auto;max-height:calc(100vh - 120px)}
+.db dl{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;margin:10px 0}
+.db dt{color:var(--muted);font-size:13px}
+.db dd{margin:0;overflow-wrap:anywhere}
+.kt{display:inline-block;font-size:12px;border-radius:999px;padding:1px 9px;margin-right:6px;color:#fff;background:var(--c)}
+.kt.product{--c:var(--prod)}.kt.vendor{--c:var(--vend)}.kt.builder{--c:var(--build)}.kt.services{--c:var(--svc)}
+.src a{display:block;font-size:13px}
+footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:90ch}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+@media (max-width:560px){.db dl{grid-template-columns:1fr}.count{margin-left:0;width:100%}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Карта строительных технологий</h1>
+  <p class="sub">Какие этапы жизненного цикла объекта закрывает каждая компания: полоса растянута по всем этапам, на которых она работает; тёмная часть — основной этап. Нажмите на название или полосу, чтобы увидеть данные и источники.</p>
+  <p class="note"><b>Как читать.</b> Данные собраны из агрегаторов, пресс-релизов и сайтов компаний; почти все строки проверены лишь частично. Суммы привлечённых денег и численность в разных источниках расходятся. Выручка стартапов в основном не раскрыта; где указана, это оценка агрегатора. Этапы присвоены по описанию продукта. Присутствие компании на карте показывает интерес и наличие продукта, а не спрос и не долю рынка. Список компаний неполон: в нём больше стартапов с внешними деньгами, чем местных игроков.</p>
+
+  <div class="bar" role="search">
+    <label>Поиск<input type="search" id="q" placeholder="название, роль, примечание"></label>
+    <label>Тип<select id="fk"><option value="">Все</option><option value="product">Продукты</option><option value="vendor">Крупные вендоры</option><option value="builder">Строители и застройщики</option><option value="services">Услуги, консалтинг, образование</option></select></label>
+    <label>Страна штаба<select id="fr"><option value="">Все</option></select></label>
+    <label>Роль клиента<select id="fo"><option value="">Все</option></select></label>
+    <label>Закрывает этап<select id="fe"><option value="">Любой</option></select></label>
+    <label>Охват<select id="fw"><option value="">Любой</option><option value="1">Один этап</option><option value="2">Два и более этапов</option><option value="4">Четыре и более этапов</option></select></label>
+    <button type="button" id="reset">Сбросить</button>
+    <button type="button" id="theme" aria-label="Переключить тему">Тема</button>
+    <span class="count" id="count" aria-live="polite"></span>
+  </div>
+  <div class="legend" aria-hidden="true">
+    <span><i class="sw" style="background:var(--prod)"></i>продукт</span>
+    <span><i class="sw" style="background:var(--vend)"></i>крупный вендор</span>
+    <span><i class="sw" style="background:var(--build)"></i>строитель или застройщик</span>
+    <span><i class="sw" style="background:var(--svc)"></i>услуги, консалтинг, образование</span>
+    <span><i class="sw" style="background:linear-gradient(to right,var(--prod-l) 50%,var(--prod) 50%)"></i>светлее — дополнительные этапы, темнее — основной</span>
+    <span><i class="sw" style="border:1px dashed var(--svc);background:repeating-linear-gradient(135deg,var(--svc-l) 0 4px,transparent 4px 8px)"></i>сквозной слой: через все этапы</span>
+  </div>
+
+  <div class="map" id="map"></div>
+
+  <footer>
+    <p>Снимок на __DATE__. Реестр: __COUNT__ строк. <a href="registry.csv">Скачать таблицу (CSV, разделитель «;», кодировка UTF-8 с BOM)</a>. Сквозные слои — данные, финансы и страхование, комплаенс — у компаний без привязки к одному этапу показаны штриховкой через все этапы; если у такой компании есть конкретные этапы, полоса стоит на них, а слой указан меткой. Таксономия этапов — рабочий инструмент классификации, а не стандарт.</p>
+  </footer>
+</div>
+
+<dialog id="dlg" aria-labelledby="dtitle">
+  <div class="dh"><h2 id="dtitle"></h2><button type="button" id="close" aria-label="Закрыть">Закрыть</button></div>
+  <div class="db" id="dbody"></div>
+</dialog>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function(){
+  var D = JSON.parse(document.getElementById('data').textContent);
+  var COLS = __COLS__;            /* линейные этапы: [код, название] */
+  var LAYERS = __LAYERS__;        /* сквозные слои: код -> название */
+  var KIND = {product:'продукт',vendor:'крупный вендор',builder:'строитель или застройщик',services:'услуги, консалтинг, образование'};
+  var IDX = {}; COLS.forEach(function(c,i){IDX[c[0]]=i});
+  var $ = function(id){return document.getElementById(id)};
+  var map=$('map'), q=$('q'), fk=$('fk'), fr=$('fr'), fo=$('fo'), fe=$('fe'), fw=$('fw');
+  function uniq(a){return a.filter(function(v,i){return v&&a.indexOf(v)===i})}
+  uniq(D.map(function(c){return c.region})).sort().forEach(function(v){var o=document.createElement('option');o.value=o.textContent=v;fr.appendChild(o)});
+  var roles=[]; D.forEach(function(c){c.role.split(';').forEach(function(r){r=r.trim(); if(r&&r!=='н/д')roles.push(r)})});
+  uniq(roles).sort().forEach(function(v){var o=document.createElement('option');o.value=o.textContent=v;fo.appendChild(o)});
+  COLS.forEach(function(c){var o=document.createElement('option');o.value=c[0];o.textContent=c[0]+' '+c[1];fe.appendChild(o)});
+
+  /* какие линейные этапы закрывает компания и какой из них основной */
+  D.forEach(function(c){
+    var all=[c.primary].concat(c.secondary).filter(function(s){return IDX[s]!==undefined});
+    c.cols=uniq(all).map(function(s){return IDX[s]}).sort(function(a,b){return a-b});
+    c.pcol=IDX[c.primary];
+    c.layers=uniq([c.primary].concat(c.secondary).filter(function(s){return LAYERS[s]}));
+    c.first=c.cols.length?c.cols[0]:99;
+  });
+
+  function match(c){
+    if(fk.value && c.kind!==fk.value) return false;
+    if(fr.value && c.region!==fr.value) return false;
+    if(fo.value && c.role.split(';').map(function(s){return s.trim()}).indexOf(fo.value)<0) return false;
+    if(fe.value && c.cols.indexOf(IDX[fe.value])<0) return false;
+    if(fw.value && c.cols.length<Number(fw.value)) return false;
+    var t=q.value.trim().toLowerCase();
+    if(t){var h=(c.name+' '+c.role+' '+c.sub+' '+c.note+' '+c.markets+' '+c.city+' '+c.country).toLowerCase(); if(h.indexOf(t)<0) return false}
+    return true;
+  }
+  function order(a,b){return (a.first-b.first)||(b.cols.length-a.cols.length)||a.name.localeCompare(b.name,'ru')}
+  function runs(cols){var r=[],s=null,p=null;cols.forEach(function(i){if(s===null){s=p=i}else if(i===p+1){p=i}else{r.push([s,p]);s=p=i}});if(s!==null)r.push([s,p]);return r}
+
+  function headRow(list){
+    var h=document.createElement('div'); h.className='row head';
+    var n=document.createElement('div'); n.className='nm'; n.textContent='Компания'; h.appendChild(n);
+    COLS.forEach(function(c,i){
+      var cnt=list.filter(function(x){return x.cols.indexOf(i)>=0}).length;
+      var d=document.createElement('div'); d.className='st'; d.innerHTML='<b></b><span></span><i></i>';
+      d.children[0].textContent=c[0]; d.children[1].textContent=c[1]; d.children[2].textContent=cnt+' комп.'; h.appendChild(d);
+    });
+    return h;
+  }
+  function bar(c){
+    var r=document.createElement('div'); r.className='row';
+    var nm=document.createElement('div'); nm.className='nm';
+    var b=document.createElement('button'); b.type='button'; b.textContent=c.name; b.title=c.name;
+    b.addEventListener('click',function(){open(c)}); nm.appendChild(b);
+    var sm=document.createElement('small'); sm.textContent=[KIND[c.kind],c.country&&c.country!=='н/д'?c.country:''].filter(Boolean).join(' · '); nm.appendChild(sm);
+    if(c.layers.length){var tg=document.createElement('div');tg.className='tags';c.layers.forEach(function(l){var t=document.createElement('span');t.className='tag';t.textContent=l;t.title=LAYERS[l];tg.appendChild(t)});nm.appendChild(tg)}
+    r.appendChild(nm);
+    for(var i=0;i<COLS.length;i++){var e=document.createElement('div');e.className='cell';e.style.gridColumn=String(i+2);r.appendChild(e)}
+    var label=c.name+', '+KIND[c.kind];
+    if(c.cols.length){
+      runs(c.cols).forEach(function(rn){
+        var s=document.createElement('button'); s.type='button'; s.className='seg '+c.kind;
+        s.style.gridColumn=(rn[0]+2)+' / '+(rn[1]+3);
+        if(c.pcol>=rn[0]&&c.pcol<=rn[1]){var n=rn[1]-rn[0]+1;s.style.setProperty('--a',((c.pcol-rn[0])/n*100)+'%');s.style.setProperty('--b',((c.pcol-rn[0]+1)/n*100)+'%')}
+        else{s.style.setProperty('--a','0%');s.style.setProperty('--b','0%')}
+        var names=[];for(var k=rn[0];k<=rn[1];k++)names.push(COLS[k][0]);
+        s.setAttribute('aria-label',label+', этапы '+names.join(', ')); s.title=c.name+': '+names.join(', ');
+        s.addEventListener('click',function(){open(c)}); r.appendChild(s);
+      });
+    } else if(c.layers.length){
+      var s=document.createElement('button'); s.type='button'; s.className='seg all '+c.kind; s.style.gridColumn='2 / -1';
+      s.setAttribute('aria-label',label+', сквозной слой '+c.layers.join(', ')); s.title=c.name+': сквозной слой '+c.layers.map(function(l){return LAYERS[l]}).join(', ');
+      s.addEventListener('click',function(){open(c)}); r.appendChild(s);
+    }
+    return r;
+  }
+  function render(){
+    map.textContent='';
+    var list=D.filter(match);
+    var staged=list.filter(function(c){return c.cols.length}).sort(order);
+    var layered=list.filter(function(c){return !c.cols.length&&c.layers.length}).sort(order);
+    var none=list.filter(function(c){return !c.cols.length&&!c.layers.length}).sort(order);
+    map.appendChild(headRow(list));
+    if(!list.length){var e=document.createElement('div');e.className='empty';e.textContent='Нет компаний при этих фильтрах.';map.appendChild(e)}
+    staged.forEach(function(c){map.appendChild(bar(c))});
+    function sec(t,arr){ if(!arr.length)return; var s=document.createElement('div');s.className='row';var d=document.createElement('div');d.className='sep';d.textContent=t;s.appendChild(d);map.appendChild(s);arr.forEach(function(c){map.appendChild(bar(c))}) }
+    sec('Сквозные слои без привязки к конкретному этапу',layered);
+    sec('Этап не определён',none);
+    $('count').textContent='Показано '+list.length+' из '+D.length;
+  }
+  function row(dl,k,v){ if(!v||v==='н/д') v=null; var dt=document.createElement('dt');dt.textContent=k;var dd=document.createElement('dd');
+    if(v===null){dd.textContent='н/д';dd.style.color='var(--muted)'} else dd.textContent=v; dl.appendChild(dt);dl.appendChild(dd); return dd}
+  function open(c){
+    $('dtitle').textContent=c.name;
+    var b=$('dbody'); b.textContent='';
+    var tg=document.createElement('p'); var t1=document.createElement('span'); t1.className='kt '+c.kind; t1.textContent=KIND[c.kind]; tg.appendChild(t1);
+    if(c.sub){var t2=document.createElement('span');t2.textContent=c.sub;tg.appendChild(t2)} b.appendChild(tg);
+    var dl=document.createElement('dl');
+    var st=[c.primary].concat(c.secondary).filter(function(s){return s!=='none'}).map(function(s){var nm=IDX[s]!==undefined?COLS[IDX[s]][1]:LAYERS[s]||''; return s+' '+nm+(s===c.primary?' (основной)':'')});
+    row(dl,'Этапы',st.length?st.join('; '):'не определён');
+    row(dl,'Роль клиента',c.role);
+    var loc=[c.city,c.country].filter(function(x){return x&&x!=='н/д'}).join(', '); row(dl,'Штаб',loc);
+    row(dl,'Рынки',c.markets);
+    row(dl,'Год основания',c.founded);
+    row(dl,'Размер',c.size);
+    row(dl,'Последний раунд',c.round);
+    row(dl,'Привлечено',c.raised);
+    row(dl,'Выручка',c.revenue);
+    var sd=row(dl,'Сайт',c.site?' ':null); if(c.site){var a=document.createElement('a');a.href=c.site;a.target='_blank';a.rel='noopener noreferrer';a.textContent=c.site.replace(/^https?:\/\//,'');sd.textContent='';sd.appendChild(a)}
+    row(dl,'Проверка данных',c.verified);
+    if(c.note) row(dl,'Примечание',c.note);
+    b.appendChild(dl);
+    if(c.sources.length){var h=document.createElement('p');h.textContent='Источники';h.style.cssText='margin:12px 0 4px;color:var(--muted);font-size:13px';b.appendChild(h);
+      var s=document.createElement('div');s.className='src';c.sources.forEach(function(u){var a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener noreferrer';a.textContent=u.replace(/^https?:\/\//,'');s.appendChild(a)});b.appendChild(s)}
+    $('dlg').showModal();
+  }
+  $('close').addEventListener('click',function(){$('dlg').close()});
+  $('dlg').addEventListener('click',function(e){if(e.target===$('dlg'))$('dlg').close()});
+  [q,fk,fr,fo,fe,fw].forEach(function(el){el.addEventListener('input',render)});
+  $('reset').addEventListener('click',function(){q.value='';fk.value='';fr.value='';fo.value='';fe.value='';fw.value='';render()});
+  $('theme').addEventListener('click',function(){var r=document.documentElement;var cur=r.getAttribute('data-theme');
+    var dark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches; r.setAttribute('data-theme',dark?'light':'dark');
+    try{localStorage.setItem('theme',dark?'light':'dark')}catch(e){}});
+  try{var th=localStorage.getItem('theme'); if(th)document.documentElement.setAttribute('data-theme',th)}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>
