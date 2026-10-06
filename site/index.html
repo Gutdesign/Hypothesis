@@ -32,6 +32,8 @@ h2.sec{font-size:19px;margin:28px 0 6px}
 .sub{color:var(--muted);margin:0 0 14px;max-width:72ch}
 .note{background:var(--warn-bg);color:var(--warn-ink);border-radius:8px;padding:10px 14px;margin:0 0 16px;max-width:92ch;font-size:14px}
 .lang{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.ctl{display:flex;gap:8px;align-items:center}
+.lang button svg{display:block}
 .lang button{font:inherit;border:0;background:var(--panel);color:var(--muted);padding:6px 12px;cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--accent);color:#fff}
 .bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:end;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px}
@@ -110,9 +112,15 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     <div>
       <h1 id="h1"></h1>
     </div>
-    <div class="lang" role="group" aria-label="Language / Язык">
-      <button type="button" id="lru" aria-pressed="true">Ru</button>
-      <button type="button" id="len" aria-pressed="false">Eng</button>
+    <div class="ctl">
+      <div class="lang" role="group" aria-label="Language / Язык">
+        <button type="button" id="lru" aria-pressed="true">Ru</button>
+        <button type="button" id="len" aria-pressed="false">Eng</button>
+      </div>
+      <div class="lang" id="thg" role="group">
+        <button type="button" id="tlight" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+        <button type="button" id="tdark" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      </div>
     </div>
   </div>
 
@@ -134,7 +142,6 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       <label class="chk"><input type="checkbox" id="top"> <span data-i="top"></span></label>
       <label><span data-i="topn"></span><select id="tn" class="narrow"><option>3</option><option selected>5</option><option>10</option></select></label>
       <button type="button" class="act" id="reset"></button>
-      <button type="button" class="act" id="theme"></button>
       <span class="count" id="count" aria-live="polite"></span>
     </div>
   </div>
@@ -174,7 +181,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     ru:{
       title:'Карта строительных SaaS',
       search:'Поиск', searchPh:'название, роль, примечание', type:'Тип', market:'Рынок сбыта', country:'Страна штаба', role:'Роль клиента', stage:'Закрывает этап', scope:'Охват', theme:'Тема',
-      global:'Глобальные компании', all:'Все', any:'Любой', reset:'Сбросить', themeBtn:'Тема оформления', close:'Закрыть',
+      global:'Глобальные компании', all:'Все', any:'Любой', reset:'Сбросить', themeGroup:'Тема оформления', themeLight:'Светлая тема', themeDark:'Тёмная тема', close:'Закрыть',
       sort:'Сортировка', group:'Группировка', top:'Только топ по рынкам', topn:'Топ-N',
       sortStage:'по первому этапу', sortCover:'по охвату этапов', sortRev:'по выручке (≈)', sortEmp:'по численности', sortName:'по названию',
       grType:'по типу', grMarket:'по рынку сбыта', grCountry:'по стране штаба', grStage:'по основному этапу', grRole:'по роли клиента', grNone:'без групп',
@@ -196,7 +203,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     en:{
       title:'Construction SaaS Map',
       search:'Search', searchPh:'name, role, note', type:'Type', market:'Sales market', country:'Headquarters country', role:'Customer role', stage:'Covers stage', scope:'Coverage', theme:'Theme',
-      global:'Global companies', all:'All', any:'Any', reset:'Reset', themeBtn:'Colour theme', close:'Close',
+      global:'Global companies', all:'All', any:'Any', reset:'Reset', themeGroup:'Colour theme', themeLight:'Light theme', themeDark:'Dark theme', close:'Close',
       sort:'Sort', group:'Group', top:'Top by market only', topn:'Top N',
       sortStage:'by first stage', sortCover:'by stages covered', sortRev:'by revenue (≈)', sortEmp:'by headcount', sortName:'by name',
       grType:'by type', grMarket:'by sales market', grCountry:'by headquarters country', grStage:'by main stage', grRole:'by customer role', grNone:'no groups',
@@ -266,7 +273,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     document.title=u.title;
     $('h1').textContent=u.title;
     document.querySelectorAll('[data-i]').forEach(function(el){el.textContent=u[el.getAttribute('data-i')]});
-    q.placeholder=u.searchPh; $('reset').textContent=u.reset; $('theme').textContent=u.themeBtn; $('close').textContent=u.close;
+    q.placeholder=u.searchPh; $('reset').textContent=u.reset; $('thg').setAttribute('aria-label',u.themeGroup); [['tlight',u.themeLight],['tdark',u.themeDark]].forEach(function(x){$(x[0]).title=x[1]; $(x[0]).setAttribute('aria-label',x[1])}); $('close').textContent=u.close;
     $('gh').textContent=u.gapsH; $('gs').textContent=u.gapsS; $('gn').textContent=u.gapsN; $('ph').textContent=u.painsH; (function(){var ps=$('ps'); ps.textContent=''; var a=document.createElement('p'); a.textContent=u.painsS+' '+u.painsL; ps.appendChild(a); var ul=document.createElement('ul'); ul.className='gl-list'; ['A','B','C','D'].forEach(function(k,i){var li=document.createElement('li'); var b=document.createElement('span'); b.className='qb '+k; b.textContent=k; b.title=u.qHint[k]; li.appendChild(b); li.appendChild(document.createTextNode(u.painsG[i])); ul.appendChild(li)}); ps.appendChild(ul); var n=document.createElement('p'); n.textContent=u.painsN; ps.appendChild(n)})();
     $('lru').setAttribute('aria-pressed',LANG==='ru'); $('len').setAttribute('aria-pressed',LANG==='en');
     $('legend').innerHTML='<span><i class="sw" style="background:var(--prod)"></i>'+u.legProd+'</span><span><i class="sw" style="background:var(--vend)"></i>'+u.legVend+'</span><span><i class="sw" style="background:var(--build)"></i>'+u.legBuild+'</span><span><i class="sw" style="background:var(--svc)"></i>'+u.legSvc+'</span><span><i class="sw" style="background:linear-gradient(to right,color-mix(in srgb,var(--prod) 12%,var(--panel)) 50%,color-mix(in srgb,var(--prod) 42%,var(--panel)) 50%);border:1px solid var(--prod)"></i>'+u.legShade+'</span><span><i class="sw" style="border:1px dashed var(--dash)"></i>'+u.legGap+'</span><span><i class="gl" style="margin:0">'+u.globalTag+'</i>'+u.legGlobal+'</span>';
@@ -470,10 +477,15 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
   $('dlg').addEventListener('click',function(e){if(e.target===$('dlg'))$('dlg').close()});
   [q,fk,fm,fr,fo,fe,fw,ft,fg,so,go,top,tn].forEach(function(el){el.addEventListener('input',render)});
   $('reset').addEventListener('click',function(){q.value='';fk.value='';fm.value='';fr.value='';fo.value='';fe.value='';fw.value='';ft.value='';fg.checked=false;top.checked=false;so.value='stage';go.value='type';render()});
-  $('theme').addEventListener('click',function(){var r=document.documentElement;var cur=r.getAttribute('data-theme');
-    var dark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches; r.setAttribute('data-theme',dark?'light':'dark');
-    try{localStorage.setItem('theme',dark?'light':'dark')}catch(e){}});
+  var mq=window.matchMedia('(prefers-color-scheme: dark)');
+  function syncTheme(){var cur=document.documentElement.getAttribute('data-theme'); var dark=cur?cur==='dark':mq.matches;
+    $('tlight').setAttribute('aria-pressed',!dark); $('tdark').setAttribute('aria-pressed',dark)}
+  function setTheme(t){document.documentElement.setAttribute('data-theme',t); try{localStorage.setItem('theme',t)}catch(e){} syncTheme()}
+  $('tlight').addEventListener('click',function(){setTheme('light')});
+  $('tdark').addEventListener('click',function(){setTheme('dark')});
+  if(mq.addEventListener)mq.addEventListener('change',syncTheme);
   try{var th=localStorage.getItem('theme'); if(th)document.documentElement.setAttribute('data-theme',th)}catch(e){}
+  syncTheme();
   setStatic(); buildFilters(); render(); gaps(); pains();
 })();
 </script>
