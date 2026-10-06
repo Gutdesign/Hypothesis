@@ -96,7 +96,7 @@
 - S3: Siemens (Digital Industries Software, Xcelerator) 86.8 млрд; Autodesk 7.2 млрд; Dassault Systèmes 6.9 млрд; Bentley Systems 1.5 млрд; Nemetschek Group 1.3 млрд
 - S5: CoCrafter 1.1
 - S6: Hilti Group 7.6 млрд; Trimble 3.6 млрд; The Access Group (строительное направление) 1.5 млрд; Procore Technologies 1.3 млрд; CMiC 140
-- S8a: Planon 168
+- S8a: Yardi 2.2 млрд; MRI Software 1.0 млрд; Planon 168
 - н/д: PlanetVerify 1.3
 
 ## 6. Что сильнее всего двигает результат

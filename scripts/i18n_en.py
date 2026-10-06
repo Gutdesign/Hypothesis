@@ -12,11 +12,11 @@ KIND_EN = {
 }
 STAGES_EN = {
     "S0": "Strategy, sites, feasibility", "S1": "Deal and financing", "S2": "Surveys",
-    "S3": "Design", "S4": "Permits", "S5": "Tenders and procurement", "S6": "Construction",
-    "S7": "Handover", "S8a": "Operations", "S8b": "Leasing and sales", "S9": "Renovation and retrofit",
+    "S3": "Design", "S4": "Permits", "S5": "Preparation: takeoff, estimates, tenders, procurement", "S6": "Construction",
+    "S7": "Commissioning, handover, as-built records", "S8a": "Operations", "S8b": "Leasing and sales", "S9": "Renovation and retrofit",
 }
 COUNTRY_EN = {
-    "Австрия": "Austria", "Великобритания": "United Kingdom", "Германия": "Germany", "Дания": "Denmark",
+    "Австралия": "Australia", "Финляндия": "Finland", "Австрия": "Austria", "Великобритания": "United Kingdom", "Германия": "Germany", "Дания": "Denmark",
     "Израиль": "Israel", "Индия": "India", "Ирландия": "Ireland", "Испания": "Spain", "Канада": "Canada",
     "Люксембург": "Luxembourg", "Лихтенштейн": "Liechtenstein", "Нидерланды": "Netherlands", "ОАЭ": "UAE", "Португалия": "Portugal",
     "США": "USA", "Словения": "Slovenia", "Франция": "France", "Швейцария": "Switzerland", "Швеция": "Sweden",
@@ -56,6 +56,7 @@ TYPE_EN = {
     "строитель/застройщик": "builder / developer", "образование": "education",
     "продукт (государственный проект)": "product (public-sector project)",
     "продукт + экспертная услуга": "product + expert service",
+    "продукт (платформа интегратора)": "product (integrator's platform)",
 }
 
 # order matters: longer phrases first
