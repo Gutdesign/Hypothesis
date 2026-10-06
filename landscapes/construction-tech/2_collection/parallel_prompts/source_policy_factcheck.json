@@ -1,0 +1,24 @@
+{
+ "exclude_domains": [
+  "tracxn.com",
+  "getlatka.com",
+  "zoominfo.com",
+  "growjo.com",
+  "datanyze.com",
+  "rocketreach.co",
+  "leadiq.com",
+  "apollo.io",
+  "cbinsights.com",
+  "owler.com",
+  "dealroom.co",
+  "contactout.com",
+  "craft.co",
+  "pitchbook.com",
+  "trysignalbase.com",
+  "reddit.com",
+  "news.ycombinator.com",
+  "quora.com",
+  "stackexchange.com",
+  "stackoverflow.com"
+ ]
+}
