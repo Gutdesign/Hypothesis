@@ -105,14 +105,12 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
   <div class="top">
     <div>
       <h1 id="h1"></h1>
-      <p class="sub" id="sub"></p>
     </div>
     <div class="lang" role="group" aria-label="Language / Язык">
       <button type="button" id="lru" aria-pressed="true">Ru</button>
       <button type="button" id="len" aria-pressed="false">Eng</button>
     </div>
   </div>
-  <p class="note" id="note"></p>
 
   <div class="bar" role="search">
     <div class="rowbar">
@@ -171,8 +169,6 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
   var UI = {
     ru:{
       title:'Карта строительных технологий',
-      sub:'Матрица: одна строка — одна компания. Сплошная полоса показывает, на каких этапах жизненного цикла объекта она работает (тёмная часть — основной этап); пунктир с прочерком — на этом этапе компании нет. Под названием — что именно она даёт. Нажмите на название или полосу, чтобы увидеть данные и источники.',
-      note:'<b>Как читать.</b> Данные собраны из агрегаторов, пресс-релизов, отчётов для инвесторов и сайтов компаний; часть ключевых цифр сверена с первоисточниками (метка A в карточке), остальные проверены лишь частично. Суммы привлечённых денег и численность в разных источниках расходятся. Выручка стартапов в основном не раскрыта; где указана, это оценка агрегатора. Этапы присвоены по описанию продукта. Присутствие компании показывает наличие продукта, а не спрос и не долю рынка. Список неполон: в нём больше стартапов с внешними деньгами, чем местных игроков.',
       search:'Поиск', searchPh:'название, роль, примечание', type:'Тип', market:'Рынок сбыта', country:'Страна штаба', role:'Роль клиента', stage:'Закрывает этап', scope:'Охват', theme:'Тема',
       global:'Глобальные компании', all:'Все', any:'Любой', reset:'Сбросить', themeBtn:'Тема оформления', close:'Закрыть',
       sort:'Сортировка', group:'Группировка', top:'Только топ по рынкам', topn:'Топ-N',
@@ -186,7 +182,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       globalTag:'глобальная', mkL:'Рынки сбыта', mkBasis:{'текст':'названы в источниках','широкий охват':'широкий охват по источникам','глобальная':'глобальная компания','штаб':'не подтверждено, подставлен штаб','вручную':'указано вручную','нет данных':'нет данных'}, empL:'штат ≈', revL:'выручка ≈ $', mln:' млн',
       gapsH:'Пробелы: рынок сбыта × этап', gapsS:'Сколько продуктов и крупных вендоров продают на рынке и закрывают этап (основной или дополнительный). Число — компании, у которых рынок назван в источниках или которые помечены глобальными; «+N?» — компании, у которых рынок сбыта не найден и подставлен штаб (не подтверждено). Нажмите на ячейку, чтобы увидеть компании на карте.',
       gapsN:'Нуль — это «в реестре никого нет», а не «возможность». Возможные причины пустоты: нет спроса или денег; регулирование; раздробленные покупатели; продукт есть, но не попал в список (список — это компании-работодатели и выпускники акселераторов). Рынок сбыта известен лишь у части компаний; у остальных он подставлен по штабу и показан как «N?». Каждую пустую ячейку нужно проверять отдельно.',
-      gapsAll:'Глобальные', painsH:'Боли и доказательства', painsS:'Что известно о проблемах покупателей и насколько это подтверждено. Оценка: A — независимое подтверждение, B — один источник со стороны покупателя или первичный источник, C — заявление вендора, D — источник без результатов. Заявления вендоров не доказывают боль; независимых данных со стороны покупателей в трёх странах мало.', pc:{pain:'Боль',stage:'Этап',who:'Кто страдает',grade:'Оценка',stype:'Тип источника',src:'Источник'},
+      gapsAll:'Глобальные', painsH:'Боли и доказательства', painsS:'Боли отрасли и степень их подтверждения. Оценка: A — независимое подтверждение; B — один источник со стороны покупателя или первичный документ; C — заявление вендора; D — источник без результатов. Почти все записи — заявления вендоров (C): данных от самих покупателей по трём странам пока мало.', pc:{pain:'Боль',stage:'Этап',who:'Кто страдает',grade:'Оценка',stype:'Тип источника',src:'Источник'},
       foot:function(d,n){return 'Снимок на '+d+'. Реестр: '+n+' строк. <a href="registry.csv">Скачать таблицу (CSV, разделитель «;», кодировка UTF-8 с BOM)</a>. Темы «данные», «финансы и страхование», «комплаенс», «образование» — не отдельные этапы: они разнесены по этапам и указаны в карточке. «Глобальная» — подтверждённое присутствие на нескольких континентах или в десятках стран; основание в примечании. Численность и выручка для сортировки и топа разобраны из текста автоматически (курсы валют грубые), это ориентир, а не данные. Буквы качества в карточке — автоматическая оценка по формулировке источника, а не ручная проверка: A — отчётность компании или первоисточник, B — пресс-релиз или новость, C — оценка агрегатора или заявление компании, D — расчёт или сомнительное. Таксономия этапов — рабочий инструмент классификации, а не стандарт.'},
       qHint:{A:'A: отчётность компании или первоисточник',B:'B: пресс-релиз или новость',C:'C: оценка агрегатора или заявление компании',D:'D: расчёт, сомнительное или не подтверждено'},
       stagesL:'Этапы', themes:'Темы', roleL:'Роль клиента', hq:'Штаб', markets:'Рынки', founded:'Год основания', size:'Размер', round:'Последний раунд', raised:'Привлечено', revenue:'Выручка', site:'Сайт', verified:'Проверка данных', noteL:'Примечание', sources:'Источники', main:' (основной)', none:'вне этапов',
@@ -195,8 +191,6 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     },
     en:{
       title:'Construction Tech Map',
-      sub:'A matrix: one row per company. A solid bar shows the stages of the building lifecycle where the company works (the darker part is its main stage); a dashed cell with a dash means the company is absent at that stage. The line under the name says what it offers. Click a name or a bar for the data and sources.',
-      note:'<b>How to read.</b> Data comes from aggregators, press releases, investor reports and company websites; some key figures were checked against primary sources (grade A on the card), the rest are only partially verified. Funding totals and headcounts differ between sources. Startup revenue is mostly undisclosed; where shown, it is an aggregator estimate. Stages are assigned from the product description. A company on the map shows that a product exists, not demand or market share. The list is incomplete: it has more venture-funded startups than local players.',
       search:'Search', searchPh:'name, role, note', type:'Type', market:'Sales market', country:'Headquarters country', role:'Customer role', stage:'Covers stage', scope:'Coverage', theme:'Theme',
       global:'Global companies', all:'All', any:'Any', reset:'Reset', themeBtn:'Colour theme', close:'Close',
       sort:'Sort', group:'Group', top:'Top by market only', topn:'Top N',
@@ -210,7 +204,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       globalTag:'global', mkL:'Sales markets', mkBasis:{'текст':'named in sources','широкий охват':'broad reach per sources','глобальная':'global company','штаб':'unconfirmed, headquarters used','вручную':'set by hand','нет данных':'no data'}, empL:'headcount ≈', revL:'revenue ≈ $', mln:'M',
       gapsH:'Gaps: sales market × stage', gapsS:'How many products and major vendors sell in a market and cover a stage (main or additional). The number counts companies whose market is named in sources or that are flagged global; "+N?" counts companies whose sales market was not found and is replaced by the headquarters (unconfirmed). Click a cell to see the companies on the map.',
       gapsN:'Zero means "nobody in the registry", not "an opportunity". Possible reasons: no demand or money; regulation; fragmented buyers; a product exists but is not in the list (the list is employers and accelerator alumni). The sales market is known for only part of the companies; for the rest it is replaced by the headquarters and shown as "N?". Every empty cell needs its own check.',
-      gapsAll:'Global', painsH:'Pains and evidence', painsS:'What is known about buyers\' problems and how well it is supported. Grade: A is independent confirmation, B one buyer-side or primary source, C a vendor claim, D a source without results. Vendor claims do not prove a pain; independent buyer-side data for the three countries is thin.', pc:{pain:'Pain',stage:'Stage',who:'Who suffers',grade:'Grade',stype:'Source type',src:'Source'},
+      gapsAll:'Global', painsH:'Pains and evidence', painsS:'Industry pains and how well each is supported. Grade: A — independent confirmation; B — a single buyer-side or primary source; C — vendor claim; D — source with no results. Almost all entries are vendor claims (C): buyer-side data for the three countries is still scarce.', pc:{pain:'Pain',stage:'Stage',who:'Who suffers',grade:'Grade',stype:'Source type',src:'Source'},
       foot:function(d,n){return 'Snapshot of '+d+'. Registry: '+n+' rows. <a href="registry.csv">Download the table (CSV, ";" delimiter, UTF-8 with BOM; the data columns are in Russian)</a>. The themes data, finance and insurance, compliance and education are not separate stages: they are spread across stages and shown on the card. "Global" means confirmed presence on several continents or in dozens of countries; the basis is in the note. Headcount and revenue used for sorting and the top mode are parsed from text automatically (rough exchange rates): an indication, not data. The quality letters on the card are an automatic rating from the wording of the source, not a manual check: A is company reporting or a primary document, B a press release or news, C an aggregator estimate or a company claim, D a calculation or a doubtful figure. The stage taxonomy is a working classification tool, not a standard.'},
       qHint:{A:'A: company reporting or a primary document',B:'B: press release or news',C:'C: aggregator estimate or company claim',D:'D: calculation, doubtful or unconfirmed'},
       stagesL:'Stages', themes:'Themes', roleL:'Customer role', hq:'Headquarters', markets:'Markets', founded:'Founded', size:'Size', round:'Latest round', raised:'Raised', revenue:'Revenue', site:'Website', verified:'Data check', noteL:'Note', sources:'Sources', main:' (main)', none:'outside the stages',
@@ -266,7 +260,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     var u=U();
     document.documentElement.lang=LANG;
     document.title=u.title;
-    $('h1').textContent=u.title; $('sub').textContent=u.sub; $('note').innerHTML=u.note;
+    $('h1').textContent=u.title;
     document.querySelectorAll('[data-i]').forEach(function(el){el.textContent=u[el.getAttribute('data-i')]});
     q.placeholder=u.searchPh; $('reset').textContent=u.reset; $('theme').textContent=u.themeBtn; $('close').textContent=u.close;
     $('gh').textContent=u.gapsH; $('gs').textContent=u.gapsS; $('gn').textContent=u.gapsN; $('ph').textContent=u.painsH; $('ps').textContent=u.painsS;
