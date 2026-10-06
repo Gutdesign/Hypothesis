@@ -54,6 +54,8 @@ TYPE_EN = {
     "консалтинг/инжиниринг": "consulting / engineering", "кастомная разработка": "custom development",
     "кастомная разработка (инженерные расчёты)": "custom development (engineering calculations)",
     "строитель/застройщик": "builder / developer", "образование": "education",
+    "продукт (государственный проект)": "product (public-sector project)",
+    "продукт + экспертная услуга": "product + expert service",
 }
 
 # order matters: longer phrases first

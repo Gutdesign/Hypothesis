@@ -34,7 +34,7 @@ STAGE_CODES = {c for c, _ in STAGES}
 EU_OTHER = {"Германия", "Франция", "Португалия", "Швеция", "Австрия", "Швейцария", "Ирландия", "Люксембург", "Лихтенштейн",
             "Словения", "Италия", "Бельгия", "Дания", "Финляндия", "Норвегия"}
 OUT = {"Индия", "Канада", "Япония", "Израиль", "ОАЭ"}
-NAME_EN = [("бывш.", "formerly"), ("строительное направление", "construction unit"), ("дистрибьютор Tekla", "Tekla distributor")]
+NAME_EN = [("направление для органов власти", "government line"), ("бывш.", "formerly"), ("строительное направление", "construction unit"), ("дистрибьютор Tekla", "Tekla distributor")]
 
 
 def region(country):
@@ -88,7 +88,7 @@ def _n(s):
 def parse_emp(s):
     """First headcount number in the string (range -> midpoint); None if absent."""
     s = (s or "").strip()
-    if not s or s == "н/д":
+    if not s or s.startswith("н/д") or s.startswith("не "):
         return None
     m = re.match(r"\D*(" + _NUM + r")(?:\s*[–-]\s*(" + _NUM + r"))?", s)
     if not m:
