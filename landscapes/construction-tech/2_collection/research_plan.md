@@ -40,9 +40,9 @@ Mode: lean — бесплатные инструменты (web_search, web_fetc
 
 | 4 | Parallel, `pro-fast` | `parallel_prompts/factcheck_US_1.txt`: сверка 24 американских программных компаний с первоисточниками (штаб, год, штат, раунд, выручка, владелец, суть продукта; поглощения, переименования, закрытия) | `2_collection/raw/parallel-factcheck-US-1.md` | на согласовании |
 | 5 | Parallel, `pro-fast` | `parallel_prompts/factcheck_US_2.txt`: то же, ещё 24 американские компании | `2_collection/raw/parallel-factcheck-US-2.md` | на согласовании |
-| 6 | Parallel, `pro-fast` | `parallel_prompts/factcheck_EU_1.txt`: то же, 31 компания (Великобритания и Ирландия; начало списка) | `2_collection/raw/parallel-factcheck-EU-1.md` | на согласовании |
-| 7 | Parallel, `pro-fast` | `parallel_prompts/factcheck_EU_2.txt`: то же, 31 компания (Великобритания, Ирландия, Нидерланды) | `2_collection/raw/parallel-factcheck-EU-2.md` | на согласовании |
-| 8 | Parallel, `pro-fast` | `parallel_prompts/factcheck_EU_3.txt`: то же, 29 компаний (Нидерланды, Испания, остальная Европа, прочие страны) | `2_collection/raw/parallel-factcheck-EU-3.md` | на согласовании |
+| 6 | Parallel, `pro-fast` | `parallel_prompts/factcheck_EU_1.txt`: то же, 31 компания вне США (Нидерланды, Испания: от 011h до Amrax) | `2_collection/raw/parallel-factcheck-EU-1.md` | на согласовании |
+| 7 | Parallel, `pro-fast` | `parallel_prompts/factcheck_EU_2.txt`: то же, 31 компания вне США (остальная Европа и прочие страны: от Augment до ZuTec) | `2_collection/raw/parallel-factcheck-EU-2.md` | на согласовании |
+| 8 | Parallel, `pro-fast` | `parallel_prompts/factcheck_EU_3.txt`: то же, 29 компаний (Великобритания и Ирландия: от 3D Repo до XYZ Reality) | `2_collection/raw/parallel-factcheck-EU-3.md` | на согласовании |
 
 Задания 4–8 (2026-10-06) — сверка записей, где значения взяты из агрегаторов (139 компаний на вкладке «Программы и вендоры»). Тексты собираются `scripts/make_factcheck_prompts.py` из реестра; в Parallel уходят только публичные сведения о компаниях, данных гипотез и личных данных нет. Оценка: $5–10 за задание на `pro-fast` (по трём прошлым запускам), $25–50 за все пять; предлагается сначала запустить задание 4 как пробное и оценить качество, затем остальные. Фактическая стоимость — в панели Parallel (API её не возвращает).
 
