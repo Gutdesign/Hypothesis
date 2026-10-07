@@ -227,6 +227,41 @@ def build_data(rows):
     return out
 
 
+CHART_CAPTIONS = {
+    "01_linkedin_startups_by_stage": ("Стартапы реестра по основному этапу", "Registry startups by main stage", True),
+    "02_stage_coverage": ("Покрытие этапов: записи ПО по основному этапу и с учётом дополнительных", "Stage coverage: software records by main stage and including additional stages", False),
+    "03_stage_market_startups": ("Этап × рынок: стартапы реестра", "Stage × market: registry startups", False),
+    "04_stage_by_class": ("Кто держит этап: стартапы, крупные вендоры, сервисные организации", "Who holds a stage: startups, major vendors, service organisations", False),
+    "05_new_rounds_by_stage": ("Стартапы с последним раундом в 2025–2026 годах, по этапам", "Startups with their latest round in 2025–2026, by stage", False),
+    "06_compliance_by_stage": ("Комплаенс и проверка норм по этапам", "Compliance and code checking by stage", False),
+    "07_last_rounds_money_by_stage": ("Сумма последних раундов 2025–2026 по этапам", "Total of the latest 2025–2026 rounds by stage", False),
+}
+
+
+def load_charts():
+    """Copy the analytics charts next to the page and return their list for the Analytics tab."""
+    src = ROOT / "landscapes" / "construction-tech" / "3_map" / "analytics" / "charts"
+    dst = SITE / "charts"
+    out = []
+    if not src.exists():
+        return out
+    dst.mkdir(exist_ok=True)
+    for old in dst.glob("*"):
+        old.unlink()
+    for png in sorted(src.glob("*.png")):
+        stem = png.stem
+        key = next((k for k in CHART_CAPTIONS if stem.startswith(k)), None)
+        if not key:
+            continue
+        ru, en, tall = CHART_CAPTIONS[key]
+        for ext in ("png", "svg"):
+            f = src / f"{stem}.{ext}"
+            if f.exists():
+                (dst / f.name).write_bytes(f.read_bytes())
+        out.append({"id": stem, "ru": ru, "en": en, "tall": tall})
+    return out
+
+
 def main():
     rows = registry.read(registry.CSV_PATH)
     data = build_data(rows)
@@ -234,7 +269,9 @@ def main():
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     en_dicts = {"region": T.REGION_EN, "role": T.ROLE_EN, "layer": T.LAYER_EN}
     tpl = (Path(__file__).resolve().parent / "map_template.html").read_text(encoding="utf-8")
+    charts = load_charts()
     html = (tpl.replace("__DATA__", payload)
+            .replace("__CHARTS__", json.dumps(charts, ensure_ascii=False))
             .replace("__COLS__", json.dumps(COLS, ensure_ascii=False))
             .replace("__EN__", json.dumps(en_dicts, ensure_ascii=False))
             .replace("__PAINS__", json.dumps(load_pains(), ensure_ascii=False).replace("</", "<\\/"))

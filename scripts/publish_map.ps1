@@ -11,6 +11,7 @@ $tmp = Join-Path $env:TEMP "gh-pages-publish"
 if (Test-Path $tmp) { Remove-Item -Recurse -Force $tmp }
 New-Item -ItemType Directory -Path $tmp | Out-Null
 Copy-Item -Path "site/index.html", "site/registry.csv", "site/.nojekyll" -Destination $tmp -Force
+if (Test-Path "site/charts") { Copy-Item -Path "site/charts" -Destination $tmp -Recurse -Force }
 Push-Location $tmp
 git init -q -b gh-pages
 git add -A

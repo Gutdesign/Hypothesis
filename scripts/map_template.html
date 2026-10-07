@@ -103,6 +103,12 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 .tabs button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:8px 14px;border-radius:8px;cursor:pointer}
 .tabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 .tabs button small{opacity:.85;margin-left:6px}
+.angrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,560px),1fr));gap:16px;align-items:start}
+.angrid figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;color:#1d2327}
+.angrid img{width:100%;height:auto;display:block;border-radius:6px}
+.angrid figure.tall{grid-row:span 2}
+.angrid figcaption{font-size:13px;color:#4b535b;padding:8px 4px 2px}
+.angrid figcaption a{color:#1f5f8b}
 .src a{display:block;font-size:13px}
 footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
@@ -131,7 +137,12 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
   <div class="tabs" role="group" id="tabs">
     <button type="button" id="tabsw" aria-pressed="true"></button>
     <button type="button" id="tabot" aria-pressed="false"></button>
+    <button type="button" id="tabsa" aria-pressed="false"></button>
   </div>
+
+  <section id="an" hidden><div class="angrid" id="angrid"></div></section>
+
+  <div id="mapview">
 
   <div class="bar" role="search">
     <div class="rowbar">
@@ -166,6 +177,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
   <h2 class="sec" id="ph"></h2>
   <div class="sub" id="ps"></div>
   <div class="gapwrap"><table class="gaps pains" id="pains"></table></div>
+  </div>
 
   <footer><p id="foot"></p></footer>
 </div>
@@ -208,7 +220,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       stagesL:'Этапы', themes:'Темы', roleL:'Роль клиента', hq:'Штаб', markets:'Рынки', founded:'Год основания', size:'Размер', round:'Последнее найденное событие финансирования или владения', raised:'Привлечено', revenue:'Выручка', site:'Сайт', verified:'Проверка данных', noteL:'Примечание', siteNo:'сайт не подтверждён', sources:'Источники', main:' (основной)', none:'вне этапов',
       kinds:{product:'продукт',vendor:'крупный вендор',builder:'строитель или застройщик',services:'услуги, консалтинг, образование',hardware:'оборудование'},
       groups:{vendor:'Крупные вендоры',product:'Продукты',builder:'Строители и застройщики',services:'Услуги, консалтинг, образование',hardware:'Оборудование'},
-      tabSw:'Программы и вендоры', tabOt:'Консалтинг, строительство, образование, оборудование', grGroup:'по материнской группе', noGroup:'Без группы', groupL:'Группа'
+      tabSa:'Аналитика', anPng:'PNG', anSvg:'SVG', anEn:'', tabSw:'Программы и вендоры', tabOt:'Консалтинг, строительство, образование, оборудование', grGroup:'по материнской группе', noGroup:'Без группы', groupL:'Группа'
     },
     en:{
       title:'ConTech Map',
@@ -231,10 +243,10 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       stagesL:'Stages', themes:'Themes', roleL:'Customer role', hq:'Headquarters', markets:'Markets', founded:'Founded', size:'Size', round:'Latest funding or ownership event found', raised:'Raised', revenue:'Revenue', site:'Website', verified:'Data check', noteL:'Note', siteNo:'site not confirmed', sources:'Sources', main:' (main)', none:'outside the stages',
       kinds:{product:'product',vendor:'major vendor',builder:'builder or developer',services:'services, consulting, education',hardware:'hardware'},
       groups:{vendor:'Major vendors',product:'Products',builder:'Builders and developers',services:'Services, consulting, education',hardware:'Hardware'},
-      tabSw:'Software and vendors', tabOt:'Consulting, construction, education, hardware', grGroup:'by parent group', noGroup:'No group', groupL:'Group'
+      tabSa:'Analytics', anPng:'PNG', anSvg:'SVG', anEn:' Chart text is in Russian.', tabSw:'Software and vendors', tabOt:'Consulting, construction, education, hardware', grGroup:'by parent group', noGroup:'No group', groupL:'Group'
     }
   };
-  var TAB='sw';
+  var TAB='sw', VIEW='map', CHARTS=__CHARTS__;
   function inTab(c){return TAB==='sw'?(c.kind==='product'||c.kind==='vendor'):(c.kind!=='product'&&c.kind!=='vendor')}
   var LANG='ru';
   try{var sl=localStorage.getItem('lang'); if(sl==='ru'||sl==='en')LANG=sl}catch(e){}
@@ -284,9 +296,24 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     var u=U(), a=D.filter(function(c){return c.kind==='product'||c.kind==='vendor'}).length, b=D.length-a;
     $('tabsw').textContent=u.tabSw+' '; $('tabot').textContent=u.tabOt+' ';
     [['tabsw',a],['tabot',b]].forEach(function(x){var s=document.createElement('small'); s.textContent=x[1]; $(x[0]).appendChild(s)});
-    $('tabsw').setAttribute('aria-pressed',TAB==='sw'); $('tabot').setAttribute('aria-pressed',TAB==='ot');
+    $('tabsa').textContent=u.tabSa+' ';
+    if(CHARTS.length){var sa=document.createElement('small'); sa.textContent=CHARTS.length; $('tabsa').appendChild(sa)}
+    $('tabsw').setAttribute('aria-pressed',VIEW==='map'&&TAB==='sw'); $('tabot').setAttribute('aria-pressed',VIEW==='map'&&TAB==='ot'); $('tabsa').setAttribute('aria-pressed',VIEW==='an');
   }
-  function setTab(t){TAB=t; syncTabs(); buildFilters(); fk.value=''; render()}
+  function renderAn(){
+    var u=U(), g=$('angrid'); g.textContent='';
+    CHARTS.forEach(function(c){
+      var f=document.createElement('figure'); if(c.tall) f.className='tall';
+      var im=document.createElement('img'); im.src='charts/'+c.id+'.png'; im.loading='lazy'; im.alt=LANG==='en'?c.en:c.ru; f.appendChild(im);
+      var cp=document.createElement('figcaption'); cp.appendChild(document.createTextNode((LANG==='en'?c.en:c.ru)+u.anEn+' '));
+      [['png',u.anPng],['svg',u.anSvg]].forEach(function(x,i){var a=document.createElement('a'); a.href='charts/'+c.id+'.'+x[0]; a.target='_blank'; a.rel='noopener'; a.textContent=x[1]; if(i)cp.appendChild(document.createTextNode(' · ')); cp.appendChild(a)});
+      f.appendChild(cp); g.appendChild(f);
+    });
+  }
+  function showView(){ $('mapview').hidden=VIEW!=='map'; $('an').hidden=VIEW!=='an'; if(VIEW==='an') renderAn(); }
+  function setTab(t){
+    if(t==='an'){VIEW='an'; syncTabs(); showView(); return}
+    VIEW='map'; TAB=t; syncTabs(); showView(); buildFilters(); fk.value=''; render()}
   function setStatic(){
     var u=U();
     document.documentElement.lang=LANG;
@@ -295,7 +322,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     document.querySelectorAll('[data-i]').forEach(function(el){el.textContent=u[el.getAttribute('data-i')]});
     q.placeholder=u.searchPh; $('reset').textContent=u.reset; $('thg').setAttribute('aria-label',u.themeGroup); [['tlight',u.themeLight],['tdark',u.themeDark]].forEach(function(x){$(x[0]).title=x[1]; $(x[0]).setAttribute('aria-label',x[1])}); $('close').textContent=u.close;
     $('gh').textContent=u.gapsH; $('gs').textContent=u.gapsS; $('gn').textContent=u.gapsN; $('ph').textContent=u.painsH; (function(){var ps=$('ps'); ps.textContent=''; var a=document.createElement('p'); a.textContent=u.painsS+' '+u.painsL; ps.appendChild(a); var ul=document.createElement('ul'); ul.className='gl-list'; ['A','B','C','D'].forEach(function(k,i){var li=document.createElement('li'); var b=document.createElement('span'); b.className='qb '+k; b.textContent=k; b.title=k+': '+u.painsG[i]; li.appendChild(b); li.appendChild(document.createTextNode(u.painsG[i])); ul.appendChild(li)}); ps.appendChild(ul); var n=document.createElement('p'); var cn={A:0,B:0,C:0,D:0}; PAINS.forEach(function(x){if(cn[x.grade]!==undefined)cn[x.grade]++}); n.textContent=u.painsN(cn); ps.appendChild(n)})();
-    syncTabs();
+    syncTabs(); if(VIEW==='an') renderAn();
     $('lru').setAttribute('aria-pressed',LANG==='ru'); $('len').setAttribute('aria-pressed',LANG==='en');
     $('legend').innerHTML='<span><i class="sw" style="background:var(--prod)"></i>'+u.legProd+'</span><span><i class="sw" style="background:var(--vend)"></i>'+u.legVend+'</span><span><i class="sw" style="background:var(--build)"></i>'+u.legBuild+'</span><span><i class="sw" style="background:var(--svc)"></i>'+u.legSvc+'</span><span><i class="sw" style="background:linear-gradient(to right,color-mix(in srgb,var(--prod) 12%,var(--panel)) 50%,color-mix(in srgb,var(--prod) 42%,var(--panel)) 50%);border:1px solid var(--prod)"></i>'+u.legShade+'</span><span><i class="sw" style="border:1px dashed var(--dash)"></i>'+u.legGap+'</span><span><i class="gl" style="margin:0">'+u.globalTag+'</i>'+u.legGlobal+'</span>';
     $('foot').innerHTML=u.foot(META.date,META.count);
@@ -432,7 +459,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
         var b=document.createElement('button'); b.type='button'; b.textContent=String(conf)+(unc?' +'+unc+'?':'');
         b.setAttribute('aria-label',(LANG==='en'?m[2]:m[1])+', '+c[0]+' '+stName(i)+': '+conf+(unc?' (+'+unc+' unconfirmed)':''));
         b.addEventListener('click',function(){
-          top.checked=false; go.value='none'; if(TAB!=='sw'){TAB='sw'; syncTabs(); buildFilters()}
+          top.checked=false; go.value='none'; if(TAB!=='sw'||VIEW!=='map'){TAB='sw'; VIEW='map'; syncTabs(); showView(); buildFilters()}
           fk.value=''; fo.value=''; fw.value=''; ft.value=''; q.value=''; fr.value=''; fg.checked=false;
           fm.value=m[0]; fe.value=c[0]; render(); map.scrollIntoView({behavior:'smooth',block:'start'});
         });
@@ -499,6 +526,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
   }
   $('tabsw').addEventListener('click',function(){setTab('sw')});
   $('tabot').addEventListener('click',function(){setTab('ot')});
+  $('tabsa').addEventListener('click',function(){setTab('an')});
   $('lru').addEventListener('click',function(){setLang('ru')});
   $('len').addEventListener('click',function(){setLang('en')});
   $('close').addEventListener('click',function(){$('dlg').close()});

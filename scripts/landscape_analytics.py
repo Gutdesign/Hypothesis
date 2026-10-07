@@ -514,7 +514,7 @@ def main():
     ax.yaxis.set_visible(False)
     ax.spines["left"].set_visible(False)
     ax.legend(frameon=False, fontsize=13, loc="upper right")
-    fig.suptitle("Покрытие этапов в реестре: записей ПО по основному этапу и с учётом дополнительных", x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
+    fig.suptitle("Покрытие этапов: основной этап и с дополнительными", x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
     fig.subplots_adjust(left=0.03, right=0.98, top=0.88, bottom=0.2)
     footer(fig, src_soft + ". Запись считается по каждому этапу, который закрывает.", y=0.02)
     save(fig, "02_stage_coverage_1600x900", plt)
@@ -563,7 +563,7 @@ def main():
     ax.spines["bottom"].set_visible(False)
     ax.spines["left"].set_visible(False)
     ax.legend(frameon=False, fontsize=12, ncol=5, loc="upper center", bbox_to_anchor=(0.45, -0.01))
-    fig.suptitle("Кто держит этап: стартапы, крупные вендоры и сервисные организации", x=0.03, y=0.975, ha="left", fontsize=22, fontweight="bold")
+    fig.suptitle("Кто держит этап: стартапы, вендоры, сервисные организации", x=0.03, y=0.975, ha="left", fontsize=22, fontweight="bold")
     fig.subplots_adjust(left=0.22, right=0.97, top=0.9, bottom=0.12)
     footer(fig, f"Реестр ConTech, n = {N_SCOPE} записей (in_scope), данные на {TODAY}. «Крупный вендор» включает продукты, входящие в группы крупных вендоров.", y=0.02, size=11)
     save(fig, "04_stage_by_class_1600x900", plt)
@@ -747,5 +747,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
