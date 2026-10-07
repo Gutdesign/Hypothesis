@@ -228,13 +228,11 @@ def build_data(rows):
 
 
 CHART_CAPTIONS = {
-    "01_linkedin_startups_by_stage": ("Стартапы реестра по основному этапу", "Registry startups by main stage", True),
-    "02_stage_coverage": ("Покрытие этапов: записи ПО по основному этапу и с учётом дополнительных", "Stage coverage: software records by main stage and including additional stages", False),
-    "03_stage_market_startups": ("Этап × рынок: стартапы реестра", "Stage × market: registry startups", False),
-    "04_stage_by_class": ("Кто держит этап: стартапы, крупные вендоры, сервисные организации", "Who holds a stage: startups, major vendors, service organisations", False),
-    "05_new_rounds_by_stage": ("Стартапы с последним раундом в 2025–2026 годах, по этапам", "Startups with their latest round in 2025–2026, by stage", False),
-    "06_compliance_by_stage": ("Комплаенс и проверка норм по этапам", "Compliance and code checking by stage", False),
-    "07_last_rounds_money_by_stage": ("Сумма последних раундов 2025–2026 по этапам", "Total of the latest 2025–2026 rounds by stage", False),
+    "02_stage_coverage": ("Сколько компаний работает на каждом этапе", "How many companies work at each stage", False),
+    "03_stage_market_startups": ("Где какие этапы закрывают стартапы", "Where startups cover which stages", False),
+    "04_stage_by_class": ("Распределение типа компаний по этапам", "Company types by stage", False),
+    "05_new_rounds_by_stage": ("Кто привлекал деньги в 2025–2026: стартапы по этапам", "Who raised money in 2025–2026: startups by stage", False),
+    "07_last_rounds_money_by_stage": ("Сколько привлекли стартапы в 2025–2026: сумма раундов по этапам, млн $", "How much startups raised in 2025–2026: total of rounds by stage, $ million", False),
 }
 
 

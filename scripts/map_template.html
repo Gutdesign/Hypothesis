@@ -305,7 +305,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     CHARTS.forEach(function(c){
       var f=document.createElement('figure'); if(c.tall) f.className='tall';
       var sf=LANG==='en'?'_en':''; var im=document.createElement('img'); im.src='charts/'+c.id+sf+'.png'; im.loading='lazy'; im.alt=LANG==='en'?c.en:c.ru; f.appendChild(im);
-      var cp=document.createElement('figcaption'); cp.appendChild(document.createTextNode((LANG==='en'?c.en:c.ru)+' '));
+      var cp=document.createElement('figcaption');
       [['png',u.anPng],['svg',u.anSvg]].forEach(function(x,i){var a=document.createElement('a'); a.href='charts/'+c.id+sf+'.'+x[0]; a.target='_blank'; a.rel='noopener'; a.textContent=x[1]; if(i)cp.appendChild(document.createTextNode(' · ')); cp.appendChild(a)});
       f.appendChild(cp); g.appendChild(f);
     });

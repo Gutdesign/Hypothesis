@@ -483,52 +483,30 @@ def main():
     thin = [c for c in order if st_prim.get(c, 0) <= 3]
     n_money = sum(len(v) for v in q3.values())
 
+    for old in CHARTS.glob("*"):
+        old.unlink()
+
+    MONTHS_RU = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
+    _t = date.today()
+
     def draw(lang):
         ru = lang == "ru"
         tr = (lambda r, e: r) if ru else (lambda r, e: e)
         sfx = "" if ru else "_en"
         sh = short if ru else SHORT_EN
         mkn = MKN if ru else MKN_EN
-        d_ = f"данные на {TODAY}" if ru else f"data as of {TODAY}"
+        d_ = f"данные на {_t.day} {MONTHS_RU[_t.month - 1]} {_t.year}" if ru else f"data as of {_t.day} {_t.strftime('%B %Y')}"
         reg = tr("Реестр ConTech", "ConTech registry")
 
         def lab(c):
             return f"{c}  {sh[c]}"
 
-        # C1 main (vertical): where startups are, by primary stage
-        fig, ax = plt.subplots(figsize=(10.8, 13.5))
-        vals = [st_prim.get(c, 0) for c in order]
-        colors = [ACCENT if c in top3 else GRAY for c in order]
-        ypos = list(range(len(order)))[::-1]
-        ax.barh(ypos, vals, color=colors, height=0.68)
-        ax.set_yticks(ypos)
-        ax.set_yticklabels([lab(c) for c in order], fontsize=17)
-        for y, v in zip(ypos, vals):
-            ax.text(v + max(vals) * 0.012, y, str(v), va="center", fontsize=18, color="#1d2327", fontweight="bold" if v >= max(vals) * 0.6 else None)
-        ax.set_xlim(0, max(vals) * 1.12)
-        ax.xaxis.set_visible(False)
-        ax.spines["bottom"].set_visible(False)
-        ax.spines["left"].set_visible(False)
-        ax.tick_params(left=False)
-        ttl = wrap(tr(f"В реестре {round(top3_share * 100)}% стартапов делают три этапа: {', '.join(short[c] for c in top3)}",
-                      f"In the registry {round(top3_share * 100)}% of startups work on three stages: {', '.join(SHORT_EN[c] for c in top3)}"), 30)
-        fig.text(0.04, 0.975, ttl, ha="left", va="top", fontsize=30, fontweight="bold", linespacing=1.15)
-        n_lines = ttl.count("\n") + 1
-        fig.text(0.04, 0.975 - 0.037 * n_lines - 0.012,
-                 wrap(tr(f"Стартапов по основному этапу: {tot_st}. Этапов, где их не больше трёх: {len(thin)} из {len(order)}",
-                         f"Startups by main stage: {tot_st}. Stages with no more than three: {len(thin)} of {len(order)}"), 90),
-                 fontsize=16, color=INK2, ha="left", va="top")
-        fig.subplots_adjust(left=0.40, right=0.96, top=0.975 - 0.037 * n_lines - 0.085, bottom=0.09)
-        footer(fig, wrap(tr(f"{reg}, n = {tot_st} стартапов, {d_}. Выборка составлена основателем и не репрезентативна для рынка.",
-                            f"{reg}, n = {tot_st} startups, {d_}. The sample was compiled by the founder and is not representative of the market."), 100), y=0.012, size=11.5)
-        save(fig, "01_linkedin_startups_by_stage_1080x1350" + sfx, plt)
-
         # C2 coverage: primary vs with secondary (software)
         fig, ax = plt.subplots(figsize=(16, 9))
         xs = list(range(len(order)))
         w_ = 0.38
-        ax.bar([x - w_ / 2 for x in xs], [q1_prim.get(c, 0) for c in order], w_, color=ACCENT, label=tr("основной этап", "main stage"))
-        ax.bar([x + w_ / 2 for x in xs], [q1_any.get(c, 0) for c in order], w_, color=GRAY, label=tr("основной и дополнительные этапы", "main and additional stages"))
+        ax.bar([x - w_ / 2 for x in xs], [q1_prim.get(c, 0) for c in order], w_, color=ACCENT, label=tr("главный этап компании", "the company's main stage"))
+        ax.bar([x + w_ / 2 for x in xs], [q1_any.get(c, 0) for c in order], w_, color=GRAY, label=tr("все этапы, которые закрывает компания", "all stages the company covers"))
         for x, c in zip(xs, order):
             ax.text(x - w_ / 2, q1_prim.get(c, 0) + 0.8, str(q1_prim.get(c, 0)), ha="center", fontsize=12)
             ax.text(x + w_ / 2, q1_any.get(c, 0) + 0.8, str(q1_any.get(c, 0)), ha="center", fontsize=12, color=INK2)
@@ -537,10 +515,10 @@ def main():
         ax.yaxis.set_visible(False)
         ax.spines["left"].set_visible(False)
         ax.legend(frameon=False, fontsize=13, loc="upper right")
-        fig.suptitle(tr("Покрытие этапов: основной этап и с дополнительными", "Stage coverage: main stage and with additional stages"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
+        fig.suptitle(tr("Сколько компаний работает на каждом этапе", "How many companies work at each stage"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
         fig.subplots_adjust(left=0.03, right=0.98, top=0.88, bottom=0.2)
-        footer(fig, tr(f"{reg}, n = {N_SOFT} записей ПО (стартапы и крупные вендоры), {d_}. Запись считается по каждому этапу, который закрывает.",
-                       f"{reg}, n = {N_SOFT} software records (startups and major vendors), {d_}. A record counts at every stage it covers."), y=0.02)
+        footer(fig, tr(f"{N_SOFT} программных продуктов из реестра ConTech, {d_}. Одна компания может попасть на несколько этапов.",
+                       f"{N_SOFT} software products from the ConTech registry, {d_}. One company can appear at several stages."), y=0.02)
         save(fig, "02_stage_coverage_1600x900" + sfx, plt)
 
         # C3 stage x market heatmap (startups)
@@ -562,10 +540,10 @@ def main():
         for sp_ in ax.spines.values():
             sp_.set_visible(False)
         ax.tick_params(length=0)
-        fig.suptitle(tr("Этап × рынок: сколько стартапов реестра на каждом рынке", "Stage × market: how many registry startups on each market"), x=0.03, y=0.975, ha="left", fontsize=22, fontweight="bold")
+        fig.suptitle(tr("Где какие этапы закрывают стартапы", "Where startups cover which stages"), x=0.03, y=0.975, ha="left", fontsize=22, fontweight="bold")
         fig.subplots_adjust(left=0.22, right=0.98, top=0.82, bottom=0.1)
-        footer(fig, tr(f"{reg}, n = {N_ST} стартапов, {d_}. Число — рынок назван в источниках или компания помечена глобальной; «+N?» — рынок подставлен по штабу (не подтверждено).",
-                       f"{reg}, n = {N_ST} startups, {d_}. The number counts startups whose market is named in sources or that are flagged global; '+N?' means the market is filled in from the headquarters (unconfirmed)."), y=0.02, size=11)
+        footer(fig, tr(f"{N_ST} стартапов реестра, {d_}. Цифра — стартапы, у которых рынок назван в источниках. «+3?» — ещё три стартапа, у которых рынок мы только предположили по стране штаб-квартиры.",
+                       f"{N_ST} registry startups, {d_}. The number is startups whose market is named in sources. '+3?' means three more startups whose market we only guessed from the headquarters country."), y=0.02, size=11)
         save(fig, "03_stage_market_startups_1600x900" + sfx, plt)
 
         # C4 stage x class (stacked, accent = startups)
@@ -585,10 +563,10 @@ def main():
         ax.spines["bottom"].set_visible(False)
         ax.spines["left"].set_visible(False)
         ax.legend(frameon=False, fontsize=12, ncol=5, loc="upper center", bbox_to_anchor=(0.45, -0.01))
-        fig.suptitle(tr("Кто держит этап: стартапы, вендоры, сервисные организации", "Who holds a stage: startups, vendors, service organisations"), x=0.03, y=0.975, ha="left", fontsize=22, fontweight="bold")
+        fig.suptitle(tr("Распределение типа компаний по этапам", "Company types by stage"), x=0.03, y=0.975, ha="left", fontsize=22, fontweight="bold")
         fig.subplots_adjust(left=0.22, right=0.97, top=0.9, bottom=0.12)
-        footer(fig, tr(f"{reg}, n = {N_SCOPE} записей (in_scope), {d_}. «Крупный вендор» включает продукты, входящие в группы крупных вендоров.",
-                       f"{reg}, n = {N_SCOPE} records (in scope), {d_}. 'Major vendor' includes products that belong to groups of major vendors."), y=0.02, size=11)
+        footer(fig, tr(f"{N_SCOPE} компаний реестра, {d_}. В «крупных вендорах» учтены и продукты, входящие в группы крупных вендоров.",
+                       f"{N_SCOPE} companies in the registry, {d_}. 'Major vendor' also counts products that belong to groups of major vendors."), y=0.02, size=11)
         save(fig, "04_stage_by_class_1600x900" + sfx, plt)
 
         # C5 new rounds 2025-2026 by stage (count)
@@ -602,27 +580,11 @@ def main():
         ax.set_xticklabels([f"{c}\n{wrap(sh[c], 15)}" for c in order], fontsize=11)
         ax.yaxis.set_visible(False)
         ax.spines["left"].set_visible(False)
-        fig.suptitle(tr("Стартапы с последним раундом в 2025–2026 годах, по основному этапу", "Startups whose latest round was in 2025–2026, by main stage"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
+        fig.suptitle(tr("Кто привлекал деньги в 2025–2026: стартапы по этапам", "Who raised money in 2025–2026: startups by stage"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
         fig.subplots_adjust(left=0.03, right=0.98, top=0.88, bottom=0.2)
-        footer(fig, tr(f"{reg}, n = {n_new} стартапов с акционерным раундом 2025–2026 (из {N_ST}), {d_}. Число раундов, не сумма; по данным агрегаторов и пресс-релизов.",
-                       f"{reg}, n = {n_new} startups with an equity round in 2025–2026 (of {N_ST}), {d_}. Number of rounds, not amounts; per aggregators and press releases."), y=0.02, size=11)
+        footer(fig, tr(f"{n_new} из {N_ST} стартапов, у которых последний раунд пришёлся на 2025 или 2026 год, {d_}. Считаем раунды, а не суммы; данные из пресс-релизов и открытых баз.",
+                       f"{n_new} of {N_ST} startups whose latest round fell in 2025 or 2026, {d_}. We count rounds, not amounts; data from press releases and open databases."), y=0.02, size=11)
         save(fig, "05_new_rounds_by_stage_1600x900" + sfx, plt)
-
-        # C6 compliance slice by stage
-        fig, ax = plt.subplots(figsize=(16, 9))
-        v = [q8_stage.get(c, 0) for c in order]
-        ax.bar(range(len(order)), v, color=ACCENT, width=0.62)
-        for i, x in enumerate(v):
-            ax.text(i, x + 0.1, str(x), ha="center", fontsize=14)
-        ax.set_xticks(range(len(order)))
-        ax.set_xticklabels([f"{c}\n{wrap(sh[c], 15)}" for c in order], fontsize=11)
-        ax.yaxis.set_visible(False)
-        ax.spines["left"].set_visible(False)
-        fig.suptitle(tr("Комплаенс и проверка норм: записи реестра по основному этапу", "Compliance and code checking: registry records by main stage"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
-        fig.subplots_adjust(left=0.03, right=0.98, top=0.88, bottom=0.2)
-        footer(fig, tr(f"{reg}, n = {len(q8)} записей (метка «комплаенс» или проверка норм в описании; правила — в findings.md), {d_}.",
-                       f"{reg}, n = {len(q8)} records (a 'compliance' label or code checking in the description; rules are in findings.md), {d_}."), y=0.02, size=11)
-        save(fig, "06_compliance_by_stage_1600x900" + sfx, plt)
 
         # C7 money by stage (only when the parsing gate passed)
         if gate_pass and q3:
@@ -633,7 +595,9 @@ def main():
             ax.barh(range(len(stg)), tot, color=[ACCENT if x == mxm else GRAY for x in tot], height=0.62)
             for i, c in enumerate(stg):
                 med = statistics.median(q3[c]) / 1e6
-                ax.text(tot[i] + mxm * 0.01, i, f"{tot[i]:.0f}   (n = {len(q3[c])}, " + tr("медиана", "median") + f" {med:.1f})", va="center", fontsize=14)
+                medtxt = (f"{med:.1f}".rstrip("0").rstrip(".")) if med % 1 else f"{med:.0f}"
+                medtxt = medtxt.replace(".", ",") if ru else medtxt
+                ax.text(tot[i] + mxm * 0.01, i, f"{tot[i]:.0f}   " + tr(f"Медиана: {medtxt} млн", f"Median: ${medtxt}M"), va="center", fontsize=14)
             ax.set_yticks(range(len(stg)))
             ax.set_yticklabels([f"{c} {sh[c]}" for c in stg], fontsize=14)
             ax.invert_yaxis()
@@ -641,10 +605,10 @@ def main():
             ax.xaxis.set_visible(False)
             ax.spines["bottom"].set_visible(False)
             ax.spines["left"].set_visible(False)
-            fig.suptitle(tr("Сумма последних раундов 2025–2026 по основному этапу, USD млн", "Total of the latest 2025–2026 rounds by main stage, USD million"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
+            fig.suptitle(tr("Сколько привлекли стартапы в 2025–2026: сумма раундов по этапам, млн $", "How much startups raised in 2025–2026: total of rounds by stage, $ million"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
             fig.subplots_adjust(left=0.22, right=0.97, top=0.88, bottom=0.12)
-            footer(fig, tr(f"{reg}, n = {n_money} стартапов с точной суммой акционерного раунда 2025–2026 (из {N_ST}), {d_}. Последние раунды, по данным агрегаторов и пресс-релизов; на этапе несколько раундов, один крупный раунд может определять сумму.",
-                           f"{reg}, n = {n_money} startups with an exact equity round amount in 2025–2026 (of {N_ST}), {d_}. Latest rounds, per aggregators and press releases; a stage has few rounds, so one large round can decide the total."), y=0.02, size=11)
+            footer(fig, tr(f"{n_money} стартапов с точной суммой раунда 2025–2026 (из {N_ST}), {d_}. Данные из пресс-релизов и открытых баз.",
+                           f"{n_money} startups with an exact round amount in 2025–2026 (of {N_ST}), {d_}. Data from press releases and open databases."), y=0.02, size=11)
             save(fig, "07_last_rounds_money_by_stage_1600x900" + sfx, plt)
 
     draw("ru")
@@ -682,12 +646,12 @@ def main():
     w("## Выводы\n")
     # 1
     w("### 1. Покрытие этапов\n")
-    w(f"- Утверждение: записи ПО распределены по основному этапу неравномерно. Цифра: " + "; ".join(f"{c} {short[c]} — {q1_prim.get(c, 0)}" for c in order) + f". n = {N_SOFT}. Оговорка: этап присвоен по описанию продукта. График: `charts/02_stage_coverage_1600x900`.")
+    w(f"- Утверждение: записи ПО распределены по основному этапу неравномерно. Цифра: " + "; ".join(f"{c} {short[c]} — {q1_prim.get(c, 0)}" for c in order) + f". n = {N_SOFT}. Оговорка: этап присвоен по описанию продукта.  График: `charts/02_stage_coverage_1600x900`.")
     w(f"- С учётом дополнительных этапов: " + "; ".join(f"{c} — {q1_any.get(c, 0)}" for c in order) + ".")
     for base in ("S5", "S6"):
         parts = ", ".join(f"{k} {subs.get(k, '')} — {v}" if k in subs else f"{k} — {v}" for k, v in sorted(q1_sub[base].items()))
         w(f"- Подэтапы {base} (записи ПО, закрывающие {base} как основной или дополнительный этап, n = {q1_sub_n[base]}; запись с несколькими подэтапами считается по каждому): {parts}.")
-    w(f"- Доля трёх самых плотных этапов среди стартапов: {round(top3_share * 100)}% ({', '.join(short[c] + ' ' + str(st_prim[c]) for c in top3)}), n = {tot_st}. График: `charts/01_linkedin_startups_by_stage_1080x1350`. Оговорка: реестр собирался вокруг стройки и ИИ, поэтому плотность этапов S5 и S6 может отражать собирание, а не рынок.\n")
+    w(f"- Доля трёх самых плотных этапов среди стартапов: {round(top3_share * 100)}% ({', '.join(short[c] + ' ' + str(st_prim[c]) for c in top3)}), n = {tot_st}. Оговорка: реестр собирался вокруг стройки и ИИ, поэтому плотность этапов S5 и S6 может отражать собирание, а не рынок.\n")
     # 2
     w("### 2. Плотность ниш\n")
     w("Топ-10 подкатегорий стартапов (точное совпадение текста, n = %d):\n" % N_ST)
@@ -729,7 +693,7 @@ def main():
     w("- Оговорка: крупные вендоры внесены выборочно (по запросам основателя по рынкам), поэтому «нет крупных вендоров на этапе» означает «нет в реестре».\n")
     # 8
     w("### 8. Комплаенс и проверка норм\n")
-    w(f"- Записей: {len(q8)} (метка `слой = комплаенс` или слова из правил: {', '.join(COMPLIANCE_KW)}). Этапы: " + "; ".join(f"{c} — {q8_stage.get(c, 0)}" for c in order if q8_stage.get(c, 0)) + ". Типы последнего раунда: " + ", ".join(f"{k} — {v}" for k, v in q8_type.most_common()) + ". Рынки: " + ", ".join(f"{MKN.get(k, k)} — {v}" for k, v in q8_mk.most_common()) + f". График: `charts/06_compliance_by_stage_1600x900`; список: `tables/q8_compliance.csv`.")
+    w(f"- Записей: {len(q8)} (метка `слой = комплаенс` или слова из правил: {', '.join(COMPLIANCE_KW)}). Этапы: " + "; ".join(f"{c} — {q8_stage.get(c, 0)}" for c in order if q8_stage.get(c, 0)) + ". Типы последнего раунда: " + ", ".join(f"{k} — {v}" for k, v in q8_type.most_common()) + ". Рынки: " + ", ".join(f"{MKN.get(k, k)} — {v}" for k, v in q8_mk.most_common()) + f". Список: `tables/q8_compliance.csv`.")
     w("- Оговорка: правила по словам дают ложные срабатывания и пропуски; список нужно прочитать глазами перед публикацией.\n")
     # 9
     w("### 9. Качество данных\n")
@@ -750,14 +714,7 @@ def main():
         w(f"- {s}")
     w("")
     w("## Кандидаты в хук\n")
-    w("Оценка для каждого кандидата не заполнена: в задании фраза оборвана («У каждой оценка…»). Нужно уточнить, какую шкалу использовать (например, острота, проверяемость, риск перегиба).\n")
-    w("| № | Первая строка поста | Цифра и откуда | Оценка |\n|---|---|---|---|")
-    w(f"| 1 | В реестре ConTech {N_ST} стартапов, и {round(top3_share * 100)}% из них делают всего три этапа | Реестр ConTech, n = {tot_st} | ? |")
-    w(f"| 2 | Из {len(order)} этапов жизненного цикла здания у {len(thin)} в реестре не больше трёх стартапов: {', '.join(short[c] for c in thin)} | n = {tot_st} | ? |")
-    w(f"| 3 | Только {n_new} из {N_ST} стартапов реестра привлекли раунд в 2025–2026 годах — и вот на каких этапах | n = {N_ST}, график 05 | ? |")
-    w(f"| 4 | На матрице «этап × рынок» {len(q5_empty)} из {len(order) * len(MK)} ячеек пусты. Это не возможность, а повод спросить, почему | n = {N_ST}, график 03 | ? |")
-    w(f"| 5 | Проверка проектов на нормы: {len(q8)} записей в реестре, и вот на каком этапе их больше всего | n = {len(q8)}, график 06 | ? |")
-    w("")
+    w("Хуки будут написаны после финализации графиков (решение основателя 07.10.2026).\n")
     w("## Файлы\n")
     w("- `registry_normalized.csv`: нормализованные поля и статусы разбора; `tables/`: таблицы по вопросам; `charts/`: PNG и SVG. Пересборка: `python scripts/landscape_analytics.py`.")
     w("- Внешние ориентиры и источники, ожидающие одобрения, — в `external_benchmarks.md` (отдельно: скрипт сеть не использует).")

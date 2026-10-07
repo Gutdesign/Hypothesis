@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-10-07T11:15:23.452351</dc:date>
+    <dc:date>2026-10-07T11:56:53.988785</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -43,7 +43,7 @@ L 290.647552 100.145455
 L 290.647552 142.075913 
 L 253.44 142.075913 
 z
-" clip-path="url(#p13d7180c6e)" style="fill: #b9c0c6"/>
+" clip-path="url(#pfcd161e73f)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_4">
     <path d="M 253.44 167.775227 
@@ -51,7 +51,7 @@ L 432.516348 167.775227
 L 432.516348 209.705685 
 L 253.44 209.705685 
 z
-" clip-path="url(#p13d7180c6e)" style="fill: #b9c0c6"/>
+" clip-path="url(#pfcd161e73f)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_5">
     <path d="M 253.44 235.404999 
@@ -59,7 +59,7 @@ L 380.377765 235.404999
 L 380.377765 277.335457 
 L 253.44 277.335457 
 z
-" clip-path="url(#p13d7180c6e)" style="fill: #b9c0c6"/>
+" clip-path="url(#pfcd161e73f)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_6">
     <path d="M 253.44 303.034771 
@@ -67,7 +67,7 @@ L 362.182072 303.034771
 L 362.182072 344.965229 
 L 253.44 344.965229 
 z
-" clip-path="url(#p13d7180c6e)" style="fill: #b9c0c6"/>
+" clip-path="url(#pfcd161e73f)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_7">
     <path d="M 253.44 370.664543 
@@ -75,7 +75,7 @@ L 893.44 370.664543
 L 893.44 412.595001 
 L 253.44 412.595001 
 z
-" clip-path="url(#p13d7180c6e)" style="fill: #1f5f8b"/>
+" clip-path="url(#pfcd161e73f)" style="fill: #1f5f8b"/>
    </g>
    <g id="patch_8">
     <path d="M 253.44 438.294315 
@@ -83,7 +83,7 @@ L 283.806164 438.294315
 L 283.806164 480.224773 
 L 253.44 480.224773 
 z
-" clip-path="url(#p13d7180c6e)" style="fill: #b9c0c6"/>
+" clip-path="url(#pfcd161e73f)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_9">
     <path d="M 253.44 505.924087 
@@ -91,18 +91,18 @@ L 273.784129 505.924087
 L 273.784129 547.854545 
 L 253.44 547.854545 
 z
-" clip-path="url(#p13d7180c6e)" style="fill: #b9c0c6"/>
+" clip-path="url(#pfcd161e73f)" style="fill: #b9c0c6"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="ytick_1">
      <g id="line2d_1">
       <defs>
-       <path id="m2b4e6f562f" d="M 0 0 
+       <path id="m77afc7b012" d="M 0 0 
 L -3.5 0 
 " style="stroke: #4b535b; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m2b4e6f562f" x="253.44" y="121.110684" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m77afc7b012" x="253.44" y="121.110684" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
@@ -112,7 +112,7 @@ L -3.5 0
     <g id="ytick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#m2b4e6f562f" x="253.44" y="188.740456" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m77afc7b012" x="253.44" y="188.740456" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
@@ -122,7 +122,7 @@ L -3.5 0
     <g id="ytick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#m2b4e6f562f" x="253.44" y="256.370228" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m77afc7b012" x="253.44" y="256.370228" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
@@ -132,7 +132,7 @@ L -3.5 0
     <g id="ytick_4">
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m2b4e6f562f" x="253.44" y="324" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m77afc7b012" x="253.44" y="324" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
@@ -142,7 +142,7 @@ L -3.5 0
     <g id="ytick_5">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#m2b4e6f562f" x="253.44" y="391.629772" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m77afc7b012" x="253.44" y="391.629772" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
@@ -152,7 +152,7 @@ L -3.5 0
     <g id="ytick_6">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m2b4e6f562f" x="253.44" y="459.259544" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m77afc7b012" x="253.44" y="459.259544" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
@@ -162,7 +162,7 @@ L -3.5 0
     <g id="ytick_7">
      <g id="line2d_7">
       <g>
-       <use xlink:href="#m2b4e6f562f" x="253.44" y="526.889316" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m77afc7b012" x="253.44" y="526.889316" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_7">
@@ -171,37 +171,36 @@ L -3.5 0
     </g>
    </g>
    <g id="text_8">
-    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="297.047552" y="124.74795" transform="rotate(-0 297.047552 124.74795)">31   (n = 2, median 15.5)</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="297.047552" y="124.74795" transform="rotate(-0 297.047552 124.74795)">31   Median: $15.5M</text>
    </g>
    <g id="text_9">
-    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="438.916348" y="192.377722" transform="rotate(-0 438.916348 192.377722)">149   (n = 3, median 50.0)</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="438.916348" y="192.377722" transform="rotate(-0 438.916348 192.377722)">149   Median: $50M</text>
    </g>
    <g id="text_10">
-    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="386.777765" y="260.007494" transform="rotate(-0 386.777765 260.007494)">106   (n = 3, median 49.5)</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="386.777765" y="260.007494" transform="rotate(-0 386.777765 260.007494)">106   Median: $49.5M</text>
    </g>
    <g id="text_11">
-    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="368.582072" y="327.637266" transform="rotate(-0 368.582072 327.637266)">91   (n = 6, median 14.5)</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="368.582072" y="327.637266" transform="rotate(-0 368.582072 327.637266)">91   Median: $14.5M</text>
    </g>
    <g id="text_12">
-    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="899.84" y="395.267038" transform="rotate(-0 899.84 395.267038)">533   (n = 13, median 25.0)</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="899.84" y="395.267038" transform="rotate(-0 899.84 395.267038)">533   Median: $25M</text>
    </g>
    <g id="text_13">
-    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="290.206164" y="462.89681" transform="rotate(-0 290.206164 462.89681)">25   (n = 1, median 25.3)</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="290.206164" y="462.89681" transform="rotate(-0 290.206164 462.89681)">25   Median: $25.3M</text>
    </g>
    <g id="text_14">
-    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="280.184129" y="530.526582" transform="rotate(-0 280.184129 530.526582)">17   (n = 1, median 16.9)</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="280.184129" y="530.526582" transform="rotate(-0 280.184129 530.526582)">17   Median: $16.9M</text>
    </g>
   </g>
   <g id="text_15">
-   <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="34.56" y="36.156563" transform="rotate(-0 34.56 36.156563)">Total of the latest 2025–2026 rounds by main stage, USD million</text>
+   <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="34.56" y="36.156563" transform="rotate(-0 34.56 36.156563)">How much startups raised in 2025–2026: total of rounds by stage, $ million</text>
   </g>
   <g id="text_16">
-   <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(23.04 618.09334)">ConTech registry, n = 29 startups with an exact equity round amount in 2025–2026 (of 129), data as of 2026-10-07. Latest rounds, per aggregators and press releases; a stage</text>
-   <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(23.04 631.296348)">has few rounds, so one large round can decide the total.</text>
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #4b535b" x="23.04" y="632.397422" transform="rotate(-0 23.04 632.397422)">29 startups with an exact round amount in 2025–2026 (of 129), data as of 7 October 2026. Data from press releases and open databases.</text>
   </g>
  </g>
  <defs>
-  <clipPath id="p13d7180c6e">
+  <clipPath id="pfcd161e73f">
    <rect x="253.44" y="77.76" width="864" height="492.48"/>
   </clipPath>
  </defs>

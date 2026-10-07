@@ -246,7 +246,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       tabSa:'Analytics', anPng:'PNG', anSvg:'SVG', tabSw:'Software and vendors', tabOt:'Consulting, construction, education, hardware', grGroup:'by parent group', noGroup:'No group', groupL:'Group'
     }
   };
-  var TAB='sw', VIEW='map', CHARTS=[{"id": "01_linkedin_startups_by_stage_1080x1350", "ru": "Стартапы реестра по основному этапу", "en": "Registry startups by main stage", "tall": true}, {"id": "02_stage_coverage_1600x900", "ru": "Покрытие этапов: записи ПО по основному этапу и с учётом дополнительных", "en": "Stage coverage: software records by main stage and including additional stages", "tall": false}, {"id": "03_stage_market_startups_1600x900", "ru": "Этап × рынок: стартапы реестра", "en": "Stage × market: registry startups", "tall": false}, {"id": "04_stage_by_class_1600x900", "ru": "Кто держит этап: стартапы, крупные вендоры, сервисные организации", "en": "Who holds a stage: startups, major vendors, service organisations", "tall": false}, {"id": "05_new_rounds_by_stage_1600x900", "ru": "Стартапы с последним раундом в 2025–2026 годах, по этапам", "en": "Startups with their latest round in 2025–2026, by stage", "tall": false}, {"id": "06_compliance_by_stage_1600x900", "ru": "Комплаенс и проверка норм по этапам", "en": "Compliance and code checking by stage", "tall": false}, {"id": "07_last_rounds_money_by_stage_1600x900", "ru": "Сумма последних раундов 2025–2026 по этапам", "en": "Total of the latest 2025–2026 rounds by stage", "tall": false}];
+  var TAB='sw', VIEW='map', CHARTS=[{"id": "02_stage_coverage_1600x900", "ru": "Сколько компаний работает на каждом этапе", "en": "How many companies work at each stage", "tall": false}, {"id": "03_stage_market_startups_1600x900", "ru": "Где какие этапы закрывают стартапы", "en": "Where startups cover which stages", "tall": false}, {"id": "04_stage_by_class_1600x900", "ru": "Распределение типа компаний по этапам", "en": "Company types by stage", "tall": false}, {"id": "05_new_rounds_by_stage_1600x900", "ru": "Кто привлекал деньги в 2025–2026: стартапы по этапам", "en": "Who raised money in 2025–2026: startups by stage", "tall": false}, {"id": "07_last_rounds_money_by_stage_1600x900", "ru": "Сколько привлекли стартапы в 2025–2026: сумма раундов по этапам, млн $", "en": "How much startups raised in 2025–2026: total of rounds by stage, $ million", "tall": false}];
   function inTab(c){return TAB==='sw'?(c.kind==='product'||c.kind==='vendor'):(c.kind!=='product'&&c.kind!=='vendor')}
   var LANG='ru';
   try{var sl=localStorage.getItem('lang'); if(sl==='ru'||sl==='en')LANG=sl}catch(e){}
@@ -305,7 +305,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     CHARTS.forEach(function(c){
       var f=document.createElement('figure'); if(c.tall) f.className='tall';
       var sf=LANG==='en'?'_en':''; var im=document.createElement('img'); im.src='charts/'+c.id+sf+'.png'; im.loading='lazy'; im.alt=LANG==='en'?c.en:c.ru; f.appendChild(im);
-      var cp=document.createElement('figcaption'); cp.appendChild(document.createTextNode((LANG==='en'?c.en:c.ru)+' '));
+      var cp=document.createElement('figcaption');
       [['png',u.anPng],['svg',u.anSvg]].forEach(function(x,i){var a=document.createElement('a'); a.href='charts/'+c.id+sf+'.'+x[0]; a.target='_blank'; a.rel='noopener'; a.textContent=x[1]; if(i)cp.appendChild(document.createTextNode(' · ')); cp.appendChild(a)});
       f.appendChild(cp); g.appendChild(f);
     });
