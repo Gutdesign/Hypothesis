@@ -121,7 +121,7 @@ SOFT = re.compile(r"агрегатор|latka|оценк|заявлен|заяв�
 
 def quality(field, text, verified):
     """A: company reporting / primary document; B: press release or news; C: aggregator estimate or company claim; D: calculation or doubtful."""
-    if not text or text == "н/д" or text.startswith("не раскрыта") and ";" not in text:
+    if not text or text.startswith("н/д") or text.startswith("не раскрыта") and ";" not in text:
         return ""
     t = text.lower()
     if WEAK.search(t):

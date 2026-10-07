@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Карта строительных SaaS / Construction SaaS Map</title>
+<title>Карта ConTech / ConTech Map</title>
 <meta name="description" content="Что даёт каждая компания на каждом этапе жизненного цикла объекта. / What each company offers at each stage of the building lifecycle.">
 <style>
 :root{
@@ -188,11 +188,11 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
   var MKIDX = {}; MARKETS.forEach(function(m){MKIDX[m[0]]=m});
   var UI = {
     ru:{
-      title:'Карта строительных SaaS',
+      title:'Карта ConTech',
       search:'Поиск', searchPh:'название, роль, примечание', type:'Тип', market:'Рынок сбыта', country:'Страна штаба', role:'Роль клиента', stage:'Закрывает этап', scope:'Охват', theme:'Тема',
       global:'Глобальные компании', all:'Все', any:'Любой', reset:'Сбросить', themeGroup:'Тема оформления', themeLight:'Светлая тема', themeDark:'Тёмная тема', close:'Закрыть',
       sort:'Сортировка', group:'Группировка', top:'Первые по численности штата в каждом рынке', topn:'Первые N',
-      sortStage:'по первому этапу', sortCover:'по охвату этапов', sortRev:'по выручке (≈, оценки разных лет и разной основы)', sortEmp:'по численности', sortName:'по названию',
+      sortStage:'по первому этапу', sortCover:'по охвату этапов', sortRev:'по опубликованной выручке или ARR (≈; год и основа различаются)', sortEmp:'по численности', sortName:'по названию',
       grType:'по типу', grMarket:'по рынку сбыта', grCountry:'по стране штаба', grStage:'по основному этапу', grRole:'по роли клиента', grNone:'без групп',
       one:'Один этап', two:'Два и более этапов', four:'Четыре и более этапов',
       shown:function(a,b){return 'Показано '+a+' из '+b}, comp:' комп.',
@@ -200,22 +200,22 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       legProd:'продукт', legVend:'крупный вендор', legBuild:'строитель или застройщик', legSvc:'услуги, консалтинг, образование',
       legShade:'светлее — дополнительные этапы, темнее — основной', legGap:'— покрытие на этапе не подтверждено', legGlobal:'глобальная компания',
       globalTag:'глобальная', mkL:'Рынки сбыта', mkBasis:{'текст':'названы в источниках','широкий охват':'широкий охват по источникам','глобальная':'глобальная компания','штаб':'не подтверждено, подставлен штаб','вручную':'указано вручную','нет данных':'нет данных'}, empL:'штат ≈', revL:'выручка ≈ $', mln:' млн',
-      gapsH:'Покрытие реестра: рынок сбыта × этап', gapsS:'Сколько продуктов и крупных вендоров продают на рынке и закрывают этап (основной или дополнительный). Число — компании, у которых рынок назван в источниках или которые помечены глобальными; «+N?» — компании, у которых рынок сбыта не найден и подставлен штаб (не подтверждено). Нажмите на ячейку, чтобы увидеть компании на карте.',
+      gapsH:'Покрытие реестра: рынок сбыта × этап', gapsS:'Количество записей (продукты и крупные вендоры) с указанным или предполагаемым присутствием на рынке, закрывающих этап (основной или дополнительный). Продукты одной группы считаются отдельными записями. Число — записи, у которых рынок назван в источниках или которые помечены глобальными (охват глобальных — заявление компании); «+N?» — записи, у которых рынок подставлен по штабу (не подтверждено). Нажмите на ячейку, чтобы увидеть записи на карте.',
       gapsN:'Нуль — это «в реестре никого нет», а не «возможность». Возможные причины пустоты: нет спроса или денег; регулирование; раздробленные покупатели; продукт есть, но не попал в список (список — это компании-работодатели и выпускники акселераторов). Рынок сбыта известен лишь у части компаний; у остальных он подставлен по штабу и показан как «N?». Каждую пустую ячейку нужно проверять отдельно.',
-      gapsAll:'Глобальные', painsH:'Боли и доказательства', painsS:'Боли отрасли и степень их подтверждения.', painsG:['независимое подтверждение','один источник со стороны покупателя или первичный документ','заявление вендора','источник без результатов'], painsL:'Оценка:', painsN:'Почти все записи — заявления вендоров (C): данных от самих покупателей по трём странам пока мало.', pc:{pain:'Боль',stage:'Этап',who:'Кто страдает',grade:'Оценка',stype:'Тип источника',src:'Источник'},
+      gapsAll:'Глобальные', painsH:'Боли и доказательства', painsS:'Боли отрасли и степень их подтверждения.', painsG:['независимое подтверждение','один источник со стороны покупателя или первичный документ','заявление вендора, пресс-релиз или один вторичный источник','источник без результатов'], painsL:'Оценка:', painsN:function(c){return 'Записей по оценкам: A — '+c.A+', B — '+c.B+', C — '+c.C+', D — '+c.D+'. Данных от самих покупателей по трём странам пока мало.'}, pc:{pain:'Боль',stage:'Этап',who:'Кто страдает',grade:'Оценка',stype:'Тип источника',src:'Источник'},
       foot:function(d,n){return 'Снимок на '+d+'. Реестр: '+n+' строк. <a href="registry.csv">Скачать таблицу (CSV, разделитель «;», кодировка UTF-8 с BOM)</a>. Темы «данные», «финансы и страхование», «комплаенс», «образование» — не отдельные этапы: они разнесены по этапам и указаны в карточке. «Глобальная» — подтверждённое присутствие на нескольких континентах или в десятках стран; основание в примечании. Численность и выручка для сортировки и топа разобраны из текста автоматически (курсы валют грубые), это ориентир, а не данные. Буквы качества в карточке — автоматическая оценка по формулировке источника, а не ручная проверка: A — отчётность компании или первоисточник, B — пресс-релиз или новость, C — оценка агрегатора или заявление компании, D — расчёт или сомнительное. Таксономия этапов — рабочий инструмент классификации, а не стандарт.'},
       qHint:{A:'A: отчётность компании или первоисточник',B:'B: пресс-релиз или новость',C:'C: оценка агрегатора или заявление компании',D:'D: расчёт, сомнительное или не подтверждено'},
-      stagesL:'Этапы', themes:'Темы', roleL:'Роль клиента', hq:'Штаб', markets:'Рынки', founded:'Год основания', size:'Размер', round:'Последний раунд', raised:'Привлечено', revenue:'Выручка', site:'Сайт', verified:'Проверка данных', noteL:'Примечание', sources:'Источники', main:' (основной)', none:'вне этапов',
+      stagesL:'Этапы', themes:'Темы', roleL:'Роль клиента', hq:'Штаб', markets:'Рынки', founded:'Год основания', size:'Размер', round:'Последнее найденное событие финансирования или владения', raised:'Привлечено', revenue:'Выручка', site:'Сайт', verified:'Проверка данных', noteL:'Примечание', siteNo:'сайт не подтверждён', sources:'Источники', main:' (основной)', none:'вне этапов',
       kinds:{product:'продукт',vendor:'крупный вендор',builder:'строитель или застройщик',services:'услуги, консалтинг, образование',hardware:'оборудование'},
       groups:{vendor:'Крупные вендоры',product:'Продукты',builder:'Строители и застройщики',services:'Услуги, консалтинг, образование',hardware:'Оборудование'},
       tabSw:'Программы и вендоры', tabOt:'Консалтинг, строительство, образование, оборудование', grGroup:'по материнской группе', noGroup:'Без группы', groupL:'Группа'
     },
     en:{
-      title:'Construction SaaS Map',
+      title:'ConTech Map',
       search:'Search', searchPh:'name, role, note', type:'Type', market:'Sales market', country:'Headquarters country', role:'Customer role', stage:'Covers stage', scope:'Coverage', theme:'Theme',
       global:'Global companies', all:'All', any:'Any', reset:'Reset', themeGroup:'Colour theme', themeLight:'Light theme', themeDark:'Dark theme', close:'Close',
       sort:'Sort', group:'Group', top:'Largest by headcount in each market', topn:'First N',
-      sortStage:'by first stage', sortCover:'by stages covered', sortRev:'by revenue (≈, estimates of different years and bases)', sortEmp:'by headcount', sortName:'by name',
+      sortStage:'by first stage', sortCover:'by stages covered', sortRev:'by published revenue or ARR (≈; year and basis differ)', sortEmp:'by headcount', sortName:'by name',
       grType:'by type', grMarket:'by sales market', grCountry:'by headquarters country', grStage:'by main stage', grRole:'by customer role', grNone:'no groups',
       one:'One stage', two:'Two or more stages', four:'Four or more stages',
       shown:function(a,b){return 'Showing '+a+' of '+b}, comp:' cos.',
@@ -223,12 +223,12 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       legProd:'product', legVend:'major vendor', legBuild:'builder or developer', legSvc:'services, consulting, education',
       legShade:'lighter: additional stages, darker: main stage', legGap:'— coverage at this stage is not confirmed', legGlobal:'global company',
       globalTag:'global', mkL:'Sales markets', mkBasis:{'текст':'named in sources','широкий охват':'broad reach per sources','глобальная':'global company','штаб':'unconfirmed, headquarters used','вручную':'set by hand','нет данных':'no data'}, empL:'headcount ≈', revL:'revenue ≈ $', mln:'M',
-      gapsH:'Registry coverage: sales market × stage', gapsS:'How many products and major vendors sell in a market and cover a stage (main or additional). The number counts companies whose market is named in sources or that are flagged global; "+N?" counts companies whose sales market was not found and is replaced by the headquarters (unconfirmed). Click a cell to see the companies on the map.',
+      gapsH:'Registry coverage: sales market × stage', gapsS:'The number of records (products and major vendors) with a stated or presumed presence in a market that cover a stage (main or additional). Products of one group count as separate records. The number counts records whose market is named in sources or that are flagged global (the reach of global ones is a company claim); "+N?" counts records whose market is filled in from the headquarters (unconfirmed). Click a cell to see the records on the map.',
       gapsN:'Zero means "nobody in the registry", not "an opportunity". Possible reasons: no demand or money; regulation; fragmented buyers; a product exists but is not in the list (the list is employers and accelerator alumni). The sales market is known for only part of the companies; for the rest it is replaced by the headquarters and shown as "N?". Every empty cell needs its own check.',
-      gapsAll:'Global', painsH:'Pains and evidence', painsS:'Industry pains and how well each is supported.', painsG:['independent confirmation','a single buyer-side or primary source','vendor claim','source with no results'], painsL:'Grade:', painsN:'Almost all entries are vendor claims (C): buyer-side data for the three countries is still scarce.', pc:{pain:'Pain',stage:'Stage',who:'Who suffers',grade:'Grade',stype:'Source type',src:'Source'},
+      gapsAll:'Global', painsH:'Pains and evidence', painsS:'Industry pains and how well each is supported.', painsG:['independent confirmation','a single buyer-side or primary source','vendor claim, press release or a single secondary source','source with no results'], painsL:'Grade:', painsN:function(c){return 'Entries by grade: A — '+c.A+', B — '+c.B+', C — '+c.C+', D — '+c.D+'. Buyer-side data for the three countries is still scarce.'}, pc:{pain:'Pain',stage:'Stage',who:'Who suffers',grade:'Grade',stype:'Source type',src:'Source'},
       foot:function(d,n){return 'Snapshot of '+d+'. Registry: '+n+' rows. <a href="registry.csv">Download the table (CSV, ";" delimiter, UTF-8 with BOM; the data columns are in Russian)</a>. The themes data, finance and insurance, compliance and education are not separate stages: they are spread across stages and shown on the card. "Global" means confirmed presence on several continents or in dozens of countries; the basis is in the note. Headcount and revenue used for sorting and the top mode are parsed from text automatically (rough exchange rates): an indication, not data. The quality letters on the card are an automatic rating from the wording of the source, not a manual check: A is company reporting or a primary document, B a press release or news, C an aggregator estimate or a company claim, D a calculation or a doubtful figure. The stage taxonomy is a working classification tool, not a standard.'},
       qHint:{A:'A: company reporting or a primary document',B:'B: press release or news',C:'C: aggregator estimate or company claim',D:'D: calculation, doubtful or unconfirmed'},
-      stagesL:'Stages', themes:'Themes', roleL:'Customer role', hq:'Headquarters', markets:'Markets', founded:'Founded', size:'Size', round:'Latest round', raised:'Raised', revenue:'Revenue', site:'Website', verified:'Data check', noteL:'Note', sources:'Sources', main:' (main)', none:'outside the stages',
+      stagesL:'Stages', themes:'Themes', roleL:'Customer role', hq:'Headquarters', markets:'Markets', founded:'Founded', size:'Size', round:'Latest funding or ownership event found', raised:'Raised', revenue:'Revenue', site:'Website', verified:'Data check', noteL:'Note', siteNo:'site not confirmed', sources:'Sources', main:' (main)', none:'outside the stages',
       kinds:{product:'product',vendor:'major vendor',builder:'builder or developer',services:'services, consulting, education',hardware:'hardware'},
       groups:{vendor:'Major vendors',product:'Products',builder:'Builders and developers',services:'Services, consulting, education',hardware:'Hardware'},
       tabSw:'Software and vendors', tabOt:'Consulting, construction, education, hardware', grGroup:'by parent group', noGroup:'No group', groupL:'Group'
@@ -294,7 +294,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     $('h1').textContent=u.title;
     document.querySelectorAll('[data-i]').forEach(function(el){el.textContent=u[el.getAttribute('data-i')]});
     q.placeholder=u.searchPh; $('reset').textContent=u.reset; $('thg').setAttribute('aria-label',u.themeGroup); [['tlight',u.themeLight],['tdark',u.themeDark]].forEach(function(x){$(x[0]).title=x[1]; $(x[0]).setAttribute('aria-label',x[1])}); $('close').textContent=u.close;
-    $('gh').textContent=u.gapsH; $('gs').textContent=u.gapsS; $('gn').textContent=u.gapsN; $('ph').textContent=u.painsH; (function(){var ps=$('ps'); ps.textContent=''; var a=document.createElement('p'); a.textContent=u.painsS+' '+u.painsL; ps.appendChild(a); var ul=document.createElement('ul'); ul.className='gl-list'; ['A','B','C','D'].forEach(function(k,i){var li=document.createElement('li'); var b=document.createElement('span'); b.className='qb '+k; b.textContent=k; b.title=k+': '+u.painsG[i]; li.appendChild(b); li.appendChild(document.createTextNode(u.painsG[i])); ul.appendChild(li)}); ps.appendChild(ul); var n=document.createElement('p'); n.textContent=u.painsN; ps.appendChild(n)})();
+    $('gh').textContent=u.gapsH; $('gs').textContent=u.gapsS; $('gn').textContent=u.gapsN; $('ph').textContent=u.painsH; (function(){var ps=$('ps'); ps.textContent=''; var a=document.createElement('p'); a.textContent=u.painsS+' '+u.painsL; ps.appendChild(a); var ul=document.createElement('ul'); ul.className='gl-list'; ['A','B','C','D'].forEach(function(k,i){var li=document.createElement('li'); var b=document.createElement('span'); b.className='qb '+k; b.textContent=k; b.title=k+': '+u.painsG[i]; li.appendChild(b); li.appendChild(document.createTextNode(u.painsG[i])); ul.appendChild(li)}); ps.appendChild(ul); var n=document.createElement('p'); var cn={A:0,B:0,C:0,D:0}; PAINS.forEach(function(x){if(cn[x.grade]!==undefined)cn[x.grade]++}); n.textContent=u.painsN(cn); ps.appendChild(n)})();
     syncTabs();
     $('lru').setAttribute('aria-pressed',LANG==='ru'); $('len').setAttribute('aria-pressed',LANG==='en');
     $('legend').innerHTML='<span><i class="sw" style="background:var(--prod)"></i>'+u.legProd+'</span><span><i class="sw" style="background:var(--vend)"></i>'+u.legVend+'</span><span><i class="sw" style="background:var(--build)"></i>'+u.legBuild+'</span><span><i class="sw" style="background:var(--svc)"></i>'+u.legSvc+'</span><span><i class="sw" style="background:linear-gradient(to right,color-mix(in srgb,var(--prod) 12%,var(--panel)) 50%,color-mix(in srgb,var(--prod) 42%,var(--panel)) 50%);border:1px solid var(--prod)"></i>'+u.legShade+'</span><span><i class="sw" style="border:1px dashed var(--dash)"></i>'+u.legGap+'</span><span><i class="gl" style="margin:0">'+u.globalTag+'</i>'+u.legGlobal+'</span>';
@@ -404,14 +404,14 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
   }
   function render(){
     map.textContent='';
-    var list=D.filter(match), u=U(), n=Number(tn.value)||5, shown=0;
+    var list=D.filter(match), u=U(), n=Number(tn.value)||5, shown=0, seen={};
     map.appendChild(headRow(list));
     if(!list.length){var e=document.createElement('div');e.className='empty';e.textContent=u.noRes;map.appendChild(e)}
     groups(list).forEach(function(gr){
       var title=gr[0], arr=gr[1], isTop=gr[2];
       var vis=isTop?arr.slice(0,n):arr;
       if(title) map.appendChild(sepRow(title+' · '+arr.length));
-      vis.forEach(function(c,i){map.appendChild(line(c,isTop?i+1:0)); shown++});
+      vis.forEach(function(c,i){map.appendChild(line(c,isTop?i+1:0)); if(!seen[c.id]){seen[c.id]=1; shown++}});
       if(isTop&&arr.length>vis.length) map.appendChild(moreRow(arr.length-vis.length));
     });
     $('count').textContent=u.shown(shown,D.filter(inTab).length);
@@ -432,7 +432,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
         var b=document.createElement('button'); b.type='button'; b.textContent=String(conf)+(unc?' +'+unc+'?':'');
         b.setAttribute('aria-label',(LANG==='en'?m[2]:m[1])+', '+c[0]+' '+stName(i)+': '+conf+(unc?' (+'+unc+' unconfirmed)':''));
         b.addEventListener('click',function(){
-          if(TAB!=='sw'){TAB='sw'; syncTabs(); buildFilters()}
+          top.checked=false; go.value='none'; if(TAB!=='sw'){TAB='sw'; syncTabs(); buildFilters()}
           fk.value=''; fo.value=''; fw.value=''; ft.value=''; q.value=''; fr.value=''; fg.checked=false;
           fm.value=m[0]; fe.value=c[0]; render(); map.scrollIntoView({behavior:'smooth',block:'start'});
         });
@@ -481,7 +481,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     row(dl,u.round,G(c,'round'),qbadge(c,'round'));
     row(dl,u.raised,G(c,'raised'),qbadge(c,'raised'));
     row(dl,u.revenue,G(c,'revenue'),qbadge(c,'revenue'));
-    var sd=row(dl,u.site,c.site?' ':null); if(c.site){var a=document.createElement('a');a.href=c.site;a.target='_blank';a.rel='noopener noreferrer';a.textContent=c.site.replace(/^https?:\/\//,'');sd.textContent='';sd.appendChild(a)}
+    var sd=row(dl,u.site,c.site?' ':u.siteNo); if(c.site){var a=document.createElement('a');a.href=c.site;a.target='_blank';a.rel='noopener noreferrer';a.textContent=c.site.replace(/^https?:\/\//,'');sd.textContent='';sd.appendChild(a)}
     row(dl,u.verified,G(c,'verified'));
     if(c.group) row(dl,u.groupL,c.group);
     if(G(c,'note')) row(dl,u.noteL,G(c,'note'));
