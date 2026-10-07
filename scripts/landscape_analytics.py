@@ -465,166 +465,191 @@ def main():
             c = q9[s]
             w.writerow([s, c["да"], c["частично"], c["нет"], sum(c.values())])
 
-    # ================= charts =================
+    # ================= charts (Russian and English variants) =================
     plt = setup_mpl()
-    src_soft = f"Реестр ConTech, n = {N_SOFT} записей ПО (стартапы и крупные вендоры), данные на {TODAY}"
+    import matplotlib.colors as mc
     charts = []
+    SHORT_EN = {"S0": "Strategy and sites", "S1": "Deal and financing", "S2": "Surveys", "S3": "Design", "S4": "Permits and review",
+                "S5": "Pre-construction", "S6": "Construction", "S7": "Handover", "S8a": "Operations", "S8b": "Leasing and sales",
+                "S9": "Renovation, end of life"}
+    MKN_EN = {"US": "USA", "UK": "United Kingdom", "ES": "Spain", "NL": "Netherlands", "EU": "Other Europe", "OTHER": "Outside US and Europe"}
+    CL_EN = {"стартап": "startup", "крупный вендор": "major vendor", "консалтинг-инжиниринг": "consulting / engineering", "строитель": "builder", "прочее": "other"}
 
-    # C1 main (vertical): where startups are, by primary stage
+    # numbers shared by the charts and the findings
     st_prim = Counter(n["stage_primary"] for n in startups if n["stage_primary"])
     tot_st = sum(st_prim.values())
     top3 = [c for c, _ in st_prim.most_common(3)]
     top3_share = sum(st_prim[c] for c in top3) / tot_st if tot_st else 0
     thin = [c for c in order if st_prim.get(c, 0) <= 3]
-    fig, ax = plt.subplots(figsize=(10.8, 13.5))
-    vals = [st_prim.get(c, 0) for c in order]
-    colors = [ACCENT if c in top3 else GRAY for c in order]
-    ypos = list(range(len(order)))[::-1]
-    ax.barh(ypos, vals, color=colors, height=0.68)
-    ax.set_yticks(ypos)
-    ax.set_yticklabels([f"{c}  {short[c]}" for c in order], fontsize=17)
-    for y, v in zip(ypos, vals):
-        ax.text(v + max(vals) * 0.012, y, str(v), va="center", fontsize=18, color="#1d2327", fontweight="bold" if v >= max(vals) * 0.6 else None)
-    ax.set_xlim(0, max(vals) * 1.12)
-    ax.xaxis.set_visible(False)
-    ax.spines["bottom"].set_visible(False)
-    ax.spines["left"].set_visible(False)
-    ax.tick_params(left=False)
-    ttl = wrap(f"В реестре {round(top3_share * 100)}% стартапов делают три этапа: {', '.join(short[c] for c in top3)}", 30)
-    fig.text(0.04, 0.975, ttl, ha="left", va="top", fontsize=30, fontweight="bold", linespacing=1.15)
-    n_lines = ttl.count("\n") + 1
-    fig.text(0.04, 0.975 - 0.037 * n_lines - 0.012, wrap(f"Стартапов по основному этапу: {tot_st}. Этапов, где их не больше трёх: {len(thin)} из {len(order)}", 90),
-             fontsize=16, color=INK2, ha="left", va="top")
-    fig.subplots_adjust(left=0.40, right=0.96, top=0.975 - 0.037 * n_lines - 0.085, bottom=0.09)
-    footer(fig, wrap(f"Реестр ConTech, n = {tot_st} стартапов, данные на {TODAY}. Выборка составлена основателем и не репрезентативна для рынка.", 100), y=0.012, size=11.5)
-    save(fig, "01_linkedin_startups_by_stage_1080x1350", plt)
-    charts.append(("01_linkedin_startups_by_stage_1080x1350", f"Стартапы по основному этапу; три самых плотных — акцент; n = {tot_st}"))
+    n_money = sum(len(v) for v in q3.values())
 
-    # C2 coverage: primary vs with secondary (software)
-    fig, ax = plt.subplots(figsize=(16, 9))
-    xs = list(range(len(order)))
-    w_ = 0.38
-    ax.bar([x - w_ / 2 for x in xs], [q1_prim.get(c, 0) for c in order], w_, color=ACCENT, label="основной этап")
-    ax.bar([x + w_ / 2 for x in xs], [q1_any.get(c, 0) for c in order], w_, color=GRAY, label="основной и дополнительные этапы")
-    for x, c in zip(xs, order):
-        ax.text(x - w_ / 2, q1_prim.get(c, 0) + 0.8, str(q1_prim.get(c, 0)), ha="center", fontsize=12)
-        ax.text(x + w_ / 2, q1_any.get(c, 0) + 0.8, str(q1_any.get(c, 0)), ha="center", fontsize=12, color=INK2)
-    ax.set_xticks(xs)
-    ax.set_xticklabels([f"{c}\n{wrap(short[c], 15)}" for c in order], fontsize=11)
-    ax.yaxis.set_visible(False)
-    ax.spines["left"].set_visible(False)
-    ax.legend(frameon=False, fontsize=13, loc="upper right")
-    fig.suptitle("Покрытие этапов: основной этап и с дополнительными", x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
-    fig.subplots_adjust(left=0.03, right=0.98, top=0.88, bottom=0.2)
-    footer(fig, src_soft + ". Запись считается по каждому этапу, который закрывает.", y=0.02)
-    save(fig, "02_stage_coverage_1600x900", plt)
-    charts.append(("02_stage_coverage_1600x900", f"Записи ПО по основному этапу и с учётом дополнительных; n = {N_SOFT}"))
+    def draw(lang):
+        ru = lang == "ru"
+        tr = (lambda r, e: r) if ru else (lambda r, e: e)
+        sfx = "" if ru else "_en"
+        sh = short if ru else SHORT_EN
+        mkn = MKN if ru else MKN_EN
+        d_ = f"данные на {TODAY}" if ru else f"data as of {TODAY}"
+        reg = tr("Реестр ConTech", "ConTech registry")
 
-    # C3 stage x market heatmap (startups)
-    import matplotlib.colors as mc
-    fig, ax = plt.subplots(figsize=(16, 9))
-    M = [[q5_conf[(s, m)] for m in MK] for s in order]
-    cmap = mc.LinearSegmentedColormap.from_list("one", ["#f1f5f8", ACCENT])
-    mx = max(max(r) for r in M) or 1
-    ax.imshow(M, cmap=cmap, vmin=0, vmax=mx, aspect="auto")
-    for i, s in enumerate(order):
-        for j, m in enumerate(MK):
-            c_, u_ = q5_conf[(s, m)], q5_unc[(s, m)]
-            txt = str(c_) + (f" +{u_}?" if u_ else "")
-            ax.text(j, i, txt, ha="center", va="center", fontsize=14, color="white" if c_ > mx * 0.55 else "#1d2327")
-    ax.set_xticks(range(len(MK)))
-    ax.set_xticklabels([MKN[m] for m in MK], fontsize=13)
-    ax.xaxis.tick_top()
-    ax.set_yticks(range(len(order)))
-    ax.set_yticklabels([f"{c} {short[c]}" for c in order], fontsize=13)
-    for sp_ in ax.spines.values():
-        sp_.set_visible(False)
-    ax.tick_params(length=0)
-    fig.suptitle("Этап × рынок: сколько стартапов реестра на каждом рынке", x=0.03, y=0.975, ha="left", fontsize=22, fontweight="bold")
-    fig.subplots_adjust(left=0.22, right=0.98, top=0.82, bottom=0.1)
-    footer(fig, f"Реестр ConTech, n = {N_ST} стартапов, данные на {TODAY}. Число — рынок назван в источниках или компания помечена глобальной; «+N?» — рынок подставлен по штабу (не подтверждено).", y=0.02, size=11)
-    save(fig, "03_stage_market_startups_1600x900", plt)
-    charts.append(("03_stage_market_startups_1600x900", f"Матрица этап × рынок для стартапов; n = {N_ST}"))
+        def lab(c):
+            return f"{c}  {sh[c]}"
 
-    # C4 stage x class (stacked, accent = startups)
-    fig, ax = plt.subplots(figsize=(16, 9))
-    left = [0] * len(order)
-    pal = {"стартап": ACCENT, "крупный вендор": "#6f7d89", "консалтинг-инжиниринг": GRAY, "строитель": "#d6dade", "прочее": "#e8ebee"}
-    for cl in CL:
-        v = [q7[s].get(cl, 0) for s in order]
-        ax.barh(range(len(order)), v, left=left, color=pal[cl], label=cl, height=0.68, edgecolor="white", linewidth=1.5)
-        left = [a + b for a, b in zip(left, v)]
-    ax.set_yticks(range(len(order)))
-    ax.set_yticklabels([f"{c} {short[c]}" for c in order], fontsize=13)
-    ax.invert_yaxis()
-    for i, t in enumerate(left):
-        ax.text(t + 0.6, i, str(t), va="center", fontsize=12)
-    ax.xaxis.set_visible(False)
-    ax.spines["bottom"].set_visible(False)
-    ax.spines["left"].set_visible(False)
-    ax.legend(frameon=False, fontsize=12, ncol=5, loc="upper center", bbox_to_anchor=(0.45, -0.01))
-    fig.suptitle("Кто держит этап: стартапы, вендоры, сервисные организации", x=0.03, y=0.975, ha="left", fontsize=22, fontweight="bold")
-    fig.subplots_adjust(left=0.22, right=0.97, top=0.9, bottom=0.12)
-    footer(fig, f"Реестр ConTech, n = {N_SCOPE} записей (in_scope), данные на {TODAY}. «Крупный вендор» включает продукты, входящие в группы крупных вендоров.", y=0.02, size=11)
-    save(fig, "04_stage_by_class_1600x900", plt)
-    charts.append(("04_stage_by_class_1600x900", f"Записи по основному этапу и классу; n = {N_SCOPE}"))
-
-    # C5 new rounds 2025-2026 by stage (count)
-    fig, ax = plt.subplots(figsize=(16, 9))
-    v = [q4.get(c, 0) for c in order]
-    mxv = max(v) or 1
-    ax.bar(range(len(order)), v, color=[ACCENT if x == mxv else GRAY for x in v], width=0.62)
-    for i, x in enumerate(v):
-        ax.text(i, x + 0.15, str(x), ha="center", fontsize=14)
-    ax.set_xticks(range(len(order)))
-    ax.set_xticklabels([f"{c}\n{wrap(short[c], 15)}" for c in order], fontsize=11)
-    ax.yaxis.set_visible(False)
-    ax.spines["left"].set_visible(False)
-    fig.suptitle("Стартапы с последним раундом в 2025–2026 годах, по основному этапу", x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
-    fig.subplots_adjust(left=0.03, right=0.98, top=0.88, bottom=0.2)
-    footer(fig, f"Реестр ConTech, n = {n_new} стартапов с акционерным раундом 2025–2026 (из {N_ST}), данные на {TODAY}. Число раундов, не сумма; по данным агрегаторов и пресс-релизов.", y=0.02, size=11)
-    save(fig, "05_new_rounds_by_stage_1600x900", plt)
-    charts.append(("05_new_rounds_by_stage_1600x900", f"Число стартапов с раундом 2025–2026 по этапам; n = {n_new}"))
-
-    # C6 compliance slice by stage
-    fig, ax = plt.subplots(figsize=(16, 9))
-    v = [q8_stage.get(c, 0) for c in order]
-    ax.bar(range(len(order)), v, color=ACCENT, width=0.62)
-    for i, x in enumerate(v):
-        ax.text(i, x + 0.1, str(x), ha="center", fontsize=14)
-    ax.set_xticks(range(len(order)))
-    ax.set_xticklabels([f"{c}\n{wrap(short[c], 15)}" for c in order], fontsize=11)
-    ax.yaxis.set_visible(False)
-    ax.spines["left"].set_visible(False)
-    fig.suptitle("Комплаенс и проверка норм: записи реестра по основному этапу", x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
-    fig.subplots_adjust(left=0.03, right=0.98, top=0.88, bottom=0.2)
-    footer(fig, f"Реестр ConTech, n = {len(q8)} записей (метка «комплаенс» или проверка норм в описании; правила — в findings.md), данные на {TODAY}.", y=0.02, size=11)
-    save(fig, "06_compliance_by_stage_1600x900", plt)
-    charts.append(("06_compliance_by_stage_1600x900", f"Записи с комплаенсом или проверкой норм по этапам; n = {len(q8)}"))
-
-    # C7 money by stage (only when the parsing gate passed)
-    if gate_pass and q3:
-        fig, ax = plt.subplots(figsize=(16, 9))
-        stg = [c for c in order if q3.get(c)]
-        tot = [sum(q3[c]) / 1e6 for c in stg]
-        mxm = max(tot)
-        ax.barh(range(len(stg)), tot, color=[ACCENT if x == mxm else GRAY for x in tot], height=0.62)
-        for i, c in enumerate(stg):
-            med = statistics.median(q3[c]) / 1e6
-            ax.text(tot[i] + mxm * 0.01, i, f"{tot[i]:.0f}   (n = {len(q3[c])}, медиана {med:.1f})", va="center", fontsize=14)
-        ax.set_yticks(range(len(stg)))
-        ax.set_yticklabels([f"{c} {short[c]}" for c in stg], fontsize=14)
-        ax.invert_yaxis()
-        ax.set_xlim(0, mxm * 1.35)
+        # C1 main (vertical): where startups are, by primary stage
+        fig, ax = plt.subplots(figsize=(10.8, 13.5))
+        vals = [st_prim.get(c, 0) for c in order]
+        colors = [ACCENT if c in top3 else GRAY for c in order]
+        ypos = list(range(len(order)))[::-1]
+        ax.barh(ypos, vals, color=colors, height=0.68)
+        ax.set_yticks(ypos)
+        ax.set_yticklabels([lab(c) for c in order], fontsize=17)
+        for y, v in zip(ypos, vals):
+            ax.text(v + max(vals) * 0.012, y, str(v), va="center", fontsize=18, color="#1d2327", fontweight="bold" if v >= max(vals) * 0.6 else None)
+        ax.set_xlim(0, max(vals) * 1.12)
         ax.xaxis.set_visible(False)
         ax.spines["bottom"].set_visible(False)
         ax.spines["left"].set_visible(False)
-        n_money = sum(len(v) for v in q3.values())
-        fig.suptitle("Сумма последних раундов 2025–2026 по основному этапу, USD млн", x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
-        fig.subplots_adjust(left=0.22, right=0.97, top=0.88, bottom=0.12)
-        footer(fig, f"Реестр ConTech, n = {n_money} стартапов с точной суммой акционерного раунда 2025–2026 (из {N_ST}), данные на {TODAY}. Последние раунды, по данным агрегаторов и пресс-релизов; на этапе несколько раундов, один крупный раунд может определять сумму.", y=0.02, size=11)
-        save(fig, "07_last_rounds_money_by_stage_1600x900", plt)
-        charts.append(("07_last_rounds_money_by_stage_1600x900", f"Сумма последних раундов 2025–2026 по этапам; n = {n_money}"))
+        ax.tick_params(left=False)
+        ttl = wrap(tr(f"В реестре {round(top3_share * 100)}% стартапов делают три этапа: {', '.join(short[c] for c in top3)}",
+                      f"In the registry {round(top3_share * 100)}% of startups work on three stages: {', '.join(SHORT_EN[c] for c in top3)}"), 30)
+        fig.text(0.04, 0.975, ttl, ha="left", va="top", fontsize=30, fontweight="bold", linespacing=1.15)
+        n_lines = ttl.count("\n") + 1
+        fig.text(0.04, 0.975 - 0.037 * n_lines - 0.012,
+                 wrap(tr(f"Стартапов по основному этапу: {tot_st}. Этапов, где их не больше трёх: {len(thin)} из {len(order)}",
+                         f"Startups by main stage: {tot_st}. Stages with no more than three: {len(thin)} of {len(order)}"), 90),
+                 fontsize=16, color=INK2, ha="left", va="top")
+        fig.subplots_adjust(left=0.40, right=0.96, top=0.975 - 0.037 * n_lines - 0.085, bottom=0.09)
+        footer(fig, wrap(tr(f"{reg}, n = {tot_st} стартапов, {d_}. Выборка составлена основателем и не репрезентативна для рынка.",
+                            f"{reg}, n = {tot_st} startups, {d_}. The sample was compiled by the founder and is not representative of the market."), 100), y=0.012, size=11.5)
+        save(fig, "01_linkedin_startups_by_stage_1080x1350" + sfx, plt)
+
+        # C2 coverage: primary vs with secondary (software)
+        fig, ax = plt.subplots(figsize=(16, 9))
+        xs = list(range(len(order)))
+        w_ = 0.38
+        ax.bar([x - w_ / 2 for x in xs], [q1_prim.get(c, 0) for c in order], w_, color=ACCENT, label=tr("основной этап", "main stage"))
+        ax.bar([x + w_ / 2 for x in xs], [q1_any.get(c, 0) for c in order], w_, color=GRAY, label=tr("основной и дополнительные этапы", "main and additional stages"))
+        for x, c in zip(xs, order):
+            ax.text(x - w_ / 2, q1_prim.get(c, 0) + 0.8, str(q1_prim.get(c, 0)), ha="center", fontsize=12)
+            ax.text(x + w_ / 2, q1_any.get(c, 0) + 0.8, str(q1_any.get(c, 0)), ha="center", fontsize=12, color=INK2)
+        ax.set_xticks(xs)
+        ax.set_xticklabels([f"{c}\n{wrap(sh[c], 15)}" for c in order], fontsize=11)
+        ax.yaxis.set_visible(False)
+        ax.spines["left"].set_visible(False)
+        ax.legend(frameon=False, fontsize=13, loc="upper right")
+        fig.suptitle(tr("Покрытие этапов: основной этап и с дополнительными", "Stage coverage: main stage and with additional stages"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
+        fig.subplots_adjust(left=0.03, right=0.98, top=0.88, bottom=0.2)
+        footer(fig, tr(f"{reg}, n = {N_SOFT} записей ПО (стартапы и крупные вендоры), {d_}. Запись считается по каждому этапу, который закрывает.",
+                       f"{reg}, n = {N_SOFT} software records (startups and major vendors), {d_}. A record counts at every stage it covers."), y=0.02)
+        save(fig, "02_stage_coverage_1600x900" + sfx, plt)
+
+        # C3 stage x market heatmap (startups)
+        fig, ax = plt.subplots(figsize=(16, 9))
+        M = [[q5_conf[(s, m)] for m in MK] for s in order]
+        cmap = mc.LinearSegmentedColormap.from_list("one", ["#f1f5f8", ACCENT])
+        mx = max(max(r) for r in M) or 1
+        ax.imshow(M, cmap=cmap, vmin=0, vmax=mx, aspect="auto")
+        for i, s in enumerate(order):
+            for j, m in enumerate(MK):
+                c_, u_ = q5_conf[(s, m)], q5_unc[(s, m)]
+                txt = str(c_) + (f" +{u_}?" if u_ else "")
+                ax.text(j, i, txt, ha="center", va="center", fontsize=14, color="white" if c_ > mx * 0.55 else "#1d2327")
+        ax.set_xticks(range(len(MK)))
+        ax.set_xticklabels([mkn[m] for m in MK], fontsize=13)
+        ax.xaxis.tick_top()
+        ax.set_yticks(range(len(order)))
+        ax.set_yticklabels([f"{c} {sh[c]}" for c in order], fontsize=13)
+        for sp_ in ax.spines.values():
+            sp_.set_visible(False)
+        ax.tick_params(length=0)
+        fig.suptitle(tr("Этап × рынок: сколько стартапов реестра на каждом рынке", "Stage × market: how many registry startups on each market"), x=0.03, y=0.975, ha="left", fontsize=22, fontweight="bold")
+        fig.subplots_adjust(left=0.22, right=0.98, top=0.82, bottom=0.1)
+        footer(fig, tr(f"{reg}, n = {N_ST} стартапов, {d_}. Число — рынок назван в источниках или компания помечена глобальной; «+N?» — рынок подставлен по штабу (не подтверждено).",
+                       f"{reg}, n = {N_ST} startups, {d_}. The number counts startups whose market is named in sources or that are flagged global; '+N?' means the market is filled in from the headquarters (unconfirmed)."), y=0.02, size=11)
+        save(fig, "03_stage_market_startups_1600x900" + sfx, plt)
+
+        # C4 stage x class (stacked, accent = startups)
+        fig, ax = plt.subplots(figsize=(16, 9))
+        left = [0] * len(order)
+        pal = {"стартап": ACCENT, "крупный вендор": "#6f7d89", "консалтинг-инжиниринг": GRAY, "строитель": "#d6dade", "прочее": "#e8ebee"}
+        for cl in CL:
+            v = [q7[s].get(cl, 0) for s in order]
+            ax.barh(range(len(order)), v, left=left, color=pal[cl], label=cl if ru else CL_EN[cl], height=0.68, edgecolor="white", linewidth=1.5)
+            left = [a + b for a, b in zip(left, v)]
+        ax.set_yticks(range(len(order)))
+        ax.set_yticklabels([f"{c} {sh[c]}" for c in order], fontsize=13)
+        ax.invert_yaxis()
+        for i, t_ in enumerate(left):
+            ax.text(t_ + 0.6, i, str(t_), va="center", fontsize=12)
+        ax.xaxis.set_visible(False)
+        ax.spines["bottom"].set_visible(False)
+        ax.spines["left"].set_visible(False)
+        ax.legend(frameon=False, fontsize=12, ncol=5, loc="upper center", bbox_to_anchor=(0.45, -0.01))
+        fig.suptitle(tr("Кто держит этап: стартапы, вендоры, сервисные организации", "Who holds a stage: startups, vendors, service organisations"), x=0.03, y=0.975, ha="left", fontsize=22, fontweight="bold")
+        fig.subplots_adjust(left=0.22, right=0.97, top=0.9, bottom=0.12)
+        footer(fig, tr(f"{reg}, n = {N_SCOPE} записей (in_scope), {d_}. «Крупный вендор» включает продукты, входящие в группы крупных вендоров.",
+                       f"{reg}, n = {N_SCOPE} records (in scope), {d_}. 'Major vendor' includes products that belong to groups of major vendors."), y=0.02, size=11)
+        save(fig, "04_stage_by_class_1600x900" + sfx, plt)
+
+        # C5 new rounds 2025-2026 by stage (count)
+        fig, ax = plt.subplots(figsize=(16, 9))
+        v = [q4.get(c, 0) for c in order]
+        mxv = max(v) or 1
+        ax.bar(range(len(order)), v, color=[ACCENT if x == mxv else GRAY for x in v], width=0.62)
+        for i, x in enumerate(v):
+            ax.text(i, x + 0.15, str(x), ha="center", fontsize=14)
+        ax.set_xticks(range(len(order)))
+        ax.set_xticklabels([f"{c}\n{wrap(sh[c], 15)}" for c in order], fontsize=11)
+        ax.yaxis.set_visible(False)
+        ax.spines["left"].set_visible(False)
+        fig.suptitle(tr("Стартапы с последним раундом в 2025–2026 годах, по основному этапу", "Startups whose latest round was in 2025–2026, by main stage"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
+        fig.subplots_adjust(left=0.03, right=0.98, top=0.88, bottom=0.2)
+        footer(fig, tr(f"{reg}, n = {n_new} стартапов с акционерным раундом 2025–2026 (из {N_ST}), {d_}. Число раундов, не сумма; по данным агрегаторов и пресс-релизов.",
+                       f"{reg}, n = {n_new} startups with an equity round in 2025–2026 (of {N_ST}), {d_}. Number of rounds, not amounts; per aggregators and press releases."), y=0.02, size=11)
+        save(fig, "05_new_rounds_by_stage_1600x900" + sfx, plt)
+
+        # C6 compliance slice by stage
+        fig, ax = plt.subplots(figsize=(16, 9))
+        v = [q8_stage.get(c, 0) for c in order]
+        ax.bar(range(len(order)), v, color=ACCENT, width=0.62)
+        for i, x in enumerate(v):
+            ax.text(i, x + 0.1, str(x), ha="center", fontsize=14)
+        ax.set_xticks(range(len(order)))
+        ax.set_xticklabels([f"{c}\n{wrap(sh[c], 15)}" for c in order], fontsize=11)
+        ax.yaxis.set_visible(False)
+        ax.spines["left"].set_visible(False)
+        fig.suptitle(tr("Комплаенс и проверка норм: записи реестра по основному этапу", "Compliance and code checking: registry records by main stage"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
+        fig.subplots_adjust(left=0.03, right=0.98, top=0.88, bottom=0.2)
+        footer(fig, tr(f"{reg}, n = {len(q8)} записей (метка «комплаенс» или проверка норм в описании; правила — в findings.md), {d_}.",
+                       f"{reg}, n = {len(q8)} records (a 'compliance' label or code checking in the description; rules are in findings.md), {d_}."), y=0.02, size=11)
+        save(fig, "06_compliance_by_stage_1600x900" + sfx, plt)
+
+        # C7 money by stage (only when the parsing gate passed)
+        if gate_pass and q3:
+            fig, ax = plt.subplots(figsize=(16, 9))
+            stg = [c for c in order if q3.get(c)]
+            tot = [sum(q3[c]) / 1e6 for c in stg]
+            mxm = max(tot)
+            ax.barh(range(len(stg)), tot, color=[ACCENT if x == mxm else GRAY for x in tot], height=0.62)
+            for i, c in enumerate(stg):
+                med = statistics.median(q3[c]) / 1e6
+                ax.text(tot[i] + mxm * 0.01, i, f"{tot[i]:.0f}   (n = {len(q3[c])}, " + tr("медиана", "median") + f" {med:.1f})", va="center", fontsize=14)
+            ax.set_yticks(range(len(stg)))
+            ax.set_yticklabels([f"{c} {sh[c]}" for c in stg], fontsize=14)
+            ax.invert_yaxis()
+            ax.set_xlim(0, mxm * 1.35)
+            ax.xaxis.set_visible(False)
+            ax.spines["bottom"].set_visible(False)
+            ax.spines["left"].set_visible(False)
+            fig.suptitle(tr("Сумма последних раундов 2025–2026 по основному этапу, USD млн", "Total of the latest 2025–2026 rounds by main stage, USD million"), x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
+            fig.subplots_adjust(left=0.22, right=0.97, top=0.88, bottom=0.12)
+            footer(fig, tr(f"{reg}, n = {n_money} стартапов с точной суммой акционерного раунда 2025–2026 (из {N_ST}), {d_}. Последние раунды, по данным агрегаторов и пресс-релизов; на этапе несколько раундов, один крупный раунд может определять сумму.",
+                           f"{reg}, n = {n_money} startups with an exact equity round amount in 2025–2026 (of {N_ST}), {d_}. Latest rounds, per aggregators and press releases; a stage has few rounds, so one large round can decide the total."), y=0.02, size=11)
+            save(fig, "07_last_rounds_money_by_stage_1600x900" + sfx, plt)
+
+    draw("ru")
+    draw("en")
+    charts = [(f.stem, "") for f in sorted(CHARTS.glob("*.png")) if not f.stem.endswith("_en")]
 
     # ================= findings.md =================
     L = []

@@ -250,14 +250,17 @@ def load_charts():
         old.unlink()
     for png in sorted(src.glob("*.png")):
         stem = png.stem
+        if stem.endswith("_en"):
+            continue  # the English variant is copied together with the Russian one
         key = next((k for k in CHART_CAPTIONS if stem.startswith(k)), None)
         if not key:
             continue
         ru, en, tall = CHART_CAPTIONS[key]
         for ext in ("png", "svg"):
-            f = src / f"{stem}.{ext}"
-            if f.exists():
-                (dst / f.name).write_bytes(f.read_bytes())
+            for name in (stem, stem + "_en"):
+                f = src / f"{name}.{ext}"
+                if f.exists():
+                    (dst / f.name).write_bytes(f.read_bytes())
         out.append({"id": stem, "ru": ru, "en": en, "tall": tall})
     return out
 

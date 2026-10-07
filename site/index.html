@@ -220,7 +220,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       stagesL:'Этапы', themes:'Темы', roleL:'Роль клиента', hq:'Штаб', markets:'Рынки', founded:'Год основания', size:'Размер', round:'Последнее найденное событие финансирования или владения', raised:'Привлечено', revenue:'Выручка', site:'Сайт', verified:'Проверка данных', noteL:'Примечание', siteNo:'сайт не подтверждён', sources:'Источники', main:' (основной)', none:'вне этапов',
       kinds:{product:'продукт',vendor:'крупный вендор',builder:'строитель или застройщик',services:'услуги, консалтинг, образование',hardware:'оборудование'},
       groups:{vendor:'Крупные вендоры',product:'Продукты',builder:'Строители и застройщики',services:'Услуги, консалтинг, образование',hardware:'Оборудование'},
-      tabSa:'Аналитика', anPng:'PNG', anSvg:'SVG', anEn:'', tabSw:'Программы и вендоры', tabOt:'Консалтинг, строительство, образование, оборудование', grGroup:'по материнской группе', noGroup:'Без группы', groupL:'Группа'
+      tabSa:'Аналитика', anPng:'PNG', anSvg:'SVG', tabSw:'Программы и вендоры', tabOt:'Консалтинг, строительство, образование, оборудование', grGroup:'по материнской группе', noGroup:'Без группы', groupL:'Группа'
     },
     en:{
       title:'ConTech Map',
@@ -243,7 +243,7 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
       stagesL:'Stages', themes:'Themes', roleL:'Customer role', hq:'Headquarters', markets:'Markets', founded:'Founded', size:'Size', round:'Latest funding or ownership event found', raised:'Raised', revenue:'Revenue', site:'Website', verified:'Data check', noteL:'Note', siteNo:'site not confirmed', sources:'Sources', main:' (main)', none:'outside the stages',
       kinds:{product:'product',vendor:'major vendor',builder:'builder or developer',services:'services, consulting, education',hardware:'hardware'},
       groups:{vendor:'Major vendors',product:'Products',builder:'Builders and developers',services:'Services, consulting, education',hardware:'Hardware'},
-      tabSa:'Analytics', anPng:'PNG', anSvg:'SVG', anEn:' Chart text is in Russian.', tabSw:'Software and vendors', tabOt:'Consulting, construction, education, hardware', grGroup:'by parent group', noGroup:'No group', groupL:'Group'
+      tabSa:'Analytics', anPng:'PNG', anSvg:'SVG', tabSw:'Software and vendors', tabOt:'Consulting, construction, education, hardware', grGroup:'by parent group', noGroup:'No group', groupL:'Group'
     }
   };
   var TAB='sw', VIEW='map', CHARTS=[{"id": "01_linkedin_startups_by_stage_1080x1350", "ru": "Стартапы реестра по основному этапу", "en": "Registry startups by main stage", "tall": true}, {"id": "02_stage_coverage_1600x900", "ru": "Покрытие этапов: записи ПО по основному этапу и с учётом дополнительных", "en": "Stage coverage: software records by main stage and including additional stages", "tall": false}, {"id": "03_stage_market_startups_1600x900", "ru": "Этап × рынок: стартапы реестра", "en": "Stage × market: registry startups", "tall": false}, {"id": "04_stage_by_class_1600x900", "ru": "Кто держит этап: стартапы, крупные вендоры, сервисные организации", "en": "Who holds a stage: startups, major vendors, service organisations", "tall": false}, {"id": "05_new_rounds_by_stage_1600x900", "ru": "Стартапы с последним раундом в 2025–2026 годах, по этапам", "en": "Startups with their latest round in 2025–2026, by stage", "tall": false}, {"id": "06_compliance_by_stage_1600x900", "ru": "Комплаенс и проверка норм по этапам", "en": "Compliance and code checking by stage", "tall": false}, {"id": "07_last_rounds_money_by_stage_1600x900", "ru": "Сумма последних раундов 2025–2026 по этапам", "en": "Total of the latest 2025–2026 rounds by stage", "tall": false}];
@@ -304,9 +304,9 @@ footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:92ch}
     var u=U(), g=$('angrid'); g.textContent='';
     CHARTS.forEach(function(c){
       var f=document.createElement('figure'); if(c.tall) f.className='tall';
-      var im=document.createElement('img'); im.src='charts/'+c.id+'.png'; im.loading='lazy'; im.alt=LANG==='en'?c.en:c.ru; f.appendChild(im);
-      var cp=document.createElement('figcaption'); cp.appendChild(document.createTextNode((LANG==='en'?c.en:c.ru)+u.anEn+' '));
-      [['png',u.anPng],['svg',u.anSvg]].forEach(function(x,i){var a=document.createElement('a'); a.href='charts/'+c.id+'.'+x[0]; a.target='_blank'; a.rel='noopener'; a.textContent=x[1]; if(i)cp.appendChild(document.createTextNode(' · ')); cp.appendChild(a)});
+      var sf=LANG==='en'?'_en':''; var im=document.createElement('img'); im.src='charts/'+c.id+sf+'.png'; im.loading='lazy'; im.alt=LANG==='en'?c.en:c.ru; f.appendChild(im);
+      var cp=document.createElement('figcaption'); cp.appendChild(document.createTextNode((LANG==='en'?c.en:c.ru)+' '));
+      [['png',u.anPng],['svg',u.anSvg]].forEach(function(x,i){var a=document.createElement('a'); a.href='charts/'+c.id+sf+'.'+x[0]; a.target='_blank'; a.rel='noopener'; a.textContent=x[1]; if(i)cp.appendChild(document.createTextNode(' · ')); cp.appendChild(a)});
       f.appendChild(cp); g.appendChild(f);
     });
   }

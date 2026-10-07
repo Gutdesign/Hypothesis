@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-10-07T11:15:21.934564</dc:date>
+    <dc:date>2026-10-07T11:15:23.194074</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -43,7 +43,7 @@ L 142.388659 518.4
 L 142.388659 453.837363 
 L 84.305455 453.837363 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #b9c0c6"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_4">
     <path d="M 177.988043 518.4 
@@ -51,7 +51,7 @@ L 236.071248 518.4
 L 236.071248 518.4 
 L 177.988043 518.4 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #b9c0c6"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_5">
     <path d="M 271.670632 518.4 
@@ -59,7 +59,7 @@ L 329.753837 518.4
 L 329.753837 518.4 
 L 271.670632 518.4 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #b9c0c6"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_6">
     <path d="M 365.35322 518.4 
@@ -67,7 +67,7 @@ L 423.436425 518.4
 L 423.436425 389.274725 
 L 365.35322 389.274725 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #b9c0c6"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_7">
     <path d="M 459.035809 518.4 
@@ -75,7 +75,7 @@ L 517.119014 518.4
 L 517.119014 421.556044 
 L 459.035809 421.556044 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #b9c0c6"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_8">
     <path d="M 552.718398 518.4 
@@ -83,7 +83,7 @@ L 610.801602 518.4
 L 610.801602 324.712088 
 L 552.718398 324.712088 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #b9c0c6"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_9">
     <path d="M 646.400986 518.4 
@@ -91,7 +91,7 @@ L 704.484191 518.4
 L 704.484191 98.742857 
 L 646.400986 98.742857 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #1f5f8b"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #1f5f8b"/>
    </g>
    <g id="patch_10">
     <path d="M 740.083575 518.4 
@@ -99,7 +99,7 @@ L 798.16678 518.4
 L 798.16678 486.118681 
 L 740.083575 486.118681 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #b9c0c6"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_11">
     <path d="M 833.766163 518.4 
@@ -107,7 +107,7 @@ L 891.849368 518.4
 L 891.849368 518.4 
 L 833.766163 518.4 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #b9c0c6"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_12">
     <path d="M 927.448752 518.4 
@@ -115,7 +115,7 @@ L 985.531957 518.4
 L 985.531957 486.118681 
 L 927.448752 486.118681 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #b9c0c6"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #b9c0c6"/>
    </g>
    <g id="patch_13">
     <path d="M 1021.131341 518.4 
@@ -123,139 +123,139 @@ L 1079.214545 518.4
 L 1079.214545 518.4 
 L 1021.131341 518.4 
 z
-" clip-path="url(#pe6f7efa8b6)" style="fill: #b9c0c6"/>
+" clip-path="url(#pb0cbe3317c)" style="fill: #b9c0c6"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="m31a81da0c4" d="M 0 0 
+       <path id="m5f856d0928" d="M 0 0 
 L 0 3.5 
 " style="stroke: #4b535b; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m31a81da0c4" x="113.347057" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="113.347057" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(106.356041 534.858496)">S0</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(77.75776 548.060645)">Стратегия и</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(90.347604 561.262793)">участки</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(77.684713 548.061504)">Strategy and</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(100.548385 561.264512)">sites</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#m31a81da0c4" x="207.029646" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="207.029646" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(200.03863 534.858496)">S1</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(180.471521 548.060645)">Сделка и</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(157.570036 561.262793)">финансирование</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(182.416286 548.061504)">Deal and</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(181.694411 561.264512)">financing</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#m31a81da0c4" x="300.712234" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="300.712234" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(293.721219 534.858496)">S2</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(269.135359 548.060645)">Изыскания</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(278.713953 548.060645)">Surveys</text>
      </g>
     </g>
     <g id="xtick_4">
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m31a81da0c4" x="394.394823" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="394.394823" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(387.403807 534.858496)">S3</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(345.894276 548.060645)">Проектирование</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(375.405213 548.061504)">Design</text>
      </g>
     </g>
     <g id="xtick_5">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#m31a81da0c4" x="488.077411" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="488.077411" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(481.086396 534.858496)">S4</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(447.373115 548.060645)">Разрешения и</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(455.167646 561.262793)">экспертиза</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(455.405693 548.061504)">Permits and</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(469.88788 561.264512)">review</text>
      </g>
     </g>
     <g id="xtick_6">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m31a81da0c4" x="581.76" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="581.76" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(574.768984 534.858496)">S5</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(542.626641 548.060645)">Подготовка к</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(558.394453 561.262793)">стройке</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(571.031563 548.060645)">Pre-</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(547.557734 561.263652)">construction</text>
      </g>
     </g>
     <g id="xtick_7">
      <g id="line2d_7">
       <g>
-       <use xlink:href="#m31a81da0c4" x="675.442589" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="675.442589" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_7">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(668.451573 534.858496)">S6</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(631.787198 548.060645)">Строительство</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(640.423917 548.061504)">Construction</text>
      </g>
     </g>
     <g id="xtick_8">
      <g id="line2d_8">
       <g>
-       <use xlink:href="#m31a81da0c4" x="769.125177" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="769.125177" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_8">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(762.134162 534.858496)">S7</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(720.223302 548.060645)">Ввод и передача</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(742.375412 548.061504)">Handover</text>
      </g>
     </g>
     <g id="xtick_9">
      <g id="line2d_9">
       <g>
-       <use xlink:href="#m31a81da0c4" x="862.807766" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="862.807766" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_9">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(852.446281 534.858496)">S8a</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(821.683235 548.060645)">Эксплуатация</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(832.570656 548.061504)">Operations</text>
      </g>
     </g>
     <g id="xtick_10">
      <g id="line2d_10">
       <g>
-       <use xlink:href="#m31a81da0c4" x="956.490354" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="956.490354" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_10">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(946.007698 534.859355)">S8b</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(929.761214 548.061504)">Аренда и</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(930.538948 561.263652)">продажа</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(923.301292 548.062363)">Leasing and</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(942.477386 561.265371)">sales</text>
      </g>
     </g>
     <g id="xtick_11">
      <g id="line2d_11">
       <g>
-       <use xlink:href="#m31a81da0c4" x="1050.172943" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
+       <use xlink:href="#m5f856d0928" x="1050.172943" y="518.4" style="fill: #4b535b; stroke: #4b535b; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_11">
       <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(1043.181927 534.858496)">S9</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(1013.951146 548.060645)">Реновация и</text>
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(1013.487943 561.262793)">конец цикла</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(1005.344505 548.061504)">Renovation, end</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #4b535b" transform="translate(1034.747162 561.264512)">of life</text>
      </g>
     </g>
    </g>
@@ -299,14 +299,14 @@ L 1128.96 518.4
    </g>
   </g>
   <g id="text_23">
-   <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="34.56" y="36.154844" transform="rotate(-0 34.56 36.154844)">Стартапы с последним раундом в 2025–2026 годах, по основному этапу</text>
+   <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1d2327" x="34.56" y="36.156563" transform="rotate(-0 34.56 36.156563)">Startups whose latest round was in 2025–2026, by main stage</text>
   </g>
   <g id="text_24">
-   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #4b535b" x="23.04" y="632.397422" transform="rotate(-0 23.04 632.397422)">Реестр ConTech, n = 30 стартапов с акционерным раундом 2025–2026 (из 129), данные на 2026-10-07. Число раундов, не сумма; по данным агрегаторов и пресс-релизов.</text>
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #4b535b" x="23.04" y="632.397422" transform="rotate(-0 23.04 632.397422)">ConTech registry, n = 30 startups with an equity round in 2025–2026 (of 129), data as of 2026-10-07. Number of rounds, not amounts; per aggregators and press releases.</text>
   </g>
  </g>
  <defs>
-  <clipPath id="pe6f7efa8b6">
+  <clipPath id="pb0cbe3317c">
    <rect x="34.56" y="77.76" width="1094.4" height="440.64"/>
   </clipPath>
  </defs>
