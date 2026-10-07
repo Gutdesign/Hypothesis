@@ -373,11 +373,13 @@ def main():
             q4_names[n["stage_primary"]].append(n["компания"])
     n_new = sum(q4.values())
     q3 = {}
+    q3_names = {}
     if gate_pass:
         for n in startups:
             if n["last_round_type"] in EQ and n["last_round_year"] in (2025, 2026) and n["last_round_usd"] != "" \
                and n["last_round_usd_parse_status"] == "ok" and n["stage_primary"]:
                 q3.setdefault(n["stage_primary"], []).append(int(n["last_round_usd"]))
+                q3_names.setdefault(n["stage_primary"], []).append((int(n["last_round_usd"]), n["компания"]))
     with open(TABLES / "q4_new_rounds_2025_2026.csv", "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f, delimiter=";")
         w.writerow(["этап", "название", "стартапов_с_раундом_2025_2026", "компании"])
@@ -600,6 +602,30 @@ def main():
     save(fig, "06_compliance_by_stage_1600x900", plt)
     charts.append(("06_compliance_by_stage_1600x900", f"Записи с комплаенсом или проверкой норм по этапам; n = {len(q8)}"))
 
+    # C7 money by stage (only when the parsing gate passed)
+    if gate_pass and q3:
+        fig, ax = plt.subplots(figsize=(16, 9))
+        stg = [c for c in order if q3.get(c)]
+        tot = [sum(q3[c]) / 1e6 for c in stg]
+        mxm = max(tot)
+        ax.barh(range(len(stg)), tot, color=[ACCENT if x == mxm else GRAY for x in tot], height=0.62)
+        for i, c in enumerate(stg):
+            med = statistics.median(q3[c]) / 1e6
+            ax.text(tot[i] + mxm * 0.01, i, f"{tot[i]:.0f}   (n = {len(q3[c])}, медиана {med:.1f})", va="center", fontsize=14)
+        ax.set_yticks(range(len(stg)))
+        ax.set_yticklabels([f"{c} {short[c]}" for c in stg], fontsize=14)
+        ax.invert_yaxis()
+        ax.set_xlim(0, mxm * 1.35)
+        ax.xaxis.set_visible(False)
+        ax.spines["bottom"].set_visible(False)
+        ax.spines["left"].set_visible(False)
+        n_money = sum(len(v) for v in q3.values())
+        fig.suptitle("Сумма последних раундов 2025–2026 по основному этапу, USD млн", x=0.03, y=0.97, ha="left", fontsize=22, fontweight="bold")
+        fig.subplots_adjust(left=0.22, right=0.97, top=0.88, bottom=0.12)
+        footer(fig, f"Реестр ConTech, n = {n_money} стартапов с точной суммой акционерного раунда 2025–2026 (из {N_ST}), данные на {TODAY}. Последние раунды, по данным агрегаторов и пресс-релизов; на этапе несколько раундов, один крупный раунд может определять сумму.", y=0.02, size=11)
+        save(fig, "07_last_rounds_money_by_stage_1600x900", plt)
+        charts.append(("07_last_rounds_money_by_stage_1600x900", f"Сумма последних раундов 2025–2026 по этапам; n = {n_money}"))
+
     # ================= findings.md =================
     L = []
     w = L.append
@@ -650,11 +676,14 @@ def main():
     # 3
     w("### 3. Деньги по этапам\n")
     if gate_pass:
-        w("| Этап | n с суммой | сумма, USD млн | медиана, USD млн |\n|---|---|---|---|")
+        w("| Этап | n с суммой | сумма, USD млн | медиана, USD млн | крупнейший раунд |\n|---|---|---|---|---|")
         for c in order:
             vals = q3.get(c, [])
             if vals:
-                w(f"| {c} {short[c]} | {len(vals)} | {sum(vals) / 1e6:.1f} | {statistics.median(vals) / 1e6:.1f} |")
+                big_r = max(q3_names[c])
+                w(f"| {c} {short[c]} | {len(vals)} | {sum(vals) / 1e6:.1f} | {statistics.median(vals) / 1e6:.1f} | {big_r[1]} {big_r[0] / 1e6:.0f} ({round(big_r[0] / sum(vals) * 100)}% суммы) |")
+        n_money = sum(len(v) for v in q3.values())
+        w(f"\nn = {n_money} стартапов с точной суммой акционерного раунда 2025–2026 из {N_ST}; только акционерные раунды, без займов, покупок и частного капитала. Суммы — по данным агрегаторов и пресс-релизов, курсы — см. выше. Оговорка: на этапе по 1–13 раундов, один крупный раунд определяет сумму (см. последний столбец); медиана устойчивее суммы. Не выводите из таблицы «куда идут деньги в отрасли». График: `charts/07_last_rounds_money_by_stage_1600x900`.")
     else:
         w(f"Не рассчитывалось: порог разбора не пройден ({ok_usd} из {N_ST} стартапов, {gate_share * 100:.1f}%). Для справки, акционерных раундов с годом разобрано {len(rounds)}; из них 2025–2026 — {n_new}. Остальные суммы в реестре — оценки, диапазоны, покупки или «н/д».\n")
     # 4
