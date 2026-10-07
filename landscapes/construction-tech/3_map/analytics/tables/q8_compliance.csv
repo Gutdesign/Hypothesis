@@ -1,0 +1,15 @@
+﻿id;компания;класс;этап;тип_раунда;год_раунда;рынки;слой_комплаенс
+meltplan;MeltPlan;стартап;S5;seed;2026;US;True
+netvendor;NetVendor;стартап;S8a;private-equity;2025;US;True
+greenlite;GreenLite;стартап;S4;B;2025;US;False
+ai-bob;AI-BOB;стартап;S3;none;;EU;True
+alloovium;Alloovium;стартап;S6;seed;2026;OTHER;True
+gocontractor;GoContractor;стартап;S6;acquisition;2024;EU;True
+permitify;Permitify;стартап;S4;pre-seed;;US;False
+planetverify;PlanetVerify;стартап;;seed;2022;EU;True
+struck;Struck;стартап;S4;seed;2025;EU;True
+zutec;ZuTec;стартап;S7;none;;"UK; EU; OTHER";True
+roxit;Roxit (Visma Roxit);стартап;S4;acquisition;2015;NL;True
+xxllnc;xxllnc;стартап;S4;none;;NL;True
+skyciv;SkyCiv;стартап;S3;none;;"US; UK; ES; NL; EU; OTHER";False
+one-click-lca;One Click LCA;стартап;S3;unspecified;2023;"US; UK; ES; NL; EU; OTHER";True
